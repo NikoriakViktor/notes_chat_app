@@ -1796,7 +1796,7 @@ Without the `SELENIUM_REMOTE_URL` variable → `_make_driver()` in the test code
 **1. The Actions tab in the repository**
 
 ```
-https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-23_02/actions
+https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
 ```
 
 Here is the list of all workflow runs. Green — all green. Red — something failed.
@@ -1903,7 +1903,7 @@ Every test you wrote in Steps 2–6 automatically runs in CI on every push.
 
 ### Practice: check that CI/CD works
 
-1. Open in your browser: `https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-23_02/actions`
+1. Open in your browser: `https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions`
 2. Find the workflow **"Django Tests (module_5/lesson_Django_Testing)"**
 3. Click on the latest run
 4. Expand Job 1 → Step "Run unit and integration tests"

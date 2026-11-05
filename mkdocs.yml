@@ -1,8 +1,8 @@
 site_name: Notes Chat App — Курс Django
 site_description: Навчальний курс Django від основ до production-ready застосунку з WebSocket чатом
 site_url: https://nikoriakviktor.github.io/notes_chat_app/
-repo_url: https://github.com/NikoriakViktot/notes_chat_app
-repo_name: NikoriakViktot/notes_chat_app
+repo_url: https://github.com/NikoriakViktor/notes_chat_app
+repo_name: NikoriakViktor/notes_chat_app
 docs_dir: docs
 site_dir: site
 

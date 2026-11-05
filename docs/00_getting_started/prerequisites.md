@@ -101,7 +101,7 @@ docker compose up
 ### Git — мінімальний рівень
 
 ```bash
-git clone https://github.com/NikoriakViktot/notes_chat_app.git
+git clone https://github.com/NikoriakViktor/notes_chat_app.git
 git status
 git log --oneline
 git diff

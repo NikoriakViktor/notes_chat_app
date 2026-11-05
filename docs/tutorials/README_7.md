@@ -1796,7 +1796,7 @@ TOTAL                          409     23    94%
 **1. Actions tab у репозиторії**
 
 ```
-https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-23_02/actions
+https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
 ```
 
 Тут список всіх workflow runs. Зелений — all green. Червоний — щось впало.
@@ -1903,7 +1903,7 @@ test_selenium.py  ─────►   Job 2                 ──► ✅ аб�
 
 ### Практика: перевір що CI/CD працює
 
-1. Відкрий у браузері: `https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-23_02/actions`
+1. Відкрий у браузері: `https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions`
 2. Знайди workflow **"Django Tests (module_5/lesson_Django_Testing)"**
 3. Клікни на останній run
 4. Розгорни Job 1 → Step "Run unit and integration tests"

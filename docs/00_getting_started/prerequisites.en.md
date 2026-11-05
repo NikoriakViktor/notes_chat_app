@@ -101,7 +101,7 @@ You need to be able to: open a terminal, go to a folder, run a command, read the
 ### Git — minimum level
 
 ```bash
-git clone https://github.com/NikoriakViktot/notes_chat_app.git
+git clone https://github.com/NikoriakViktor/notes_chat_app.git
 git status
 git log --oneline
 git diff

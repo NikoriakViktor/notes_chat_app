@@ -43,7 +43,7 @@ The project UI uses the name `CrispyNotes`. The Django project package is `notes
 ## Quick start
 
 ```bash
-git clone https://github.com/NikoriakViktot/notes_chat_app.git
+git clone https://github.com/NikoriakViktor/notes_chat_app.git
 cd notes_chat_app
 
 python3 -m venv .venv
@@ -106,7 +106,7 @@ flowchart TD
 
 The documentation is built with [MkDocs + Material](https://squidfunk.github.io/mkdocs-material/).
 
-**Online:** https://nikoriakviktot.github.io/notes_chat_app/
+**Online:** https://nikoriakviktor.github.io/notes_chat_app/
 
 ### Local preview
 
@@ -129,7 +129,7 @@ git push
 ```
 
 GitHub Actions automatically builds the site and deploys it to the `gh-pages` branch.
-Status: https://github.com/NikoriakViktot/notes_chat_app/actions
+Status: https://github.com/NikoriakViktor/notes_chat_app/actions
 
 > **First deploy:** go to **Settings → Pages**, choose Source = `gh-pages` / `/ (root)`, and click Save.
 

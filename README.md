@@ -43,7 +43,7 @@ UI проєкту використовує назву `CrispyNotes`. Django proj
 ## Швидкий запуск
 
 ```bash
-git clone https://github.com/NikoriakViktot/notes_chat_app.git
+git clone https://github.com/NikoriakViktor/notes_chat_app.git
 cd notes_chat_app
 
 python3 -m venv .venv
@@ -106,7 +106,7 @@ flowchart TD
 
 Документація побудована на [MkDocs + Material](https://squidfunk.github.io/mkdocs-material/).
 
-**Онлайн:** https://nikoriakviktot.github.io/notes_chat_app/
+**Онлайн:** https://nikoriakviktor.github.io/notes_chat_app/
 
 ### Локальний перегляд
 
@@ -129,7 +129,7 @@ git push
 ```
 
 GitHub Actions автоматично збудує сайт і задеплоїть у гілку `gh-pages`.
-Статус: https://github.com/NikoriakViktot/notes_chat_app/actions
+Статус: https://github.com/NikoriakViktor/notes_chat_app/actions
 
 > **Перший деплой:** зайди в **Settings → Pages**, вибери Source = `gh-pages` / `/ (root)`, натисни Save.
 
