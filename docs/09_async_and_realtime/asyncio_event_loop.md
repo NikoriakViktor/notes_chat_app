@@ -1,6 +1,5 @@
-# Урок 34 — Asyncio: Кооперативна Багатозадачність та Архітектура Event Loop
+# Asyncio: Кооперативна Багатозадачність та Архітектура Event Loop
 
-**Модуль:** 4 — Network & Concurrent Systems  
 **Складність:** intermediate  
 **Мова:** Українська
 

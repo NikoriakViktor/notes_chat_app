@@ -200,8 +200,8 @@ views.note_list()
 
 | Tier | Де дивитись | Метод | HTML у шаблоні | Де Bootstrap-класи |
 |------|-------------|-------|----------------|--------------------|
-| **1 — Raw** | [`notes_project/forms.py`](../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py) | `{{ form.as_p }}` | ~5 рядків | Ніде (немає стилів) |
-| **2 — Manual** | [`django_bootstrap_project/`](../django_bootstrap_project/) | Ручний HTML | ~80 рядків | У шаблоні вручну |
+| **1 — Raw** | [README_3 — форми без crispy](README_3.md) | `{{ form.as_p }}` | ~5 рядків | Ніде (немає стилів) |
+| **2 — Manual** | [README_2](README_2.md) | Ручний HTML | ~80 рядків | У шаблоні вручну |
 | **3 — Crispy** | **цей проєкт** `/notes/new/` | `{% crispy form %}` | **1 рядок** | У `forms.py` через Layout |
 
 Всі три підходи передають **ту саму** `NoteForm`. Різниця — тільки спосіб рендерингу.
@@ -507,7 +507,7 @@ TEMPLATES = [{
 
 ```bash
 # 1. Переходимо до папки
-cd module_5/lesson_HTML_CSS_Bootstrap/crispy_notes_project
+cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 
 # 2. Встановлюємо залежності
 pip install -r requirements.txt
@@ -535,8 +535,8 @@ python manage.py runserver
 | `http://127.0.0.1:8000/admin/` | Django Admin |
 
 > **Tier 1 і Tier 2 як код для порівняння** (не як живі URL):
-> - Tier 1 (`form.as_p`): [`notes_project/hello_app/forms.py`](../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py)
-> - Tier 2 (manual Bootstrap): [`django_bootstrap_project/`](../django_bootstrap_project/)
+> - Tier 1 (`form.as_p`): [README_3 — форми без crispy](README_3.md)
+> - Tier 2 (manual Bootstrap): [README_2](README_2.md)
 
 ---
 
@@ -848,7 +848,7 @@ LOGIN_REDIRECT_URL = '/notes/'
 
 **Мета:** показати що є у Django "з коробки", без жодних стилів.
 
-> Tier 1 реалізовано у [`notes_project`](../../lesson_Django_ORM_Database/notes_project/) — там форми без crispy.
+> Tier 1 реалізовано у [`notes_project`](README_3.md) — там форми без crispy.
 > Код нижче — для порівняння концепцій.
 
 ```python
@@ -904,7 +904,7 @@ def note_create_raw(request):
 
 **Мета:** показати повний Bootstrap HTML — щоб зрозуміти від чого рятує Tier 3.
 
-> Tier 2 реалізовано у [`django_bootstrap_project`](../django_bootstrap_project/) — там форми з ручним Bootstrap HTML.
+> Tier 2 реалізовано у [`django_bootstrap_project`](README_2.md) — там форми з ручним Bootstrap HTML.
 > Код нижче — для порівняння концепцій.
 
 ```html
@@ -1408,8 +1408,8 @@ crispy_notes_project/
 
 | Файл | Опис |
 |------|------|
-| [`../DESIGN_FOUNDATIONS.md`](../DESIGN_FOUNDATIONS.md) | UX, CRAP, Bootstrap, ієрархія шаблонів, Crispy — теорія |
-| [`../CRISPY_FORMS.md`](../CRISPY_FORMS.md) | Повний довідник: FormHelper, Layout, Bootstrap компоненти, Dynamic API |
-| [`../ADVANCED_TEMPLATES.md §3`](../ADVANCED_TEMPLATES.md) | FormHelper + Layout — деталі |
-| [`../ADVANCED_TEMPLATES.md §5`](../ADVANCED_TEMPLATES.md) | SaaS Dashboard Architecture |
-| [`../../lesson_Django_ORM_Database/notes_project/README.md`](../../lesson_Django_ORM_Database/notes_project/README.md) | ORM, Services/Selectors, міграції — фундамент цього проєкту |
+| [Дизайн-основи](../05_frontend_and_templates/design_foundations_full.md) | UX, CRAP, Bootstrap, ієрархія шаблонів, Crispy — теорія |
+| [Crispy Forms](../04_forms_and_validation/crispy_forms_full.md) | Повний довідник: FormHelper, Layout, Bootstrap компоненти, Dynamic API |
+| [Advanced Templates §3](../05_frontend_and_templates/advanced_templates_full.md) | FormHelper + Layout — деталі |
+| [Advanced Templates §5](../05_frontend_and_templates/advanced_templates_full.md) | SaaS Dashboard Architecture |
+| [README_3](README_3.md) | ORM, Services/Selectors, міграції — фундамент цього проєкту |

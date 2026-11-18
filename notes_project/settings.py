@@ -1,7 +1,7 @@
 """
-Django settings — lesson_Django_authentication_and_security
+Django settings — notes_chat_app
 
-Новий урок додає до crispy_notes_project:
+Крок 5 (автентифікація і безпека) додає:
   + password reset/change flows   → EMAIL_BACKEND (console), /accounts/password_*/
   + security settings block       → SESSION_COOKIE_HTTPONLY, X_FRAME_OPTIONS, ...
   + Group-based sharing           → Django built-in Group model used in Note/ShoppingList

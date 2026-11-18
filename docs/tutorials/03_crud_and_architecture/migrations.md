@@ -120,8 +120,8 @@ sequenceDiagram
 ```bash
 # Кроки для нашого проекту:
 
-# 1. Переходимо до папки проекту
-cd module_5/lesson_Django_ORM_Database/notes_project
+# 1. Переходимо до папки проекту (шлях у тебе свій)
+cd .../notes_project
 
 # 2. Перевіряємо що hello_app в INSTALLED_APPS
 # settings.py → INSTALLED_APPS має містити 'hello_app'

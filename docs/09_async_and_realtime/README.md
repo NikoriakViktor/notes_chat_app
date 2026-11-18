@@ -56,7 +56,7 @@ Django Channels — це Django-реалізація ASGI, яка додає Web
 |----------|-----------|
 | [Sync vs Async](async_01_sync_vs_async_full.md) | блокуючий vs неблокуючий I/O, GIL, thread pool, event loop |
 | [asyncio](async_02_asyncio_full.md) | coroutine, `await`, `Task`, `gather`, `asyncio.run()` |
-| [asyncio: Event Loop](lesson_34_documentation.md) | архітектура event loop, callbacks, futures, libuv |
+| [asyncio: Event Loop](asyncio_event_loop.md) | архітектура event loop, callbacks, futures, libuv |
 | [ASGI](async_03_asgi_full.md) | ASGI spec, `ProtocolTypeRouter`, lifecycle, scope |
 | [Django Async Views](async_04_django_async_views_full.md) | `async def view()`, обмеження, коли варто |
 | [Async ORM](async_05_async_orm_full.md) | `aadd`, `acreate`, `aget`, `async for`, відмінності від sync |

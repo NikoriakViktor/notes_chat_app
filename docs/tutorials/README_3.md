@@ -17,7 +17,7 @@
 - [04 · NORMALIZATION — одна правда для одного факту](#04--normalization)
 - [05 · MIGRATIONS — Git для схеми БД](#05--migrations)
 
-🔬 **[orm_laboratory.ipynb](hello_app/orm_laboratory.ipynb)** — інтерактивна лабораторія: виконуй кожну клітинку і дивись SQL
+🔬 **[ORM laboratory](../reference/legacy_source/orm_laboratory_reference.md)** — інтерактивна лабораторія: виконуй кожну клітинку і дивись SQL
 
 **Покрокова реалізація**
 1. [Крок 0 — Від домену до схеми (правильний початок)](#крок-0--від-домену-до-схеми)
@@ -810,8 +810,8 @@ sequenceDiagram
 ```bash
 # Кроки для нашого проекту:
 
-# 1. Переходимо до папки проекту
-cd module_5/lesson_Django_ORM_Database/notes_project
+# 1. Переходимо до папки проекту (шлях у тебе свій)
+cd .../notes_project
 
 # 2. Перевіряємо що hello_app в INSTALLED_APPS
 # settings.py → INSTALLED_APPS має містити 'hello_app'
@@ -937,9 +937,9 @@ print(f"Теги: {[t.name for t in note.tags.all()]}")
 ## Крок 7 — Архітектура: Services & Selectors
 
 > **Детальна документація (читати окремо):**
-> - [DJANGO_SERVICES_SELECTORS.md](../DJANGO_SERVICES_SELECTORS.md) — повна архітектура: View→Service→Selector→ORM, data flow, антипатерни, таблиця відповідальностей
-> - [DJANGO_SELECTORS.md](../DJANGO_SELECTORS.md) — глибоко про Selector: CQRS-light, naming convention, QuerySet vs evaluated list, централізація N+1
-> - [DJANGO_SERVICES.md](../DJANGO_SERVICES.md) — глибоко про Service: stateless функції, `@transaction.atomic`, `on_commit()`, Celery як transport layer
+> - [Services та Selectors](../06_application_architecture/services_selectors_full.md) — повна архітектура: View→Service→Selector→ORM, data flow, антипатерни, таблиця відповідальностей
+> - [Selectors (поглиблено)](../06_application_architecture/django_selectors_full.md) — глибоко про Selector: CQRS-light, naming convention, QuerySet vs evaluated list, централізація N+1
+> - [Services (поглиблено)](../06_application_architecture/django_services_full.md) — глибоко про Service: stateless функції, `@transaction.atomic`, `on_commit()`, Celery як transport layer
 
 ---
 > **🧠 Ментальна модель:** View — це **контролер трафіку**, не виконавець. Він приймає HTTP-запит, делегує роботу і повертає відповідь. Якщо View сам виконує всі запити до БД — це "fat view" і через місяць код стає нечитабельним. Selector = читання. Service = запис/зміна.

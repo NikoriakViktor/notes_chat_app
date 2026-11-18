@@ -35,6 +35,8 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - admonition
   - pymdownx.details
   - pymdownx.tabbed:
@@ -295,7 +297,7 @@ nav:
       - Огляд: 09_async_and_realtime/README.md
       - Sync vs Async: 09_async_and_realtime/async_01_sync_vs_async_full.md
       - asyncio: 09_async_and_realtime/async_02_asyncio_full.md
-      - "asyncio: Event Loop": 09_async_and_realtime/lesson_34_documentation.md
+      - "asyncio: Event Loop": 09_async_and_realtime/asyncio_event_loop.md
       - ASGI: 09_async_and_realtime/async_03_asgi_full.md
       - Django Async Views: 09_async_and_realtime/async_04_django_async_views_full.md
       - Async ORM: 09_async_and_realtime/async_05_async_orm_full.md

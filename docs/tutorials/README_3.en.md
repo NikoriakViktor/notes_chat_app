@@ -17,7 +17,7 @@
 - [04 · NORMALIZATION — one truth for one fact](#04--normalization)
 - [05 · MIGRATIONS — Git for the DB schema](#05--migrations)
 
-🔬 **[orm_laboratory.ipynb](hello_app/orm_laboratory.ipynb)** — an interactive lab: run each cell and look at the SQL
+🔬 **[ORM laboratory](../reference/legacy_source/orm_laboratory_reference.md)** — an interactive lab: run each cell and look at the SQL
 
 **Step-by-step implementation**
 1. [Step 0 — From domain to schema (the right start)](#step-0--from-domain-to-schema)
@@ -811,8 +811,8 @@ sequenceDiagram
 ```bash
 # Steps for our project:
 
-# 1. Go to the project folder
-cd module_5/lesson_Django_ORM_Database/notes_project
+# 1. Go to the project folder (your path is your own)
+cd .../notes_project
 
 # 2. Check that hello_app is in INSTALLED_APPS
 # settings.py → INSTALLED_APPS must contain 'hello_app'
@@ -938,9 +938,9 @@ print(f"Теги: {[t.name for t in note.tags.all()]}")
 ## Step 7 — Architecture: Services & Selectors
 
 > **Detailed documentation (read separately):**
-> - [DJANGO_SERVICES_SELECTORS.md](../DJANGO_SERVICES_SELECTORS.md) — the full architecture: View→Service→Selector→ORM, data flow, anti-patterns, a responsibility table
-> - [DJANGO_SELECTORS.md](../DJANGO_SELECTORS.md) — an in-depth look at Selectors: CQRS-light, naming convention, QuerySet vs evaluated list, centralizing N+1
-> - [DJANGO_SERVICES.md](../DJANGO_SERVICES.md) — an in-depth look at Services: stateless functions, `@transaction.atomic`, `on_commit()`, Celery as a transport layer
+> - [Services and Selectors](../06_application_architecture/services_selectors_full.md) — the full architecture: View→Service→Selector→ORM, data flow, anti-patterns, a responsibility table
+> - [Selectors (in depth)](../06_application_architecture/django_selectors_full.md) — an in-depth look at Selectors: CQRS-light, naming convention, QuerySet vs evaluated list, centralizing N+1
+> - [Services (in depth)](../06_application_architecture/django_services_full.md) — an in-depth look at Services: stateless functions, `@transaction.atomic`, `on_commit()`, Celery as a transport layer
 
 ---
 > **🧠 Mental model:** A View is a **traffic controller**, not a worker. It accepts an HTTP request, delegates the work and returns a response. If a View runs all the DB queries itself, it is a "fat view", and a month later the code becomes unreadable. Selector = reading. Service = writing/changing.

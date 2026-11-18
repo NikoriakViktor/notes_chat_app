@@ -2,7 +2,7 @@
 views.py — HTTP шар (тільки request/response).
 
 Тонкі view функції — вся логіка делегована selectors/services.
-Деталі архітектурних патернів: lesson_Django_ORM_Database/notes_project/notes_app/views.py
+Деталі архітектурних патернів: https://nikoriakviktor.github.io/notes_chat_app/tutorials/03_crud_and_architecture/views_fundamentals/
 """
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages

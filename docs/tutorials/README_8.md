@@ -234,7 +234,7 @@ overengineering + складніший код + ті самі результат
 ### Крок 1: Перехід до директорії
 
 ```bash
-cd module_5/lesson_Django_Async/notes_chat_app
+cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 ```
 
 ### Крок 2: Створення virtualenv
@@ -1385,8 +1385,8 @@ Python може завантажити **не той проєкт**. Docker ви
 ```
 Без Docker:                         З Docker:
 sys.path = [                        sys.path = [
-  lesson_Django_authentication/..., ← /app ← тільки notes_chat_app
-  lesson_Django_Async/...,          ]
+  other_django_project/...,         ← /app ← тільки notes_chat_app
+  another_django_project/...,       ]
   ...                               WORKDIR /app → ENV PYTHONPATH=/app
 ]
 ```
@@ -1408,8 +1408,8 @@ services:
 ### 19.3. Запуск
 
 ```powershell
-# Перейти до папки проєкту (PowerShell / CMD)
-cd C:\Users\victo\PycharmProjects\PY-Course-Victor-Nikoriak-23_02\module_5\lesson_Django_Async\notes_chat_app
+# Перейти до кореня репозиторію notes_chat_app — там лежить docker-compose.yml (PowerShell / CMD)
+cd C:\...\notes_chat_app
 
 # Білд + старт (перший раз ~3-5 хв)
 docker compose up --build

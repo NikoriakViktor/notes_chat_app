@@ -1,7 +1,7 @@
 # Book Progress
 
 Поточний стан роботи з документацією Notes Chat App.
-Оновлено: 2026-09-27 (ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).
+Оновлено: 2026-11-18 (ревізія 12 — контрольні точки кроків 1–9 у форматі книги FastAPI, прибрано згадки старого репозиторію курсу; ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).
 
 ---
 
@@ -34,6 +34,30 @@
 - `MKDOCS_NAVIGATION_PLAN.md` — нова директорійна навігація ✅
 
 ---
+
+### Batch T — Сліди старого монорепозиторію курсу (2026-11-18): DONE ✅
+
+- Прибрано `module_5/...`, `lesson_Django_*`, `lesson_HTML_*`, `note_lesson_*`, «Урок N / Модуль N» у docs/ (крім `_internal`) і mkdocs.yml, uk + en.
+- `cd module_5/...`: для кроків 5–8 і 7a команди йдуть з кореня репозиторію; для README_2/README_3/migrations (власний проєкт читача) — `cd C:\...\<project>` / `cd .../notes_project`, як у README_1.
+- Мертві посилання README_2–7 (`../BOOTSTRAP_5.md`, `../../lesson_*/...` тощо) спрямовано на канонічні глави книги; відсутні файли (`views_fbv_backup.py`, `basics/`) — на `reference/legacy_source/legacy_missing_reference.md`.
+- `lesson_34_documentation(.en).md` перейменовано на `asyncio_event_loop(.en).md` (URL сторінки змінився).
+- `tutorials/06_testing/ci_github_actions(.en).md` переписано під реальний `.github/workflows/django-tests.yml`; coverage-вивід — реальний локальний запуск (209 tests OK, TOTAL 94%).
+- Перевірки: `mkdocs build --strict` exit 0 без warning; link-check 54 зібраних сторінок (uk+en) — 0 битих внутрішніх посилань/якорів.
+- Залишено навмисно: посилання на поточний курс (урок 36) у `06_application_architecture/drf_rest_api_full.md`, рядки 179 і 633.
+
+### Batch S — Контрольні точки кроків 1–9 (2026-11-18): DONE ✅
+
+Запит автора: прибрати згадки старого репозиторію курсу (`…-23_02`) і зробити чекліст «як у книзі FastAPI».
+
+| Що | Файли | Результат |
+|---|---|---|
+| Згадки старого репозиторію курсу | `tutorials/README_1`, `README_7` (розділ CI переписано під `.github/workflows/django-tests.yml` цього репо), `README_8`, `07_async_django/7a_benchmark` (+ `.en.md`), коментар у `.github/workflows/django-tests.yml` | `grep -rn "23_02"` поза `.git/`, `site/` — порожньо |
+| Формат контрольних точок | `tutorials/0N_*/checkpoint.md` + `.en.md` (9 пар) | розділи `#check`, `#checklist`, `#mistakes`, `#practice`, `#summary`, `#self-check`, `#next` (порядок як у news_hub) |
+| `pymdownx.tasklist` (`custom_checkbox: true`) | `mkdocs.yml` | `- [ ]` рендеряться як checkbox |
+
+Реальні перевірки, на яких побудовано розділи «Перевір» — див. `VALIDATION_REPORT.md`.
+Кроки 1–2 перевірено в окремому scratch-проєкті (`hello_project`/`hello_app`, код з глав); кроки 3–9 — на коді цього репо.
+Не перевірено: 7A (async views `hello_app` — немає в репо), повний `docker compose up`, `--profile test run selenium-tests`, ngrok.
 
 ### Batch R — REST API в код Notes Chat App (2026-09-27): DONE ✅
 
@@ -500,5 +524,5 @@ README.md, ARCHITECTURE.md, GLOSSARY.md, LEARNING_PATH.md, TROUBLESHOOTING.md, T
 
 | Блокер | Впливає на |
 |--------|-----------|
-| mkdocs не встановлений локально | `mkdocs build --strict` — blocked |
+| ~~mkdocs не встановлений локально~~ | зняти: 2026-11-18 `mkdocs build --strict` пройшов у scratch venv з `requirements-docs.txt` |
 | crispy_notes_project не у поточному репо | Верифікація README_6 Issue 1 |

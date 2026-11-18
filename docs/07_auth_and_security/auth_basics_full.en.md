@@ -1,7 +1,7 @@
 # Authentication vs Authorization — The Basics
 
 > **Audience:** Students learning web application security in Django for the first time.
-> **Project:** `crispy_notes_chat_app` (lesson_Django_authentication_and_security)
+> **Project:** `notes_chat_app` — the notes application from this repository
 
 ---
 

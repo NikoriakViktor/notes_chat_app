@@ -259,8 +259,8 @@ the container has only `/app` in `sys.path`, with no third-party packages from e
 ```
 Without Docker:                     With Docker:
 sys.path = [                        sys.path = [
-  lesson_Django_authentication/..., ← /app ← only notes_chat_app
-  lesson_Django_Async/...,          ]
+  other_django_project/...,         ← /app ← only notes_chat_app
+  another_django_project/...,       ]
   ...                               WORKDIR /app → ENV PYTHONPATH=/app
 ]
 ```
@@ -282,8 +282,8 @@ services:
 ### Running it
 
 ```powershell
-# Go to the project folder (PowerShell / CMD)
-cd C:\Users\victo\PycharmProjects\PY-Course-Victor-Nikoriak-23_02\module_5\lesson_Django_Async\notes_chat_app
+# Go to the root of the notes_chat_app repository, where docker-compose.yml lives (PowerShell / CMD)
+cd C:\...\notes_chat_app
 
 # Build + start (the first time takes ~3-5 min)
 docker compose up --build
