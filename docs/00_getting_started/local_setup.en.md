@@ -29,7 +29,7 @@ It covers:
 `notes_chat_app` requires PostgreSQL and Redis. Docker Compose brings everything up with a single command:
 
 ```bash
-git clone https://github.com/NikoriakViktot/notes_chat_app.git
+git clone https://github.com/NikoriakViktor/notes_chat_app.git
 cd notes_chat_app
 cp .env.example .env          # copy the configuration
 docker compose up --build     # first run (3–7 minutes)

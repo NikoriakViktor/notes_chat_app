@@ -1,7 +1,7 @@
 # GitHub Actions CI — Django Tests (notes_chat_app)
 
 # ЯК ПЕРЕГЛЯНУТИ РЕЗУЛЬТАТИ:
-#   https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-23_02/actions
+#   https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
 
 name: Django Tests
 
