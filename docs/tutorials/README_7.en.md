@@ -1456,14 +1456,14 @@ The Traceback shows: the file, the line, what was expected, what was received.
 ### Where the workflow lives
 
 ```
-PY-Course-Victor-Nikoriak-23_02/          ← repository root
+notes_chat_app/                           ← repository root
 └── .github/
     └── workflows/
         └── django-tests.yml              ← ★ the REAL file, GitHub sees it
 ```
 
-The file `crispy_notes_project/.github/workflows/django-tests.yml` is a **sample/reference**.
-GitHub Actions reads workflows ONLY from the repository's root folder. Everything else is ignored.
+GitHub Actions reads workflows ONLY from `.github/workflows/` at the repository root. Everything else is ignored.
+The project itself (`manage.py`, `notes_app/`, `notes_project/`) also lives at the root, so every workflow command runs from there.
 
 ---
 
@@ -1474,102 +1474,114 @@ You:     git push origin main
          │
          ▼
 GitHub:  Detect event → push to main
-         did paths change? module_5/lesson_Django_Testing/** → YES
+         did paths change? notes_app/**, notes_project/**, templates/** … → YES
          │
          ▼
-Azure:   Provision Ubuntu 22.04 VM (new, clean)
+Azure:   Provision an Ubuntu VM (new, clean) + a PostgreSQL 16 service container
          │
-         ├── Job 1: unit-and-integration (~1-2 min)
+         ├── Job 1: unit-and-integration
          │     checkout → python 3.12 → pip install → manage.py check → manage.py test
          │     Result: ✅ or ❌
          │
-         └── Job 2: selenium-e2e (~1-2 min) — only if Job 1 is ✅
-               checkout → pip install → manage.py test test_selenium
-               Chrome is installed on ubuntu-latest, Selenium Manager = chromedriver
+         └── Job 2: selenium-e2e — only if Job 1 is ✅
+               PostgreSQL + selenium/standalone-chrome as service containers
+               checkout → pip install → manage.py test notes_app.tests.test_selenium
                Result: ✅ or ❌
          │
          ▼
-GitHub:  Green/red status on the commit + email if ❌
+GitHub:  Green/red status on the commit + an email if ❌
 ```
 
 ---
 
 ### The full workflow: line by line
 
-!!! warning "This workflow comes from the course's original monorepo"
-    The YAML code below describes the CI workflow written for the course monorepo,
-    where the project is located at `module_5/lesson_Django_Testing/crispy_notes_project`.
-    Accordingly, `paths:` and `working-directory:` point to that path.
-
-    In the standalone **notes_chat_app** repository the workflow watches the paths
-    `notes_app/**` and `notes_project/**` — without the `module_5/` prefix.
-    The walkthrough below is a teaching example of GitHub Actions structure — the concepts
-    (`on`, `paths`, `jobs`, `steps`, `needs`) apply to any project.
-
-File: [`.github/workflows/django-tests.yml`](../../../../.github/workflows/django-tests.yml)
+File: [`.github/workflows/django-tests.yml`](https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml)
 
 #### Name and triggers
 
 ```yaml
-name: Django Tests (module_5/lesson_Django_Testing)
+name: Django Tests
 ```
 
-This name is displayed in the **Actions** tab on GitHub.
+This name is shown in the **Actions** tab on GitHub.
 
 ```yaml
 on:
   push:
     branches: [ main, master ]
     paths:
-      - 'module_5/lesson_Django_Testing/**'
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
       - '.github/workflows/django-tests.yml'
   pull_request:
     branches: [ main, master ]
     paths:
-      - 'module_5/lesson_Django_Testing/**'
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
       - '.github/workflows/django-tests.yml'
   workflow_dispatch:
 ```
 
-**`on`** — defines when to run the workflow.
-📖 [Documentation: Events that trigger workflows](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
+**`on`** defines when the workflow runs.
+📖 [Docs: Events that trigger workflows](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows)
 
 | Key | What it means |
 |------|-----------|
 | `push` | On every git push |
 | `branches` | Only for the `main` or `master` branches |
-| `paths` | **Only if these files changed.** If you edit module_1, the workflow doesn't run |
+| `paths` | **Only if these files changed.** If you edit only `docs/`, the workflow does not run |
 | `pull_request` | When a PR is opened or updated |
 | `workflow_dispatch` | The "Run workflow" button in the GitHub UI → Actions |
 
 **Why `paths`?**
 
-Without `paths`, every push to any file in the course would run the Django lesson's tests. With `paths`, the workflow runs only when files of this particular lesson or the workflow itself have changed. It saves CI minutes.
+Without `paths`, every push (even a book edit in `docs/`) would run the Django tests. With `paths`, the workflow runs only when the application code, templates, static files, dependencies or the workflow itself change. It saves CI minutes.
 
 ---
 
-#### Job 1: Unit & Integration Tests
+#### Job 1: Unit, Integration & Consumer Tests
 
 ```yaml
 jobs:
   unit-and-integration:
-    name: Unit & Integration Tests
+    name: Unit, Integration & Consumer Tests
     runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
 ```
 
-**`runs-on: ubuntu-latest`** — the runner type. It is a fresh Ubuntu 22.04 VM on Azure. After the job finishes, the VM is destroyed. No state is kept between runs.
+**`runs-on: ubuntu-latest`** is the runner type: a fresh Ubuntu VM on Azure. After the job finishes, the VM is destroyed. There is no state between runs.
 
-📖 [Documentation: GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories)
+📖 [Docs: GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories)
 
-```yaml
-    defaults:
-      run:
-        working-directory: module_5/lesson_Django_Testing/crispy_notes_project
-```
+**`services.db`** is PostgreSQL 16 in a container next to the runner. `notes_project/settings.py` does not start without `DATABASE_URL` (`Exception: DATABASE_URL не встановлено`), so the job sets `DATABASE_URL` to `localhost:5432`. `--health-cmd pg_isready` makes the steps start only once the database accepts connections.
 
-**`defaults.run.working-directory`** — all `run:` commands in this job are executed from this directory. Without it, every command would start from the repository root and you would have to write `cd module_5/...` before every step.
+No `working-directory` is needed: `manage.py` is at the repository root, and that is where every `run:` executes.
 
-📖 [Documentation: defaults.run](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#defaultsrun)
+📖 [Docs: services](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices)
 
 ---
 
@@ -1609,7 +1621,7 @@ Installs the required Python version. Ubuntu-latest has several Python versions;
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('module_5/lesson_Django_Testing/crispy_notes_project/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 ```
@@ -1617,14 +1629,14 @@ Installs the required Python version. Ubuntu-latest has several Python versions;
 Caches the `~/.cache/pip` folder between workflow runs.
 
 **How it works:**
-1. On the first run — there is no cache, pip downloads the packages (~60 seconds), the cache is saved
-2. On subsequent runs — if `requirements.txt` hasn't changed, the `key` matches → pip loads the packages from the cache (~5 seconds)
-3. If `requirements.txt` has changed → the `key` is new → the cache is not found → `restore-keys` gives a partial match → the cache is updated
+1. On the first run there is no cache, pip downloads the packages (~60 seconds), the cache is saved
+2. On later runs, if `requirements.txt` has not changed, the `key` matches → pip installs the packages from the cache (~5 seconds)
+3. If `requirements.txt` changed → a new `key` → no cache found → `restore-keys` gives a partial match → the cache is updated
 
-`${{ hashFiles(...) }}` is a GitHub Actions expression. It returns the file's SHA-256 hash. If the file hasn't changed, the hash is the same → cache hit.
+`${{ hashFiles(...) }}` is a GitHub Actions expression. It returns the SHA-256 hash of the file. If the file has not changed, the hash is the same → a cache hit.
 
 📖 [actions/cache on GitHub Marketplace](https://github.com/marketplace/actions/cache)
-📖 [Documentation: Caching dependencies](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)
+📖 [Docs: Caching dependencies](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows)
 
 ---
 
@@ -1635,7 +1647,7 @@ Caches the `~/.cache/pip` folder between workflow runs.
         run: pip install -r requirements.txt
 ```
 
-A simple shell command. It runs from the `working-directory` → that is, from `crispy_notes_project/`.
+A plain shell command. It runs from the repository root, where `requirements.txt` lives.
 
 ---
 
@@ -1661,21 +1673,23 @@ If there is a configuration error, you find out here in 3 seconds, not after 2 m
 **Step 6 — Run tests**
 
 ```yaml
-      - name: Run unit and integration tests
+      - name: Run unit, integration and consumer tests
         run: |
           python manage.py test \
-            hello_app.tests.test_models \
-            hello_app.tests.test_services \
-            hello_app.tests.test_forms \
-            hello_app.tests.test_views \
+            notes_app.tests.test_models \
+            notes_app.tests.test_services \
+            notes_app.tests.test_forms \
+            notes_app.tests.test_views \
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api \
             -v 2
 ```
 
-Runs 123 tests (unit + integration). The modules are listed explicitly without `test_selenium` — Selenium is in a separate job.
+Runs 209 tests (25 models + 65 services + 22 forms + 84 views + 9 consumers + 4 API). The modules are listed explicitly, without `test_selenium`: Selenium has its own job.
 
-`-v 2` — verbose: each test is printed on its own line. In CI this is useful: you immediately see the name of the test that failed.
+`-v 2` means verbose: every test is printed on its own line. In CI this helps: you see at once which test name failed.
 
-If any test returns `FAILED` → the step returns exit code 1 → GitHub Actions considers the step failed → the job stops → Job 2 (selenium) doesn't run.
+If any test returns `FAILED` → the step returns exit code 1 → GitHub Actions marks the step as failed → the job stops → Job 2 (selenium) does not run.
 
 ---
 
@@ -1685,29 +1699,31 @@ If any test returns `FAILED` → the step returns exit code 1 → GitHub Actions
       - name: Generate coverage report
         run: |
           coverage run manage.py test \
-            hello_app.tests.test_models \
-            hello_app.tests.test_services \
-            hello_app.tests.test_forms \
-            hello_app.tests.test_views
+            notes_app.tests.test_models \
+            notes_app.tests.test_services \
+            notes_app.tests.test_forms \
+            notes_app.tests.test_views \
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api
           coverage report --show-missing
           coverage xml -o coverage.xml
 ```
 
-`coverage run` — runs the tests through `coverage`, tracking which lines of code are executed.
+`coverage run` runs the tests through `coverage`, tracking which lines of code execute.
 
-`coverage report --show-missing` — prints a table:
+`coverage report --show-missing` prints a table (the format; your numbers will differ):
 
 ```
 Name                          Stmts   Miss  Cover   Missing
 -----------------------------------------------------------
-hello_app/models.py             87      3    97%   45, 67, 89
-hello_app/services.py          124      8    94%   34-41
-hello_app/views.py             198     12    94%   ...
+notes_app/models.py             ...    ...   ...%   ...
+notes_app/services.py           ...    ...   ...%   ...
+notes_app/views.py              ...    ...   ...%   ...
 -----------------------------------------------------------
-TOTAL                          409     23    94%
+TOTAL                           ...    ...   ...%
 ```
 
-`coverage xml -o coverage.xml` — saves it as XML for integration with Codecov / SonarQube.
+`coverage xml -o coverage.xml` saves it as XML for Codecov / SonarQube integration.
 
 📖 [Coverage.py documentation](https://coverage.readthedocs.io/en/latest/)
 
@@ -1720,12 +1736,12 @@ TOTAL                          409     23    94%
         uses: actions/upload-artifact@v4
         with:
           name: coverage-xml
-          path: module_5/lesson_Django_Testing/crispy_notes_project/coverage.xml
+          path: coverage.xml
 ```
 
-Saves `coverage.xml` as an artifact — the file is attached to the workflow run and can be downloaded from the GitHub UI.
+Saves `coverage.xml` as an artifact: the file is attached to the workflow run and can be downloaded from the GitHub UI.
 
-The path is given relative to the repository root (not the `working-directory`) — artifact upload does not inherit `defaults.run.working-directory`.
+The path is relative to the repository root, which is where `coverage xml` created the file.
 
 📖 [actions/upload-artifact on GitHub Marketplace](https://github.com/marketplace/actions/upload-a-build-artifact)
 
@@ -1740,43 +1756,52 @@ The path is given relative to the repository root (not the `working-directory`) 
     needs: unit-and-integration
 ```
 
-**`needs: unit-and-integration`** — Job 2 runs only after Job 1 has finished successfully. If the unit tests failed, Selenium doesn't even start. This is right: there's no point checking the browser flow if the basic logic is already broken.
+**`needs: unit-and-integration`** means Job 2 starts only after Job 1 has finished successfully. If the unit tests failed, Selenium does not even start. That is right: there is no point checking the browser flow when the basic logic is already broken.
 
-📖 [Documentation: needs](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idneeds)
+📖 [Docs: needs](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idneeds)
 
 ---
 
-**Why there is no service container for Selenium**
+**Selenium as a service container**
 
-The sample inside the project (`crispy_notes_project/.github/...`) has a `services: selenium: image: selenium/standalone-chrome` section. The real workflow **does not use** it. Here's why:
+Besides PostgreSQL, Job 2 starts a `selenium/standalone-chrome:latest` container, the same image as the `selenium` service in `docker-compose.yml`:
 
-```
-The problem with a service container:
+```yaml
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: >-
+          --add-host=host.docker.internal:host-gateway
+          --shm-size=2gb
+          --health-cmd "curl -f http://localhost:4444/wd/hub/status"
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
 
-  Runner VM                     Docker container (selenium/standalone-chrome)
-  ┌─────────────────────┐       ┌─────────────────────────────────────┐
-  │ Django test server  │       │ Chrome                              │
-  │ http://localhost:PORT│       │                                     │
-  │                     │       │  Chrome opens                       │
-  │                     │◄──────│  http://localhost:PORT              │
-  └─────────────────────┘       │                                     │
-                                │  BUT! the container's localhost ≠   │
-                                │  the runner's localhost             │
-                                │  → ERR_CONNECTION_REFUSED           │
-                                └─────────────────────────────────────┘
-
-The solution (the real workflow):
-
-  Runner VM — everything on one machine
-  ┌─────────────────────────────────────────────────────┐
-  │ Django test server       Chrome (already installed) │
-  │ http://localhost:PORT ◄─ http://localhost:PORT ✅    │
-  │                                                     │
-  │ Selenium Manager automatically downloads chromedriver│
-  └─────────────────────────────────────────────────────┘
+    env:
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
+      SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
+      WEB_HOST: host.docker.internal
 ```
 
-`ubuntu-latest` includes Chrome. `selenium>=4.6` has a built-in Selenium Manager — it finds the installed Chrome itself and downloads the matching `chromedriver` version. Nothing else is needed.
+The problem: Chrome lives in the container and the Django test server lives on the runner. The container's `localhost` ≠ the runner's `localhost`:
+
+```
+  Runner VM                          Docker container (selenium/standalone-chrome)
+  ┌──────────────────────────┐       ┌──────────────────────────────────────┐
+  │ Django test server       │       │ Chrome                               │
+  │ listens on 0.0.0.0:PORT  │◄──────│ http://host.docker.internal:PORT ✅  │
+  │                          │       │                                      │
+  │ tests → Remote WebDriver │──────►│ :4444/wd/hub                         │
+  └──────────────────────────┘       └──────────────────────────────────────┘
+```
+
+How it is solved:
+
+- `--add-host=host.docker.internal:host-gateway` adds the name `host.docker.internal` → the runner's IP to the container's `/etc/hosts`;
+- `WEB_HOST=host.docker.internal` → `_DockerLiveServerMixin` in `test_selenium.py` binds the test server to `0.0.0.0` and puts `host.docker.internal` into `live_server_url`;
+- `SELENIUM_REMOTE_URL` → `_make_headless_driver()` creates a Remote WebDriver to the container instead of a local Chrome.
 
 ---
 
@@ -1784,10 +1809,10 @@ The solution (the real workflow):
 
 ```yaml
       - name: Run Selenium E2E tests
-        run: python manage.py test hello_app.tests.test_selenium -v 2
+        run: python manage.py test notes_app.tests.test_selenium -v 2
 ```
 
-Without the `SELENIUM_REMOTE_URL` variable → `_make_driver()` in the test code uses the local Chrome in headless mode. Django's `StaticLiveServerTestCase` starts the server on a random port, and Chrome connects to it on the same `localhost`.
+Without the `SELENIUM_REMOTE_URL` variable (for example, locally without Docker), `_make_headless_driver()` starts a local headless Chrome.
 
 ---
 
@@ -1796,34 +1821,33 @@ Without the `SELENIUM_REMOTE_URL` variable → `_make_driver()` in the test code
 **1. The Actions tab in the repository**
 
 ```
-https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
+https://github.com/NikoriakViktor/notes_chat_app/actions
 ```
 
-Here is the list of all workflow runs. Green — all green. Red — something failed.
+Here is the list of all workflow runs. Green means all green. Red means something failed.
 
-**2. The Jobs graph**
+**2. The jobs graph**
 
-Click on a specific run → you see two boxes:
+Click a specific run → you see two boxes:
 
 ```
-[Unit & Integration Tests] ──needs──► [Selenium E2E Tests]
-      ✅ 1m 23s                              ✅ 1m 47s
+[Unit, Integration & Consumer Tests] ──needs──► [Selenium E2E Tests]
 ```
 
 **3. Logs of a specific step**
 
-Click on the job → click on the step → expand it:
+Click the job → click the step → expand it:
 
 ```
 Run python manage.py test ...
 
-Creating test database for alias 'default' ...
-Found 123 test(s).
-test_str_returns_hash_name (hello_app.tests.test_models.TagModelTest) ... ok
-test_unique_together_same_user_same_name_raises (...) ... ok
+Found 209 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
 ...
 ----------------------------------------------------------------------
-Ran 123 tests in 34.2s
+Ran 209 tests in ...s
+
 OK
 ```
 
@@ -1844,20 +1868,20 @@ Every commit in the commit list gets a badge:
 
 ```
 FAIL: test_note_list_excludes_other_user_notes
-      ↑ The test name → you immediately understand WHAT broke
+      ↑ The test name → you immediately see WHAT broke
 
-(hello_app.tests.test_views.NoteListViewTest)
-      ↑ The class and file → you can open it right away
+(notes_app.tests.test_views.NoteListViewTest)
+      ↑ The class and the file → you can open it right away
 
 Traceback (most recent call last):
-  File ".../test_views.py", line 89, in test_note_list_excludes_other_user_notes
-    self.assertNotContains(response, "Bob's Secret Note")
-AssertionError: Response should not contain "Bob's Secret Note"
-      ↑ We expected the string NOT to be there, but it is → Bob's notes are visible to Alice!
-      → The bug is in selectors.get_user_notes() — the filter by user was forgotten
+  File ".../test_views.py", line ..., in test_note_list_excludes_other_user_notes
+    self.assertNotContains(response, ...)
+AssertionError: ... unexpectedly found in the following response
+      ↑ We expected the string to be ABSENT, but it is there → Bob's notes are visible to Alice!
+      → A bug in selectors.get_user_notes(): the filter by user was forgotten
 
 Process completed with exit code 1
-      ↑ The Django test runner returned 1 → GitHub Actions considers the step failed
+      ↑ The Django test runner returned 1 → GitHub Actions marks the step as failed
 ```
 
 ---
@@ -1867,16 +1891,18 @@ Process completed with exit code 1
 ```
 You write:                 CI/CD runs:               You get:
 
-test_models.py    ─────►   Job 1, Step 6         ──► ✅ or ❌ in 30 sec
-test_services.py  ─────►   (unit + integration)  ──► Traceback right in GitHub
-test_forms.py     ─────►
+test_models.py    ─────►   Job 1, Step 6         ──► ✅ or ❌
+test_services.py  ─────►   (unit + integration   ──► Traceback right in GitHub
+test_forms.py     ─────►    + consumer + API)
 test_views.py     ─────►
+test_consumers.py ─────►
+test_api.py       ─────►
 
 test_selenium.py  ─────►   Job 2                 ──► ✅ or ❌ after Job 1
-                            (E2E, needs: job1)    ──► Chrome headless on Azure
+                            (E2E, needs: job1)    ──► Chrome in the selenium container
 ```
 
-Every test you wrote in Steps 2–6 automatically runs in CI on every push.
+Every test you wrote in steps 2–6 runs automatically in CI on every push.
 
 ---
 
@@ -1903,14 +1929,14 @@ Every test you wrote in Steps 2–6 automatically runs in CI on every push.
 
 ### Practice: check that CI/CD works
 
-1. Open in your browser: `https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions`
-2. Find the workflow **"Django Tests (module_5/lesson_Django_Testing)"**
-3. Click on the latest run
-4. Expand Job 1 → Step "Run unit and integration tests"
-5. Find the line `Ran 123 tests in ... OK`
-6. Go to Job 2 → see how Selenium runs on the Ubuntu runner
+1. Open in your browser: `https://github.com/NikoriakViktor/notes_chat_app/actions`
+2. Find the **"Django Tests"** workflow
+3. Click the latest run
+4. Expand Job 1 → the "Run unit, integration and consumer tests" step
+5. Find the line `Ran 209 tests in ...` and `OK`
+6. Go to Job 2 → see how Selenium runs through a Remote WebDriver in the container
 
-**On your own:** make a deliberate mistake in any test (`assertFalse(True)`), do a `git push`, and see how CI shows the FAIL and the Traceback.
+**On your own:** make a deliberate mistake in any test (`assertFalse(True)`), do a `git push`, and see how CI shows FAIL and the Traceback.
 
 ---
 

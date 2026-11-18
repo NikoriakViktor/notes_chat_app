@@ -1,7 +1,7 @@
 # Book Progress
 
 Поточний стан роботи з документацією Notes Chat App.
-Оновлено: 2026-09-27 (ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).
+Оновлено: 2026-11-18 (ревізія 12 — контрольні точки кроків 1–9 у форматі книги FastAPI, прибрано згадки старого репозиторію курсу; ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).
 
 ---
 
@@ -34,6 +34,20 @@
 - `MKDOCS_NAVIGATION_PLAN.md` — нова директорійна навігація ✅
 
 ---
+
+### Batch S — Контрольні точки кроків 1–9 (2026-11-18): DONE ✅
+
+Запит автора: прибрати згадки старого репозиторію курсу (`…-23_02`) і зробити чекліст «як у книзі FastAPI».
+
+| Що | Файли | Результат |
+|---|---|---|
+| Згадки старого репозиторію курсу | `tutorials/README_1`, `README_7` (розділ CI переписано під `.github/workflows/django-tests.yml` цього репо), `README_8`, `07_async_django/7a_benchmark` (+ `.en.md`), коментар у `.github/workflows/django-tests.yml` | `grep -rn "23_02"` поза `.git/`, `site/` — порожньо |
+| Формат контрольних точок | `tutorials/0N_*/checkpoint.md` + `.en.md` (9 пар) | розділи `#check`, `#checklist`, `#mistakes`, `#practice`, `#summary`, `#self-check`, `#next` (порядок як у news_hub) |
+| `pymdownx.tasklist` (`custom_checkbox: true`) | `mkdocs.yml` | `- [ ]` рендеряться як checkbox |
+
+Реальні перевірки, на яких побудовано розділи «Перевір» — див. `VALIDATION_REPORT.md`.
+Кроки 1–2 перевірено в окремому scratch-проєкті (`hello_project`/`hello_app`, код з глав); кроки 3–9 — на коді цього репо.
+Не перевірено: 7A (async views `hello_app` — немає в репо), повний `docker compose up`, `--profile test run selenium-tests`, ngrok.
 
 ### Batch R — REST API в код Notes Chat App (2026-09-27): DONE ✅
 
@@ -500,5 +514,5 @@ README.md, ARCHITECTURE.md, GLOSSARY.md, LEARNING_PATH.md, TROUBLESHOOTING.md, T
 
 | Блокер | Впливає на |
 |--------|-----------|
-| mkdocs не встановлений локально | `mkdocs build --strict` — blocked |
+| ~~mkdocs не встановлений локально~~ | зняти: 2026-11-18 `mkdocs build --strict` пройшов у scratch venv з `requirements-docs.txt` |
 | crispy_notes_project не у поточному репо | Верифікація README_6 Issue 1 |

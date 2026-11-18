@@ -1456,14 +1456,14 @@ Traceback показує: файл, рядок, що очікувалось, щ�
 ### Де живе workflow
 
 ```
-PY-Course-Victor-Nikoriak-23_02/          ← корінь репозиторію
+notes_chat_app/                           ← корінь репозиторію
 └── .github/
     └── workflows/
         └── django-tests.yml              ← ★ РЕАЛЬНИЙ файл, GitHub бачить його
 ```
 
-Файл `crispy_notes_project/.github/workflows/django-tests.yml` — **зразок/довідка**.
-GitHub Actions читає workflow ТІЛЬКИ з кореневої папки репозиторію. Усе інше ігнорується.
+GitHub Actions читає workflow ТІЛЬКИ з `.github/workflows/` у корені репозиторію. Усе інше ігнорується.
+Сам проєкт (`manage.py`, `notes_app/`, `notes_project/`) теж лежить у корені, тому всі команди workflow виконуються звідти.
 
 ---
 
@@ -1474,18 +1474,18 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
          │
          ▼
 GitHub:  Detect event → push до main
-         paths змінились? module_5/lesson_Django_Testing/** → YES
+         paths змінились? notes_app/**, notes_project/**, templates/** … → YES
          │
          ▼
-Azure:   Provision Ubuntu 22.04 VM (нова, чиста)
+Azure:   Provision Ubuntu VM (нова, чиста) + service container PostgreSQL 16
          │
-         ├── Job 1: unit-and-integration (~1-2 хв)
+         ├── Job 1: unit-and-integration
          │     checkout → python 3.12 → pip install → manage.py check → manage.py test
          │     Результат: ✅ або ❌
          │
-         └── Job 2: selenium-e2e (~1-2 хв) — тільки якщо Job 1 ✅
-               checkout → pip install → manage.py test test_selenium
-               Chrome встановлений на ubuntu-latest, Selenium Manager = chromedriver
+         └── Job 2: selenium-e2e — тільки якщо Job 1 ✅
+               PostgreSQL + selenium/standalone-chrome як service containers
+               checkout → pip install → manage.py test notes_app.tests.test_selenium
                Результат: ✅ або ❌
          │
          ▼
@@ -1496,22 +1496,12 @@ GitHub:  Зелений/червоний статус на коміті + email 
 
 ### Повний workflow: рядок за рядком
 
-!!! warning "Цей workflow — з оригінального монорепозиторію курсу"
-    YAML-код нижче описує CI-воркфлоу, написаний для монорепозиторію курсу,
-    де проєкт розташований за шляхом `module_5/lesson_Django_Testing/crispy_notes_project`.
-    Відповідно, `paths:` і `working-directory:` вказують на цей шлях.
-
-    У standalone-репозиторії **notes_chat_app** воркфлоу слідкує за шляхами
-    `notes_app/**` та `notes_project/**` — без `module_5/` префіксу.
-    Розбір нижче є навчальним прикладом структури GitHub Actions — концепції
-    (`on`, `paths`, `jobs`, `steps`, `needs`) застосовні до будь-якого проєкту.
-
-Файл: [`.github/workflows/django-tests.yml`](../../../../.github/workflows/django-tests.yml)
+Файл: [`.github/workflows/django-tests.yml`](https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml)
 
 #### Назва і тригери
 
 ```yaml
-name: Django Tests (module_5/lesson_Django_Testing)
+name: Django Tests
 ```
 
 Ця назва відображається у вкладці **Actions** у GitHub.
@@ -1521,12 +1511,20 @@ on:
   push:
     branches: [ main, master ]
     paths:
-      - 'module_5/lesson_Django_Testing/**'
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
       - '.github/workflows/django-tests.yml'
   pull_request:
     branches: [ main, master ]
     paths:
-      - 'module_5/lesson_Django_Testing/**'
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
       - '.github/workflows/django-tests.yml'
   workflow_dispatch:
 ```
@@ -1538,38 +1536,52 @@ on:
 |------|-----------|
 | `push` | При кожному git push |
 | `branches` | Тільки для гілок `main` або `master` |
-| `paths` | **Тільки якщо ці файли змінились.** Якщо ти правиш module_1 — workflow не запускається |
+| `paths` | **Тільки якщо ці файли змінились.** Якщо ти правиш лише `docs/` — workflow не запускається |
 | `pull_request` | При відкритті або оновленні PR |
 | `workflow_dispatch` | Кнопка "Run workflow" у GitHub UI → Actions |
 
 **Навіщо `paths`?**
 
-Без `paths` — кожен push до будь-якого файлу курсу запускав би тести Django уроку. З `paths` — workflow запускається тільки коли змінились файли саме цього уроку або сам workflow. Економить хвилини CI.
+Без `paths` кожен push (навіть правка книги в `docs/`) запускав би тести Django. З `paths` workflow запускається тільки коли змінився код застосунку, шаблони, статика, залежності або сам workflow. Економить хвилини CI.
 
 ---
 
-#### Job 1: Unit & Integration Tests
+#### Job 1: Unit, Integration & Consumer Tests
 
 ```yaml
 jobs:
   unit-and-integration:
-    name: Unit & Integration Tests
+    name: Unit, Integration & Consumer Tests
     runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
 ```
 
-**`runs-on: ubuntu-latest`** — тип runner. Це свіжа Ubuntu 22.04 VM на Azure. Після завершення job VM знищується. Між запусками немає ніякого стану.
+**`runs-on: ubuntu-latest`** — тип runner. Це свіжа Ubuntu VM на Azure. Після завершення job VM знищується. Між запусками немає ніякого стану.
 
 📖 [Документація: GitHub-hosted runners](https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories)
 
-```yaml
-    defaults:
-      run:
-        working-directory: module_5/lesson_Django_Testing/crispy_notes_project
-```
+**`services.db`** — PostgreSQL 16 у контейнері поруч із runner. `notes_project/settings.py` без `DATABASE_URL` не стартує (`Exception: DATABASE_URL не встановлено`), тому job задає `DATABASE_URL` на `localhost:5432`. `--health-cmd pg_isready` — кроки починаються тільки коли база готова приймати з'єднання.
 
-**`defaults.run.working-directory`** — усі команди `run:` у цьому job виконуються з цієї директорії. Без цього кожна команда починалась би з кореня репозиторію і треба було б писати `cd module_5/...` перед кожним кроком.
+`working-directory` не потрібен: `manage.py` лежить у корені репозиторію, а саме звідти виконуються всі `run:`.
 
-📖 [Документація: defaults.run](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#defaultsrun)
+📖 [Документація: services](https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices)
 
 ---
 
@@ -1609,7 +1621,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('module_5/lesson_Django_Testing/crispy_notes_project/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 ```
@@ -1635,7 +1647,7 @@ jobs:
         run: pip install -r requirements.txt
 ```
 
-Проста shell команда. Виконується з `working-directory` → тобто з `crispy_notes_project/`.
+Проста shell команда. Виконується з кореня репозиторію, де лежить `requirements.txt`.
 
 ---
 
@@ -1661,17 +1673,19 @@ jobs:
 **Step 6 — Run tests**
 
 ```yaml
-      - name: Run unit and integration tests
+      - name: Run unit, integration and consumer tests
         run: |
           python manage.py test \
-            hello_app.tests.test_models \
-            hello_app.tests.test_services \
-            hello_app.tests.test_forms \
-            hello_app.tests.test_views \
+            notes_app.tests.test_models \
+            notes_app.tests.test_services \
+            notes_app.tests.test_forms \
+            notes_app.tests.test_views \
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api \
             -v 2
 ```
 
-Запускає 123 тести (unit + integration). Явно перераховані модулі без `test_selenium` — Selenium в окремому job.
+Запускає 209 тестів (25 models + 65 services + 22 forms + 84 views + 9 consumers + 4 API). Явно перераховані модулі без `test_selenium` — Selenium в окремому job.
 
 `-v 2` — verbose: кожен тест виводиться окремим рядком. В CI це корисно: одразу видно яке ім'я тесту впало.
 
@@ -1685,26 +1699,28 @@ jobs:
       - name: Generate coverage report
         run: |
           coverage run manage.py test \
-            hello_app.tests.test_models \
-            hello_app.tests.test_services \
-            hello_app.tests.test_forms \
-            hello_app.tests.test_views
+            notes_app.tests.test_models \
+            notes_app.tests.test_services \
+            notes_app.tests.test_forms \
+            notes_app.tests.test_views \
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api
           coverage report --show-missing
           coverage xml -o coverage.xml
 ```
 
 `coverage run` — запускає тести через `coverage`, відстежуючи які рядки коду виконуються.
 
-`coverage report --show-missing` — виводить таблицю:
+`coverage report --show-missing` — виводить таблицю (формат; числа у твоєму запуску будуть інші):
 
 ```
 Name                          Stmts   Miss  Cover   Missing
 -----------------------------------------------------------
-hello_app/models.py             87      3    97%   45, 67, 89
-hello_app/services.py          124      8    94%   34-41
-hello_app/views.py             198     12    94%   ...
+notes_app/models.py             ...    ...   ...%   ...
+notes_app/services.py           ...    ...   ...%   ...
+notes_app/views.py              ...    ...   ...%   ...
 -----------------------------------------------------------
-TOTAL                          409     23    94%
+TOTAL                           ...    ...   ...%
 ```
 
 `coverage xml -o coverage.xml` — зберігає у XML для інтеграції з Codecov / SonarQube.
@@ -1720,12 +1736,12 @@ TOTAL                          409     23    94%
         uses: actions/upload-artifact@v4
         with:
           name: coverage-xml
-          path: module_5/lesson_Django_Testing/crispy_notes_project/coverage.xml
+          path: coverage.xml
 ```
 
 Зберігає `coverage.xml` як артефакт — файл прикріплюється до workflow run і його можна завантажити з GitHub UI.
 
-Шлях вказаний відносно кореня репозиторію (не `working-directory`) — artifact upload не успадковує `defaults.run.working-directory`.
+Шлях вказаний відносно кореня репозиторію — там `coverage xml` і створив файл.
 
 📖 [actions/upload-artifact на GitHub Marketplace](https://github.com/marketplace/actions/upload-a-build-artifact)
 
@@ -1746,37 +1762,46 @@ TOTAL                          409     23    94%
 
 ---
 
-**Чому без service container для Selenium**
+**Selenium як service container**
 
-У зразку всередині проєкту (`crispy_notes_project/.github/...`) є секція `services: selenium: image: selenium/standalone-chrome`. Реальний workflow її **не використовує**. Ось чому:
+Крім PostgreSQL, Job 2 піднімає контейнер `selenium/standalone-chrome:latest` — той самий образ, що й сервіс `selenium` у `docker-compose.yml`:
 
-```
-Проблема з service container:
+```yaml
+      selenium:
+        image: selenium/standalone-chrome:latest
+        ports:
+          - 4444:4444
+        options: >-
+          --add-host=host.docker.internal:host-gateway
+          --shm-size=2gb
+          --health-cmd "curl -f http://localhost:4444/wd/hub/status"
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
 
-  Runner VM                     Docker container (selenium/standalone-chrome)
-  ┌─────────────────────┐       ┌─────────────────────────────────────┐
-  │ Django test server  │       │ Chrome                              │
-  │ http://localhost:PORT│       │                                     │
-  │                     │       │  Chrome відкриває                   │
-  │                     │◄──────│  http://localhost:PORT              │
-  └─────────────────────┘       │                                     │
-                                │  ALE! localhost контейнера ≠        │
-                                │  localhost runner-а                 │
-                                │  → ERR_CONNECTION_REFUSED           │
-                                └─────────────────────────────────────┘
-
-Рішення (реальний workflow):
-
-  Runner VM — все на одній машині
-  ┌─────────────────────────────────────────────────────┐
-  │ Django test server       Chrome (вже встановлений)  │
-  │ http://localhost:PORT ◄─ http://localhost:PORT ✅    │
-  │                                                     │
-  │ Selenium Manager автоматично завантажує chromedriver│
-  └─────────────────────────────────────────────────────┘
+    env:
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
+      SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
+      WEB_HOST: host.docker.internal
 ```
 
-`ubuntu-latest` включає Chrome. `selenium>=4.6` має вбудований Selenium Manager — він сам знаходить встановлений Chrome і завантажує відповідну версію `chromedriver`. Нічого додатково не треба.
+Проблема: Chrome живе в контейнері, а Django test server — на runner. `localhost` контейнера ≠ `localhost` runner-а:
+
+```
+  Runner VM                          Docker container (selenium/standalone-chrome)
+  ┌──────────────────────────┐       ┌──────────────────────────────────────┐
+  │ Django test server       │       │ Chrome                               │
+  │ слухає 0.0.0.0:PORT      │◄──────│ http://host.docker.internal:PORT ✅  │
+  │                          │       │                                      │
+  │ тести → Remote WebDriver │──────►│ :4444/wd/hub                         │
+  └──────────────────────────┘       └──────────────────────────────────────┘
+```
+
+Як це розв'язано:
+
+- `--add-host=host.docker.internal:host-gateway` додає в `/etc/hosts` контейнера ім'я `host.docker.internal` → IP runner-а;
+- `WEB_HOST=host.docker.internal` → `_DockerLiveServerMixin` у `test_selenium.py` прив'язує test server до `0.0.0.0` і підставляє `host.docker.internal` у `live_server_url`;
+- `SELENIUM_REMOTE_URL` → `_make_headless_driver()` створює Remote WebDriver до контейнера замість локального Chrome.
 
 ---
 
@@ -1784,10 +1809,10 @@ TOTAL                          409     23    94%
 
 ```yaml
       - name: Run Selenium E2E tests
-        run: python manage.py test hello_app.tests.test_selenium -v 2
+        run: python manage.py test notes_app.tests.test_selenium -v 2
 ```
 
-Без змінної `SELENIUM_REMOTE_URL` → `_make_driver()` у коді тестів використовує локальний Chrome з headless режимом. Django `StaticLiveServerTestCase` запускає сервер на випадковому порту, Chrome підключається до нього на тому ж `localhost`.
+Без змінної `SELENIUM_REMOTE_URL` (наприклад, локально без Docker) `_make_headless_driver()` запускає локальний headless Chrome.
 
 ---
 
@@ -1796,7 +1821,7 @@ TOTAL                          409     23    94%
 **1. Actions tab у репозиторії**
 
 ```
-https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
+https://github.com/NikoriakViktor/notes_chat_app/actions
 ```
 
 Тут список всіх workflow runs. Зелений — all green. Червоний — щось впало.
@@ -1806,8 +1831,7 @@ https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
 Клікни на конкретний run → бачиш два прямокутники:
 
 ```
-[Unit & Integration Tests] ──needs──► [Selenium E2E Tests]
-      ✅ 1m 23s                              ✅ 1m 47s
+[Unit, Integration & Consumer Tests] ──needs──► [Selenium E2E Tests]
 ```
 
 **3. Logs конкретного step**
@@ -1817,13 +1841,13 @@ https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
 ```
 Run python manage.py test ...
 
-Creating test database for alias 'default' ...
-Found 123 test(s).
-test_str_returns_hash_name (hello_app.tests.test_models.TagModelTest) ... ok
-test_unique_together_same_user_same_name_raises (...) ... ok
+Found 209 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
 ...
 ----------------------------------------------------------------------
-Ran 123 tests in 34.2s
+Ran 209 tests in ...s
+
 OK
 ```
 
@@ -1846,13 +1870,13 @@ Actions run → Artifacts (внизу сторінки) → `coverage-xml` → �
 FAIL: test_note_list_excludes_other_user_notes
       ↑ Назва тесту → одразу зрозуміло ЩО зламалось
 
-(hello_app.tests.test_views.NoteListViewTest)
+(notes_app.tests.test_views.NoteListViewTest)
       ↑ Клас і файл → можеш одразу відкрити
 
 Traceback (most recent call last):
-  File ".../test_views.py", line 89, in test_note_list_excludes_other_user_notes
-    self.assertNotContains(response, "Bob's Secret Note")
-AssertionError: Response should not contain "Bob's Secret Note"
+  File ".../test_views.py", line ..., in test_note_list_excludes_other_user_notes
+    self.assertNotContains(response, ...)
+AssertionError: ... unexpectedly found in the following response
       ↑ Очікували що рядка НЕМАЄ, але він є → нотатки Bob'а видимі Alice!
       → Баг у selectors.get_user_notes() — забули фільтр по user
 
@@ -1867,13 +1891,15 @@ Process completed with exit code 1
 ```
 Ти пишеш:                  CI/CD запускає:           Ти отримуєш:
 
-test_models.py    ─────►   Job 1, Step 6         ──► ✅ або ❌ за 30 сек
-test_services.py  ─────►   (unit + integration)  ──► Traceback прямо в GitHub
-test_forms.py     ─────►
+test_models.py    ─────►   Job 1, Step 6         ──► ✅ або ❌
+test_services.py  ─────►   (unit + integration   ──► Traceback прямо в GitHub
+test_forms.py     ─────►    + consumer + API)
 test_views.py     ─────►
+test_consumers.py ─────►
+test_api.py       ─────►
 
 test_selenium.py  ─────►   Job 2                 ──► ✅ або ❌ після Job 1
-                            (E2E, needs: job1)    ──► Chrome headless на Azure
+                            (E2E, needs: job1)    ──► Chrome у selenium-контейнері
 ```
 
 Кожен тест, який ти написав у кроках 2–6, автоматично запускається у CI при кожному push.
@@ -1903,12 +1929,12 @@ test_selenium.py  ─────►   Job 2                 ──► ✅ аб�
 
 ### Практика: перевір що CI/CD працює
 
-1. Відкрий у браузері: `https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions`
-2. Знайди workflow **"Django Tests (module_5/lesson_Django_Testing)"**
+1. Відкрий у браузері: `https://github.com/NikoriakViktor/notes_chat_app/actions`
+2. Знайди workflow **"Django Tests"**
 3. Клікни на останній run
-4. Розгорни Job 1 → Step "Run unit and integration tests"
-5. Знайди рядок `Ran 123 tests in ... OK`
-6. Перейди до Job 2 → подивись як запускається Selenium на Ubuntu runner
+4. Розгорни Job 1 → Step "Run unit, integration and consumer tests"
+5. Знайди рядок `Ran 209 tests in ...` і `OK`
+6. Перейди до Job 2 → подивись як Selenium запускається через Remote WebDriver у контейнері
 
 **Самостійно:** зроби навмисну помилку в будь-якому тесті (`assertFalse(True)`), зроби `git push`, подивись як CI показує FAIL і Traceback.
 

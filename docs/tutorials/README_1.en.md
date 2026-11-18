@@ -59,9 +59,9 @@ simple_django_project/        ← you are here now
 **PyCharm:**
 `View → Tool Windows → Terminal` — opens a terminal already in the project folder.
 
-**A regular terminal** (from the root of the `PY-Course-Victor-Nikoriak-23_02` repository):
+**A regular terminal** (go to the folder where you create the project; your path will differ):
 ```
-cd module_5\lesson_Django_Network_Architecture\simple_django_project
+cd C:\...\simple_django_project
 ```
 
 ---
@@ -532,7 +532,7 @@ In the `news_portal/` project, PostgreSQL is already configured via Docker.
 
 ```bash
 # 1. Go to the folder
-cd module_5\lesson_Django_Network_Architecture\simple_django_project
+cd C:\...\simple_django_project
 
 # 2. Create and activate venv
 python -m venv venv

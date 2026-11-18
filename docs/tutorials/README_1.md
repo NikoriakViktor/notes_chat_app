@@ -59,9 +59,9 @@ simple_django_project/        ← ти зараз тут
 **PyCharm:**
 `View → Tool Windows → Terminal` — відкриє термінал вже в папці проєкту.
 
-**Звичайний термінал** (з кореня репозиторію `PY-Course-Victor-Nikoriak-23_02`):
+**Звичайний термінал** (перейди в папку, де створюєш проєкт; шлях у тебе свій):
 ```
-cd module_5\lesson_Django_Network_Architecture\simple_django_project
+cd C:\...\simple_django_project
 ```
 
 ---
@@ -532,7 +532,7 @@ admin.site.register(Article)
 
 ```bash
 # 1. Перейти в папку
-cd module_5\lesson_Django_Network_Architecture\simple_django_project
+cd C:\...\simple_django_project
 
 # 2. Створити і активувати venv
 python -m venv venv
