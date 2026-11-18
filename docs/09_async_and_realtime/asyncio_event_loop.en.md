@@ -1,6 +1,5 @@
-# Lesson 34 — Asyncio: Cooperative Multitasking and Event Loop Architecture
+# Asyncio: Cooperative Multitasking and Event Loop Architecture
 
-**Module:** 4 — Network & Concurrent Systems  
 **Level:** intermediate  
 **Language:** English
 

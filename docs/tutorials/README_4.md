@@ -5,8 +5,8 @@
 > **Що змінилось:** тільки `hello_app/views.py` + `hello_app/urls.py`  
 > **Що залишилось:** models, forms, selectors, services, templates — без жодних змін  
 >
-> Порівняй з [`../notes_project/`](../notes_project/) — FBV оригінал.  
-> Теорія CBV: [`../Django_Views.md`](../Django_Views.md)
+> Порівняй з [README_3](README_3.md) — FBV оригінал.  
+> Теорія CBV: [Views](../02_django_core/views_full.md)
 
 ---
 
@@ -1465,9 +1465,9 @@ note_form.html
 ```
 
 > **Посилання для глибшого вивчення Bootstrap форм:**
-> - Bootstrap 5 Forms (§7): [`../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md`](../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md)
-> - Django Templates + Bootstrap Forms (§7): [`../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md`](../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md)
-> - crispy-forms (автоматизований Bootstrap рендеринг): [`../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md`](../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md)
+> - Bootstrap 5 Forms (§7): [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md)
+> - Django Templates + Bootstrap Forms (§7): [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md)
+> - crispy-forms (автоматизований Bootstrap рендеринг): [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md)
 
 ---
 
@@ -1477,11 +1477,11 @@ note_form.html
 
 | Тема | Файл | Що там |
 |------|------|--------|
-| CBV: dispatch, mixins, decorating, Generic Views | [`../Django_Views.md`](../Django_Views.md) | Основна теорія CBV цього проекту |
-| CBV: FBV vs CBV, Generic Views lifecycle | [`../../lesson_Django_Network_Architecture/Django_Views.md`](../../lesson_Django_Network_Architecture/Django_Views.md) | Огляд Views у контексті Django архітектури |
-| URL Routing: `path()`, `<int:pk>`, `include()`, namespace | [`../../lesson_Django_Network_Architecture/Django_URL_Routing.md`](../../lesson_Django_Network_Architecture/Django_URL_Routing.md) | `as_view()` у `urls.py`, path converters |
-| Django Project Structure: роль кожного файлу | [`../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md`](../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md) | Навіщо `urls.py`, `views.py`, `apps.py` |
-| Django архітектура як система (MVT, Middleware) | [`../../lesson_Django_Network_Architecture/django_architecture.md`](../../lesson_Django_Network_Architecture/django_architecture.md) | Request Lifecycle, Middleware chain |
+| CBV: dispatch, mixins, decorating, Generic Views | [Views](../02_django_core/views_full.md) | Основна теорія CBV цього проекту |
+| CBV: FBV vs CBV, Generic Views lifecycle | [Views](../02_django_core/views_full.md) | Огляд Views у контексті Django архітектури |
+| URL Routing: `path()`, `<int:pk>`, `include()`, namespace | [URL Routing](../02_django_core/url_routing_full.md) | `as_view()` у `urls.py`, path converters |
+| Django Project Structure: роль кожного файлу | [Структура проєкту](../02_django_core/project_structure_full.md) | Навіщо `urls.py`, `views.py`, `apps.py` |
+| Django архітектура як система (MVT, Middleware) | [Архітектура Django](../02_django_core/django_architecture_full.md) | Request Lifecycle, Middleware chain |
 | Django CBV Inspector (ієрархія методів онлайн) | https://ccbv.co.uk/ | Інтерактивна схема всіх хуків |
 | Django офіційна документація CBV | https://docs.djangoproject.com/en/stable/topics/class-based-views/ | |
 
@@ -1489,34 +1489,34 @@ note_form.html
 
 | Тема | Файл | Що там |
 |------|------|--------|
-| Forms: Trust Boundary, Validation Pipeline, ModelForm | [`../DJANGO_FORMS.md`](../DJANGO_FORMS.md) | Основна теорія форм цього проекту |
-| Bootstrap 5 Forms §7: `form-control`, validation, `was-validated` | [`../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md`](../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md) | Як Bootstrap стилізує форми |
-| Django Templates + Bootstrap Forms §7: Widget attrs, `{% bootstrap_form %}` | [`../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md`](../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md) | Ручний рендеринг і django-bootstrap5 |
-| crispy-forms §3: FormHelper, Layout, Row/Column | [`../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md`](../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md) | Автоматизований Bootstrap рендеринг |
-| Django Templates: DTL, Template Inheritance, Static | [`../../lesson_Django_Network_Architecture/Django_Templates.md`](../../lesson_Django_Network_Architecture/Django_Templates.md) | Шаблонний рушій, `{% extends %}`, `{% block %}` |
+| Forms: Trust Boundary, Validation Pipeline, ModelForm | [Django Forms](../04_forms_and_validation/django_forms_full.md) | Основна теорія форм цього проекту |
+| Bootstrap 5 Forms §7: `form-control`, validation, `was-validated` | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) | Як Bootstrap стилізує форми |
+| Django Templates + Bootstrap Forms §7: Widget attrs, `{% bootstrap_form %}` | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) | Ручний рендеринг і django-bootstrap5 |
+| crispy-forms §3: FormHelper, Layout, Row/Column | [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) | Автоматизований Bootstrap рендеринг |
+| Django Templates: DTL, Template Inheritance, Static | [Django Templates](../05_frontend_and_templates/django_templates_full.md) | Шаблонний рушій, `{% extends %}`, `{% block %}` |
 
 ### Services та Selectors
 
 | Тема | Файл | Що там |
 |------|------|--------|
-| Services + Selectors повна архітектура | [`../DJANGO_SERVICES_SELECTORS.md`](../DJANGO_SERVICES_SELECTORS.md) | View→Service→Selector→ORM data flow |
-| Services: `@transaction.atomic`, `on_commit`, side effects | [`../DJANGO_SERVICES.md`](../DJANGO_SERVICES.md) | Чому `form_valid()` викликає service, не `form.save()` |
-| Selectors: CQRS-light, N+1 централізація, named queries | [`../DJANGO_SELECTORS.md`](../DJANGO_SELECTORS.md) | Чому `get_queryset()` делегує у selector |
-| Архітектурні схеми Mermaid (Services/Selectors) | [`../ORM_MERMAID.md`](../ORM_MERMAID.md) | Візуальні схеми архітектури |
+| Services + Selectors повна архітектура | [Services та Selectors](../06_application_architecture/services_selectors_full.md) | View→Service→Selector→ORM data flow |
+| Services: `@transaction.atomic`, `on_commit`, side effects | [Services (поглиблено)](../06_application_architecture/django_services_full.md) | Чому `form_valid()` викликає service, не `form.save()` |
+| Selectors: CQRS-light, N+1 централізація, named queries | [Selectors (поглиблено)](../06_application_architecture/django_selectors_full.md) | Чому `get_queryset()` делегує у selector |
+| Архітектурні схеми Mermaid (Services/Selectors) | [ORM діаграми](../03_database_and_orm/orm_mermaid_full.md) | Візуальні схеми архітектури |
 
 ### ORM та БД
 
 | Тема | Файл | Що там |
 |------|------|--------|
-| ORM: QuerySets, N+1, select_related, F(), atomic() | [`../DJANGO_ORM_DEEP.md`](../DJANGO_ORM_DEEP.md) | Як ORM використовується у selectors/services |
-| Транзакції: `select_for_update()`, deadlocks, race conditions | [`../TRANSACTIONS_CONCURRENCY.md`](../TRANSACTIONS_CONCURRENCY.md) | Чому services використовують `@atomic` |
-| Головна карта навчання (всі файли ORM модуля) | [`../INDEX.md`](../INDEX.md) | Навігація по всіх матеріалах |
-| Головна карта навчання (Network Architecture модуль) | [`../../lesson_Django_Network_Architecture/INDEX.md`](../../lesson_Django_Network_Architecture/INDEX.md) | Навігація по Views, Templates, URL Routing |
-| Bootstrap + CSS + HTML система знань | [`../../lesson_HTML_CSS_Bootstrap/INDEX.md`](../../lesson_HTML_CSS_Bootstrap/INDEX.md) | Навігація по Bootstrap, Templates, Forms |
+| ORM: QuerySets, N+1, select_related, F(), atomic() | [Django ORM](../03_database_and_orm/django_orm_full.md) | Як ORM використовується у selectors/services |
+| Транзакції: `select_for_update()`, deadlocks, race conditions | [Транзакції](../03_database_and_orm/transactions_concurrency_full.md) | Чому services використовують `@atomic` |
+| Головна карта навчання (всі файли ORM модуля) | [Огляд частини III](../03_database_and_orm/README.md) | Навігація по всіх матеріалах |
+| Головна карта навчання (Network Architecture модуль) | [Огляд частини II](../02_django_core/README.md) | Навігація по Views, Templates, URL Routing |
+| Bootstrap + CSS + HTML система знань | [Огляд частини V](../05_frontend_and_templates/README.md) | Навігація по Bootstrap, Templates, Forms |
 
 ### FBV порівняння
 
 | Тема | Файл |
 |------|------|
-| FBV оригінал (той самий проект на функціях) | [`../notes_project/README.md`](../notes_project/README.md) |
-| FBV views.py з CBV-еквівалентами у кожній функції | [`hello_app/views_fbv_backup.py`](hello_app/views_fbv_backup.py) |
+| FBV оригінал (той самий проект на функціях) | [README_3 — FBV-версія](README_3.md) |
+| FBV views.py з CBV-еквівалентами у кожній функції | [views_fbv_backup.py (не входить у цей репозиторій)](../reference/legacy_source/legacy_missing_reference.md) |

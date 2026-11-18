@@ -531,7 +531,7 @@ Rule: DEBUG = False ALWAYS in production.
 
 ```bash
 # 1. Go to the project folder
-cd module_5/lesson_Django_authentication_and_security/crispy_notes_project
+cd notes_chat_app   # the repository root: manage.py and requirements.txt live here
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -1497,14 +1497,14 @@ crispy_notes_project/
 
 | File | Topic |
 |------|------|
-| [`../AUTH_BASICS.md`](../AUTH_BASICS.md) | authenticate(), @login_required, middleware — in detail |
-| [`../SESSIONS_FLOW.md`](../SESSIONS_FLOW.md) | cookies, sessions, login/logout, password reset |
-| [`../PERMISSIONS.md`](../PERMISSIONS.md) | IDOR, object-level permissions, Q-filter for groups |
-| [`../SECURITY_FOUNDATIONS.md`](../SECURITY_FOUNDATIONS.md) | CIA Triad, Trust Boundary, password hashing, CSRF |
-| [`../SECURITY_MISCONCEPTIONS.md`](../SECURITY_MISCONCEPTIONS.md) | 6 common security mistakes |
-| [`../DJANGO_ADMIN.md`](../DJANGO_ADMIN.md) | is_staff, is_superuser, ModelAdmin |
-| [`../DJANGO_SECURITY_ARCHITECTURE.md`](../DJANGO_SECURITY_ARCHITECTURE.md) | middleware pipeline, ORM, CSRF/XSS |
-| [`../OWASP_TOP_10.md`](../OWASP_TOP_10.md) | 10 vulnerabilities and Django protection |
-| [`../ZERO_TRUST.md`](../ZERO_TRUST.md) | Zero Trust architecture with Django code |
-| [`../SIEM.md`](../SIEM.md) | logging, rsyslog, ELK Stack |
-| [`../INDEX.md`](../INDEX.md) | navigation across all files |
+| [Authentication](../07_auth_and_security/auth_basics_full.md) | authenticate(), @login_required, middleware — in detail |
+| [Sessions](../07_auth_and_security/sessions_flow_full.md) | cookies, sessions, login/logout, password reset |
+| [Permissions](../07_auth_and_security/permissions_full.md) | IDOR, object-level permissions, Q-filter for groups |
+| [Security Foundations](../07_auth_and_security/security_foundations_full.md) | CIA Triad, Trust Boundary, password hashing, CSRF |
+| [Security Misconceptions](../07_auth_and_security/security_misconceptions_full.md) | 6 common security mistakes |
+| [Django Admin](../05_frontend_and_templates/django_admin_full.md) | is_staff, is_superuser, ModelAdmin |
+| [Security Architecture](../07_auth_and_security/django_security_architecture_full.md) | middleware pipeline, ORM, CSRF/XSS |
+| [OWASP Top 10](../07_auth_and_security/owasp_top_10_full.md) | 10 vulnerabilities and Django protection |
+| [Zero Trust](../07_auth_and_security/zero_trust_full.md) | Zero Trust architecture with Django code |
+| [SIEM](../07_auth_and_security/siem_full.md) | logging, rsyslog, ELK Stack |
+| [Part VII overview](../07_auth_and_security/README.md) | navigation across all files |

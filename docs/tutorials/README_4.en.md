@@ -5,8 +5,8 @@
 > **What changed:** only `hello_app/views.py` + `hello_app/urls.py`  
 > **What stayed the same:** models, forms, selectors, services, templates — with no changes at all  
 >
-> Compare with [`../notes_project/`](../notes_project/) — the FBV original.  
-> CBV theory: [`../Django_Views.md`](../Django_Views.md)
+> Compare with [README_3](README_3.md) — the FBV original.  
+> CBV theory: [Views](../02_django_core/views_full.md)
 
 ---
 
@@ -1465,9 +1465,9 @@ note_form.html
 ```
 
 > **Links for a deeper study of Bootstrap forms:**
-> - Bootstrap 5 Forms (§7): [`../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md`](../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md)
-> - Django Templates + Bootstrap Forms (§7): [`../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md`](../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md)
-> - crispy-forms (automated Bootstrap rendering): [`../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md`](../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md)
+> - Bootstrap 5 Forms (§7): [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md)
+> - Django Templates + Bootstrap Forms (§7): [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md)
+> - crispy-forms (automated Bootstrap rendering): [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md)
 
 ---
 
@@ -1477,11 +1477,11 @@ note_form.html
 
 | Topic | File | What's there |
 |------|------|--------|
-| CBV: dispatch, mixins, decorating, Generic Views | [`../Django_Views.md`](../Django_Views.md) | The main CBV theory for this project |
-| CBV: FBV vs CBV, Generic Views lifecycle | [`../../lesson_Django_Network_Architecture/Django_Views.md`](../../lesson_Django_Network_Architecture/Django_Views.md) | Overview of Views in the context of Django architecture |
-| URL Routing: `path()`, `<int:pk>`, `include()`, namespace | [`../../lesson_Django_Network_Architecture/Django_URL_Routing.md`](../../lesson_Django_Network_Architecture/Django_URL_Routing.md) | `as_view()` in `urls.py`, path converters |
-| Django Project Structure: the role of each file | [`../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md`](../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md) | Why `urls.py`, `views.py`, `apps.py` exist |
-| Django architecture as a system (MVT, Middleware) | [`../../lesson_Django_Network_Architecture/django_architecture.md`](../../lesson_Django_Network_Architecture/django_architecture.md) | Request Lifecycle, Middleware chain |
+| CBV: dispatch, mixins, decorating, Generic Views | [Views](../02_django_core/views_full.md) | The main CBV theory for this project |
+| CBV: FBV vs CBV, Generic Views lifecycle | [Views](../02_django_core/views_full.md) | Overview of Views in the context of Django architecture |
+| URL Routing: `path()`, `<int:pk>`, `include()`, namespace | [URL Routing](../02_django_core/url_routing_full.md) | `as_view()` in `urls.py`, path converters |
+| Django Project Structure: the role of each file | [Project Structure](../02_django_core/project_structure_full.md) | Why `urls.py`, `views.py`, `apps.py` exist |
+| Django architecture as a system (MVT, Middleware) | [Django Architecture](../02_django_core/django_architecture_full.md) | Request Lifecycle, Middleware chain |
 | Django CBV Inspector (method hierarchy online) | https://ccbv.co.uk/ | An interactive map of all the hooks |
 | Official Django CBV documentation | https://docs.djangoproject.com/en/stable/topics/class-based-views/ | |
 
@@ -1489,34 +1489,34 @@ note_form.html
 
 | Topic | File | What's there |
 |------|------|--------|
-| Forms: Trust Boundary, Validation Pipeline, ModelForm | [`../DJANGO_FORMS.md`](../DJANGO_FORMS.md) | The main forms theory for this project |
-| Bootstrap 5 Forms §7: `form-control`, validation, `was-validated` | [`../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md`](../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md) | How Bootstrap styles forms |
-| Django Templates + Bootstrap Forms §7: Widget attrs, `{% bootstrap_form %}` | [`../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md`](../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md) | Manual rendering and django-bootstrap5 |
-| crispy-forms §3: FormHelper, Layout, Row/Column | [`../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md`](../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md) | Automated Bootstrap rendering |
-| Django Templates: DTL, Template Inheritance, Static | [`../../lesson_Django_Network_Architecture/Django_Templates.md`](../../lesson_Django_Network_Architecture/Django_Templates.md) | The template engine, `{% extends %}`, `{% block %}` |
+| Forms: Trust Boundary, Validation Pipeline, ModelForm | [Django Forms](../04_forms_and_validation/django_forms_full.md) | The main forms theory for this project |
+| Bootstrap 5 Forms §7: `form-control`, validation, `was-validated` | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) | How Bootstrap styles forms |
+| Django Templates + Bootstrap Forms §7: Widget attrs, `{% bootstrap_form %}` | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) | Manual rendering and django-bootstrap5 |
+| crispy-forms §3: FormHelper, Layout, Row/Column | [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) | Automated Bootstrap rendering |
+| Django Templates: DTL, Template Inheritance, Static | [Django Templates](../05_frontend_and_templates/django_templates_full.md) | The template engine, `{% extends %}`, `{% block %}` |
 
 ### Services and Selectors
 
 | Topic | File | What's there |
 |------|------|--------|
-| Services + Selectors full architecture | [`../DJANGO_SERVICES_SELECTORS.md`](../DJANGO_SERVICES_SELECTORS.md) | View→Service→Selector→ORM data flow |
-| Services: `@transaction.atomic`, `on_commit`, side effects | [`../DJANGO_SERVICES.md`](../DJANGO_SERVICES.md) | Why `form_valid()` calls a service, not `form.save()` |
-| Selectors: CQRS-light, N+1 centralization, named queries | [`../DJANGO_SELECTORS.md`](../DJANGO_SELECTORS.md) | Why `get_queryset()` delegates to a selector |
-| Mermaid architecture diagrams (Services/Selectors) | [`../ORM_MERMAID.md`](../ORM_MERMAID.md) | Visual architecture diagrams |
+| Services + Selectors full architecture | [Services and Selectors](../06_application_architecture/services_selectors_full.md) | View→Service→Selector→ORM data flow |
+| Services: `@transaction.atomic`, `on_commit`, side effects | [Services (in depth)](../06_application_architecture/django_services_full.md) | Why `form_valid()` calls a service, not `form.save()` |
+| Selectors: CQRS-light, N+1 centralization, named queries | [Selectors (in depth)](../06_application_architecture/django_selectors_full.md) | Why `get_queryset()` delegates to a selector |
+| Mermaid architecture diagrams (Services/Selectors) | [ORM Diagrams](../03_database_and_orm/orm_mermaid_full.md) | Visual architecture diagrams |
 
 ### ORM and the database
 
 | Topic | File | What's there |
 |------|------|--------|
-| ORM: QuerySets, N+1, select_related, F(), atomic() | [`../DJANGO_ORM_DEEP.md`](../DJANGO_ORM_DEEP.md) | How the ORM is used in selectors/services |
-| Transactions: `select_for_update()`, deadlocks, race conditions | [`../TRANSACTIONS_CONCURRENCY.md`](../TRANSACTIONS_CONCURRENCY.md) | Why services use `@atomic` |
-| Main learning map (all files of the ORM module) | [`../INDEX.md`](../INDEX.md) | Navigation across all materials |
-| Main learning map (Network Architecture module) | [`../../lesson_Django_Network_Architecture/INDEX.md`](../../lesson_Django_Network_Architecture/INDEX.md) | Navigation across Views, Templates, URL Routing |
-| Bootstrap + CSS + HTML knowledge system | [`../../lesson_HTML_CSS_Bootstrap/INDEX.md`](../../lesson_HTML_CSS_Bootstrap/INDEX.md) | Navigation across Bootstrap, Templates, Forms |
+| ORM: QuerySets, N+1, select_related, F(), atomic() | [Django ORM](../03_database_and_orm/django_orm_full.md) | How the ORM is used in selectors/services |
+| Transactions: `select_for_update()`, deadlocks, race conditions | [Transactions](../03_database_and_orm/transactions_concurrency_full.md) | Why services use `@atomic` |
+| Main learning map (all files of the ORM module) | [Part III overview](../03_database_and_orm/README.md) | Navigation across all materials |
+| Main learning map (Network Architecture module) | [Part II overview](../02_django_core/README.md) | Navigation across Views, Templates, URL Routing |
+| Bootstrap + CSS + HTML knowledge system | [Part V overview](../05_frontend_and_templates/README.md) | Navigation across Bootstrap, Templates, Forms |
 
 ### FBV comparison
 
 | Topic | File |
 |------|------|
-| The FBV original (the same project built with functions) | [`../notes_project/README.md`](../notes_project/README.md) |
-| FBV views.py with CBV equivalents in every function | [`hello_app/views_fbv_backup.py`](hello_app/views_fbv_backup.py) |
+| The FBV original (the same project built with functions) | [README_3 — the FBV version](README_3.md) |
+| FBV views.py with CBV equivalents in every function | [views_fbv_backup.py (not part of this repository)](../reference/legacy_source/legacy_missing_reference.md) |

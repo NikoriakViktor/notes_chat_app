@@ -531,7 +531,7 @@ SQL (спрощено):
 
 ```bash
 # 1. Перейти до папки проєкту
-cd module_5/lesson_Django_authentication_and_security/crispy_notes_project
+cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 
 # 2. Встановити залежності
 pip install -r requirements.txt
@@ -1497,14 +1497,14 @@ crispy_notes_project/
 
 | Файл | Тема |
 |------|------|
-| [`../AUTH_BASICS.md`](../AUTH_BASICS.md) | authenticate(), @login_required, middleware — детально |
-| [`../SESSIONS_FLOW.md`](../SESSIONS_FLOW.md) | cookies, sessions, login/logout, password reset |
-| [`../PERMISSIONS.md`](../PERMISSIONS.md) | IDOR, object-level permissions, Q-filter для груп |
-| [`../SECURITY_FOUNDATIONS.md`](../SECURITY_FOUNDATIONS.md) | CIA Triad, Trust Boundary, хешування паролів, CSRF |
-| [`../SECURITY_MISCONCEPTIONS.md`](../SECURITY_MISCONCEPTIONS.md) | 6 типових помилок безпеки |
-| [`../DJANGO_ADMIN.md`](../DJANGO_ADMIN.md) | is_staff, is_superuser, ModelAdmin |
-| [`../DJANGO_SECURITY_ARCHITECTURE.md`](../DJANGO_SECURITY_ARCHITECTURE.md) | middleware pipeline, ORM, CSRF/XSS |
-| [`../OWASP_TOP_10.md`](../OWASP_TOP_10.md) | 10 вразливостей та Django захист |
-| [`../ZERO_TRUST.md`](../ZERO_TRUST.md) | Zero Trust архітектура з Django кодом |
-| [`../SIEM.md`](../SIEM.md) | логування, rsyslog, ELK Stack |
-| [`../INDEX.md`](../INDEX.md) | навігація по всіх файлах |
+| [Автентифікація](../07_auth_and_security/auth_basics_full.md) | authenticate(), @login_required, middleware — детально |
+| [Сесії](../07_auth_and_security/sessions_flow_full.md) | cookies, sessions, login/logout, password reset |
+| [Права доступу](../07_auth_and_security/permissions_full.md) | IDOR, object-level permissions, Q-filter для груп |
+| [Основи безпеки](../07_auth_and_security/security_foundations_full.md) | CIA Triad, Trust Boundary, хешування паролів, CSRF |
+| [Типові помилки безпеки](../07_auth_and_security/security_misconceptions_full.md) | 6 типових помилок безпеки |
+| [Django Admin](../05_frontend_and_templates/django_admin_full.md) | is_staff, is_superuser, ModelAdmin |
+| [Архітектура безпеки](../07_auth_and_security/django_security_architecture_full.md) | middleware pipeline, ORM, CSRF/XSS |
+| [OWASP Top 10](../07_auth_and_security/owasp_top_10_full.md) | 10 вразливостей та Django захист |
+| [Zero Trust](../07_auth_and_security/zero_trust_full.md) | Zero Trust архітектура з Django кодом |
+| [SIEM](../07_auth_and_security/siem_full.md) | логування, rsyslog, ELK Stack |
+| [Огляд частини VII](../07_auth_and_security/README.md) | навігація по всіх файлах |

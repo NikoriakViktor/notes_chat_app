@@ -234,7 +234,7 @@ overengineering + more complex code + the same results.
 ### Step 1: Go to the directory
 
 ```bash
-cd module_5/lesson_Django_Async/notes_chat_app
+cd notes_chat_app   # the repository root: manage.py and requirements.txt live here
 ```
 
 ### Step 2: Create a virtualenv

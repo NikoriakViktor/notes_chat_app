@@ -984,17 +984,14 @@ Selenium:  10s    ×  100 = 16 хвилин
 
 ## Крок 0 — Запуск
 
-!!! note "Шляхи у цьому розділі — з оригінального монорепозиторію курсу"
-    Команди нижче орієнтовані на структуру оригінального курсового монорепозиторію,
-    де цей проєкт розташований за шляхом `module_5/lesson_Django_Testing/crispy_notes_project`.
-
-    Якщо ти працюєш у standalone-репозиторії **notes_chat_app**, запускай команди
-    з кореня репозиторію — `cd module_5/...` не потрібен.
+!!! note "Звідки запускати команди"
+    Усі команди нижче виконуються з кореня репозиторію **notes_chat_app** —
+    там лежать `manage.py`, `requirements.txt` і `docker-compose.yml`.
     CI-воркфлоу цього репозиторію слідкує за шляхами `notes_app/**` та `notes_project/**`.
 
 ```bash
 # 1. Перейти до папки проєкту
-cd module_5/lesson_Django_Testing/crispy_notes_project
+cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 
 # 2. Встановити залежності (якщо ще не встановлені)
 pip install -r requirements.txt
@@ -2022,16 +2019,15 @@ crispy_notes_project/
 
 | Файл | Тема |
 |------|------|
-| [`../README.md`](../README.md) | Навігація по всьому уроку тестування |
-| [`../TESTING_FOUNDATIONS.md`](../TESTING_FOUNDATIONS.md) | Піраміда, принципи, AAA |
-| [`../UNITTEST_BASICS.md`](../UNITTEST_BASICS.md) | Python unittest: TestCase, lifecycle |
-| [`../PYTEST_BASICS.md`](../PYTEST_BASICS.md) | pytest: fixtures, parametrize |
-| [`../DJANGO_TESTING.md`](../DJANGO_TESTING.md) | Django: TestCase, Client, тестова БД |
-| [`../TEST_DATA_AND_FIXTURES.md`](../TEST_DATA_AND_FIXTURES.md) | factory_boy, fixtures |
-| [`../MOCKING_AND_PATCHING.md`](../MOCKING_AND_PATCHING.md) | Mock, patch, зовнішні сервіси |
-| [`../TESTING_PRACTICE_PROJECT.md`](../TESTING_PRACTICE_PROJECT.md) | E2E, Selenium, повний сценарій |
-| [`../SELENIUM.md`](../SELENIUM.md) | Selenium WebDriver: By стратегії, waits, StaticLiveServerTestCase, session cookie trick |
-| [`../CI_CD.md`](../CI_CD.md) | CI/CD теорія, GitHub Actions компоненти, events, runners |
-| [`.github/workflows/django-tests.yml`](.github/workflows/django-tests.yml) | Зразок workflow для цього проєкту |
-| [`../../../../.github/workflows/django-tests.yml`](../../../../.github/workflows/django-tests.yml) | Реальний workflow (корінь репо) |
-| [`../basics/`](../basics/) | Runnable Python приклади тестів |
+| [Огляд частини VIII](../08_testing_and_quality/README.md) | Навігація по всьому уроку тестування |
+| [Основи тестування](../08_testing_and_quality/testing_foundations_full.md) | Піраміда, принципи, AAA |
+| [unittest](../08_testing_and_quality/unittest_basics_full.md) | Python unittest: TestCase, lifecycle |
+| [pytest](../08_testing_and_quality/pytest_basics_full.md) | pytest: fixtures, parametrize |
+| [Django Testing](../08_testing_and_quality/django_testing_full.md) | Django: TestCase, Client, тестова БД |
+| [Test Data](../08_testing_and_quality/test_data_and_fixtures_full.md) | factory_boy, fixtures |
+| [Mocking](../08_testing_and_quality/mocking_and_patching_full.md) | Mock, patch, зовнішні сервіси |
+| [Практика тестування](../08_testing_and_quality/testing_practice_project_full.md) | E2E, Selenium, повний сценарій |
+| [Selenium](../08_testing_and_quality/selenium_full.md) | Selenium WebDriver: By стратегії, waits, StaticLiveServerTestCase, session cookie trick |
+| [CI/CD](../08_testing_and_quality/ci_cd_full.md) | CI/CD теорія, GitHub Actions компоненти, events, runners |
+| [.github/workflows/django-tests.yml](https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml) | Зразок workflow для цього проєкту |
+| [basics/ (не входить у цей репозиторій)](../reference/legacy_source/legacy_missing_reference.md) | Runnable Python приклади тестів |

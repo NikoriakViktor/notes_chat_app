@@ -56,7 +56,7 @@ Django Channels is the Django implementation of ASGI that adds a WebSocket Consu
 |----------|-----------|
 | [Sync vs Async](async_01_sync_vs_async_full.md) | blocking vs non-blocking I/O, GIL, thread pool, event loop |
 | [asyncio](async_02_asyncio_full.md) | coroutine, `await`, `Task`, `gather`, `asyncio.run()` |
-| [asyncio: Event Loop](lesson_34_documentation.md) | event loop architecture, callbacks, futures, libuv |
+| [asyncio: Event Loop](asyncio_event_loop.md) | event loop architecture, callbacks, futures, libuv |
 | [ASGI](async_03_asgi_full.md) | ASGI spec, `ProtocolTypeRouter`, lifecycle, scope |
 | [Django Async Views](async_04_django_async_views_full.md) | `async def view()`, limitations, when it is worth it |
 | [Async ORM](async_05_async_orm_full.md) | `aadd`, `acreate`, `aget`, `async for`, differences from sync |

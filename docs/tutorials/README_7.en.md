@@ -984,17 +984,14 @@ Rule: E2E tests only for CRITICAL user flows.
 
 ## Step 0 — Running the project
 
-!!! note "The paths in this section come from the course's original monorepo"
-    The commands below are based on the structure of the original course monorepo,
-    where this project is located at `module_5/lesson_Django_Testing/crispy_notes_project`.
-
-    If you are working in the standalone **notes_chat_app** repository, run the commands
-    from the repository root — `cd module_5/...` is not needed.
+!!! note "Where to run the commands from"
+    All commands below run from the root of the **notes_chat_app** repository —
+    that is where `manage.py`, `requirements.txt` and `docker-compose.yml` live.
     This repository's CI workflow watches the `notes_app/**` and `notes_project/**` paths.
 
 ```bash
 # 1. Go to the project folder
-cd module_5/lesson_Django_Testing/crispy_notes_project
+cd notes_chat_app   # the repository root: manage.py and requirements.txt live here
 
 # 2. Install dependencies (if not installed yet)
 pip install -r requirements.txt
@@ -2022,16 +2019,15 @@ crispy_notes_project/
 
 | File | Topic |
 |------|------|
-| [`../README.md`](../README.md) | Navigation across the whole testing lesson |
-| [`../TESTING_FOUNDATIONS.md`](../TESTING_FOUNDATIONS.md) | The pyramid, principles, AAA |
-| [`../UNITTEST_BASICS.md`](../UNITTEST_BASICS.md) | Python unittest: TestCase, lifecycle |
-| [`../PYTEST_BASICS.md`](../PYTEST_BASICS.md) | pytest: fixtures, parametrize |
-| [`../DJANGO_TESTING.md`](../DJANGO_TESTING.md) | Django: TestCase, Client, the test DB |
-| [`../TEST_DATA_AND_FIXTURES.md`](../TEST_DATA_AND_FIXTURES.md) | factory_boy, fixtures |
-| [`../MOCKING_AND_PATCHING.md`](../MOCKING_AND_PATCHING.md) | Mock, patch, external services |
-| [`../TESTING_PRACTICE_PROJECT.md`](../TESTING_PRACTICE_PROJECT.md) | E2E, Selenium, a full scenario |
-| [`../SELENIUM.md`](../SELENIUM.md) | Selenium WebDriver: By strategies, waits, StaticLiveServerTestCase, session cookie trick |
-| [`../CI_CD.md`](../CI_CD.md) | CI/CD theory, GitHub Actions components, events, runners |
-| [`.github/workflows/django-tests.yml`](.github/workflows/django-tests.yml) | A sample workflow for this project |
-| [`../../../../.github/workflows/django-tests.yml`](../../../../.github/workflows/django-tests.yml) | The real workflow (repo root) |
-| [`../basics/`](../basics/) | Runnable Python test examples |
+| [Part VIII overview](../08_testing_and_quality/README.md) | Navigation across the whole testing lesson |
+| [Testing Foundations](../08_testing_and_quality/testing_foundations_full.md) | The pyramid, principles, AAA |
+| [unittest](../08_testing_and_quality/unittest_basics_full.md) | Python unittest: TestCase, lifecycle |
+| [pytest](../08_testing_and_quality/pytest_basics_full.md) | pytest: fixtures, parametrize |
+| [Django Testing](../08_testing_and_quality/django_testing_full.md) | Django: TestCase, Client, the test DB |
+| [Test Data](../08_testing_and_quality/test_data_and_fixtures_full.md) | factory_boy, fixtures |
+| [Mocking](../08_testing_and_quality/mocking_and_patching_full.md) | Mock, patch, external services |
+| [Testing Practice](../08_testing_and_quality/testing_practice_project_full.md) | E2E, Selenium, a full scenario |
+| [Selenium](../08_testing_and_quality/selenium_full.md) | Selenium WebDriver: By strategies, waits, StaticLiveServerTestCase, session cookie trick |
+| [CI/CD](../08_testing_and_quality/ci_cd_full.md) | CI/CD theory, GitHub Actions components, events, runners |
+| [.github/workflows/django-tests.yml](https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml) | A sample workflow for this project |
+| [basics/ (not part of this repository)](../reference/legacy_source/legacy_missing_reference.md) | Runnable Python test examples |

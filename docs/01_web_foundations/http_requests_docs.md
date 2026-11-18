@@ -1,8 +1,6 @@
-# Урок 31 — HTTP Requests: Документація та Архітектурні Схеми
+# HTTP Requests: Документація та Архітектурні Схеми
 
-**Модуль 4 · Network & Concurrent Systems**
-
-> Цей файл — довідник та архітектурний компаньйон до `note_lesson_31_http_requests.ipynb`.
+> Цей файл — довідник та архітектурний компаньйон до практики з HTTP-запитами в Python.
 > Містить Mermaid-схеми, глибокі пояснення та production patterns.
 
 ---
@@ -682,4 +680,4 @@ flowchart TD
 
 ---
 
-*Документація до Уроку 31 · Модуль 4 · Python Networking Course*
+*HTTP Requests · довідник книги Django*

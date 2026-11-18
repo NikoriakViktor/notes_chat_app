@@ -121,8 +121,8 @@ sequenceDiagram
 ```bash
 # Steps for our project:
 
-# 1. Go to the project folder
-cd module_5/lesson_Django_ORM_Database/notes_project
+# 1. Go to the project folder (your path is your own)
+cd .../notes_project
 
 # 2. Check that hello_app is in INSTALLED_APPS
 # settings.py → INSTALLED_APPS must contain 'hello_app'

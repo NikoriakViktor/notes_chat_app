@@ -42,7 +42,7 @@
 ## Структура уроку
 
 ```
-lesson_Django_Testing/
+testing/
 │
 ├── README.md                     ← ВИ ТУТ — огляд та швидкий старт
 │

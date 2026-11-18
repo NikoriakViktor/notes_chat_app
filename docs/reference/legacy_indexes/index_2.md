@@ -80,18 +80,18 @@ Composite: GPU складає шари
 > Продовження Django-архітектури. Від голого `HttpResponse("текст")`
 > до Bootstrap 5 SaaS-інтерфейсів, custom template tags, HTMX і Unfold Admin.
 
-**Попередній урок:** `lesson_Django_Network_Architecture` — MVT, ORM, HttpResponse
-**Цей урок:** фронтенд + шаблонізація + production-архітектура Django
+**Попередня тема:** мережева архітектура Django — MVT, ORM, HttpResponse
+**Ця тема:** фронтенд + шаблонізація + production-архітектура Django
 
 ---
 
-## Навігація по Модулю 5
+## Навігація по суміжних темах
 
-| Урок | Ключові концепції | Практичний проєкт |
+| Тема | Ключові концепції | Практика в книзі |
 |------|------------------|-------------------|
-| [lesson_Django_Network_Architecture](../legacy_source/legacy_missing_reference.md) | MVT, URL routing, HttpResponse, прості view | simple_django_project, news_portal |
-| [lesson_Django_ORM_Database](../legacy_source/legacy_missing_reference.md) | ORM, Services/Selectors, FBV, Bootstrap5-форми вручну | notes_chat_app, notes_chat_app |
-| **lesson_HTML_CSS_Bootstrap** (цей урок) | HTML/CSS/Bootstrap, Advanced Templates, Crispy Forms, Design Foundations | django_bootstrap_project, crispy_notes_chat_app |
+| [Мережева архітектура Django](../../02_django_core/README.md) | MVT, URL routing, HttpResponse, прості view | [Крок 1. Hello Django](../../tutorials/01_hello_django/index.md) |
+| [Django ORM і база даних](../../03_database_and_orm/README.md) | ORM, Services/Selectors, FBV, Bootstrap5-форми вручну | [Крок 2](../../tutorials/02_first_model/index.md), [Крок 3](../../tutorials/03_crud_and_architecture/index.md) |
+| **HTML, CSS і Bootstrap** (ця тема) | HTML/CSS/Bootstrap, Advanced Templates, Crispy Forms, Design Foundations | [Крок 4. Шаблони і форми](../../tutorials/04_templates_and_forms/index.md) |
 
 ---
 
@@ -99,7 +99,7 @@ Composite: GPU складає шари
 
 > **Як читати цю таблицю:** Рівень 1 = абсолютний початківець, Рівень 3 = впевнений junior. Порядок важливий — файли залежать один від одного.
 
-## Файли уроку
+## Файли теми
 
 | Файл | Рядків | Рівень | Тема |
 |------|--------|--------|------|
@@ -114,8 +114,8 @@ Composite: GPU складає шари
 | [DJANGO_ADMIN_UNFOLD.md](../../05_frontend_and_templates/django_admin_unfold_full.md) | 2171 | 7 | Django Admin + Unfold: AdminSite, ModelAdmin, Dashboard, Widgets, Filters, Caching |
 
 **Практичні проєкти:**
-- [django_bootstrap_project/README.md](../legacy_source/legacy_missing_reference.md) — CRUD-нотатки: Navbar, Card Grid, Forms, Messages, Debug Toolbar
-- [crispy_notes_chat_app/README.md](../../../README.md) — Notes CRUD з `django-crispy-forms` FormHelper+Layout, SaaS Dashboard (`layouts/` + `components/`), порівняння 3 рівнів рендерингу форм
+- [README_2 — Bootstrap Notes](../../tutorials/README_2.md) — CRUD-нотатки: Navbar, Card Grid, Forms, Messages, Debug Toolbar
+- [README репозиторію notes_chat_app](https://github.com/NikoriakViktor/notes_chat_app#readme) — Notes CRUD з `django-crispy-forms` FormHelper+Layout, SaaS Dashboard (`layouts/` + `components/`), порівняння 3 рівнів рендерингу форм
 
 ---
 

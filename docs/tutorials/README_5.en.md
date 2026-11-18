@@ -200,8 +200,8 @@ views.note_list()
 
 | Tier | Where to look | Method | HTML in the template | Where the Bootstrap classes are |
 |------|-------------|-------|----------------|--------------------|
-| **1 — Raw** | [`notes_project/forms.py`](../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py) | `{{ form.as_p }}` | ~5 lines | Nowhere (no styles) |
-| **2 — Manual** | [`django_bootstrap_project/`](../django_bootstrap_project/) | Manual HTML | ~80 lines | In the template, by hand |
+| **1 — Raw** | [README_3 — forms without crispy](README_3.md) | `{{ form.as_p }}` | ~5 lines | Nowhere (no styles) |
+| **2 — Manual** | [README_2](README_2.md) | Manual HTML | ~80 lines | In the template, by hand |
 | **3 — Crispy** | **this project** `/notes/new/` | `{% crispy form %}` | **1 line** | In `forms.py` via Layout |
 
 All three approaches pass **the same** `NoteForm`. The difference is only in how it's rendered.
@@ -507,7 +507,7 @@ Now `{{ sidebar_notebooks }}` and `{{ sidebar_tags }}` are available **in every 
 
 ```bash
 # 1. Go to the folder
-cd module_5/lesson_HTML_CSS_Bootstrap/crispy_notes_project
+cd notes_chat_app   # the repository root: manage.py and requirements.txt live here
 
 # 2. Install dependencies
 pip install -r requirements.txt
@@ -535,8 +535,8 @@ python manage.py runserver
 | `http://127.0.0.1:8000/admin/` | Django Admin |
 
 > **Tier 1 and Tier 2 as code for comparison** (not as live URLs):
-> - Tier 1 (`form.as_p`): [`notes_project/hello_app/forms.py`](../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py)
-> - Tier 2 (manual Bootstrap): [`django_bootstrap_project/`](../django_bootstrap_project/)
+> - Tier 1 (`form.as_p`): [README_3 — forms without crispy](README_3.md)
+> - Tier 2 (manual Bootstrap): [README_2](README_2.md)
 
 ---
 
@@ -848,7 +848,7 @@ Child templates (level 3) write **only content**. The sidebar, topbar, and Boots
 
 **Goal:** show what Django provides "out of the box", without any styles.
 
-> Tier 1 is implemented in [`notes_project`](../../lesson_Django_ORM_Database/notes_project/) — the forms there have no crispy.
+> Tier 1 is implemented in [`notes_project`](README_3.md) — the forms there have no crispy.
 > The code below is for comparing the concepts.
 
 ```python
@@ -904,7 +904,7 @@ No `class="form-control"`. No Bootstrap. It looks bad, but it **works correctly*
 
 **Goal:** show the full Bootstrap HTML — to understand what Tier 3 saves you from.
 
-> Tier 2 is implemented in [`django_bootstrap_project`](../django_bootstrap_project/) — the forms there use manual Bootstrap HTML.
+> Tier 2 is implemented in [`django_bootstrap_project`](README_2.md) — the forms there use manual Bootstrap HTML.
 > The code below is for comparing the concepts.
 
 ```html
@@ -1408,8 +1408,8 @@ crispy_notes_project/
 
 | File | Description |
 |------|------|
-| [`../DESIGN_FOUNDATIONS.md`](../DESIGN_FOUNDATIONS.md) | UX, CRAP, Bootstrap, template hierarchy, Crispy — theory |
-| [`../CRISPY_FORMS.md`](../CRISPY_FORMS.md) | Full reference: FormHelper, Layout, Bootstrap components, Dynamic API |
-| [`../ADVANCED_TEMPLATES.md §3`](../ADVANCED_TEMPLATES.md) | FormHelper + Layout — details |
-| [`../ADVANCED_TEMPLATES.md §5`](../ADVANCED_TEMPLATES.md) | SaaS Dashboard Architecture |
-| [`../../lesson_Django_ORM_Database/notes_project/README.md`](../../lesson_Django_ORM_Database/notes_project/README.md) | ORM, Services/Selectors, migrations — the foundation of this project |
+| [Design Foundations](../05_frontend_and_templates/design_foundations_full.md) | UX, CRAP, Bootstrap, template hierarchy, Crispy — theory |
+| [Crispy Forms](../04_forms_and_validation/crispy_forms_full.md) | Full reference: FormHelper, Layout, Bootstrap components, Dynamic API |
+| [Advanced Templates §3](../05_frontend_and_templates/advanced_templates_full.md) | FormHelper + Layout — details |
+| [Advanced Templates §5](../05_frontend_and_templates/advanced_templates_full.md) | SaaS Dashboard Architecture |
+| [README_3](README_3.md) | ORM, Services/Selectors, migrations — the foundation of this project |

@@ -35,6 +35,16 @@
 
 ---
 
+### Batch T — Сліди старого монорепозиторію курсу (2026-11-18): DONE ✅
+
+- Прибрано `module_5/...`, `lesson_Django_*`, `lesson_HTML_*`, `note_lesson_*`, «Урок N / Модуль N» у docs/ (крім `_internal`) і mkdocs.yml, uk + en.
+- `cd module_5/...`: для кроків 5–8 і 7a команди йдуть з кореня репозиторію; для README_2/README_3/migrations (власний проєкт читача) — `cd C:\...\<project>` / `cd .../notes_project`, як у README_1.
+- Мертві посилання README_2–7 (`../BOOTSTRAP_5.md`, `../../lesson_*/...` тощо) спрямовано на канонічні глави книги; відсутні файли (`views_fbv_backup.py`, `basics/`) — на `reference/legacy_source/legacy_missing_reference.md`.
+- `lesson_34_documentation(.en).md` перейменовано на `asyncio_event_loop(.en).md` (URL сторінки змінився).
+- `tutorials/06_testing/ci_github_actions(.en).md` переписано під реальний `.github/workflows/django-tests.yml`; coverage-вивід — реальний локальний запуск (209 tests OK, TOTAL 94%).
+- Перевірки: `mkdocs build --strict` exit 0 без warning; link-check 54 зібраних сторінок (uk+en) — 0 битих внутрішніх посилань/якорів.
+- Залишено навмисно: посилання на поточний курс (урок 36) у `06_application_architecture/drf_rest_api_full.md`, рядки 179 і 633.
+
 ### Batch S — Контрольні точки кроків 1–9 (2026-11-18): DONE ✅
 
 Запит автора: прибрати згадки старого репозиторію курсу (`…-23_02`) і зробити чекліст «як у книзі FastAPI».

@@ -1,7 +1,11 @@
 # GitHub Actions CI
 
-> **Мета:** кожен `git push` автоматично запускає ті самі тести, які ти щойно навчився писати.
-> Без твоєї участі. На чистому сервері. З результатом у GitHub за 2–3 хвилини.
+> **Мета:** кожен `git push`, який змінює код застосунку, автоматично запускає ті самі тести,
+> які ти щойно навчився писати. На чистій машині GitHub, без твоєї участі.
+
+Ця сторінка розбирає **реальний** workflow репозиторію —
+[`.github/workflows/django-tests.yml`](https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml).
+Усі фрагменти YAML нижче скопійовані з цього файлу, нічого не додано.
 
 ---
 
@@ -11,159 +15,174 @@
 notes_chat_app/                   ← корінь репозиторію
 └── .github/
     └── workflows/
-        └── ci.yml                ← GitHub бачить тільки files у .github/workflows/
+        ├── django-tests.yml      ← тести Django (ця сторінка)
+        └── docs.yml              ← збірка і публікація цієї книги
 ```
 
-GitHub Actions читає workflow **ТІЛЬКИ** з директорії `.github/workflows/` у кореневій папці репозиторію.
+GitHub Actions читає workflow **тільки** з директорії `.github/workflows/` у корені репозиторію.
 
 ---
 
 ## Що відбувається при `git push`
 
 ```
-Ти:  git push origin main
+Ти:  git push origin main   (змінено notes_app/, notes_project/, templates/, static/,
+         │                    requirements.txt або сам workflow)
+         ▼
+GitHub:  подія push → workflow "Django Tests"
          │
          ▼
-GitHub:  Detect event → push до main
+Runner:  нова чиста VM ubuntu-latest
          │
-         ▼
-Azure:   Provision Ubuntu 24.04 VM (нова, чиста)
-         │
-         ├── Job 1: Unit + Integration + Consumer (~1-2 хв)
-         │     checkout → python 3.12 → pip install
-         │     → PostgreSQL service → Redis service
-         │     → manage.py test models/services/forms/views/consumers
+         ├── Job 1: unit-and-integration — "Unit, Integration & Consumer Tests"
+         │     PostgreSQL service (postgres:16-alpine)
+         │     checkout → Python 3.12 → pip cache → pip install
+         │     → manage.py check
+         │     → manage.py test models/services/forms/views/consumers/api
+         │     → coverage report + артефакт coverage-xml
          │     Результат: ✅ або ❌
          │
-         └── Job 2: Selenium E2E (~1-2 хв) — тільки якщо Job 1 ✅
-               checkout → pip install → migrations
-               → PostgreSQL + Redis + Selenium Chrome service
-               → manage.py test test_selenium
+         └── Job 2: selenium-e2e — "Selenium E2E Tests" (тільки якщо Job 1 ✅)
+               PostgreSQL service + selenium/standalone-chrome service
+               checkout → Python 3.12 → pip cache → pip install
+               → manage.py test notes_app.tests.test_selenium
                Результат: ✅ або ❌
          │
          ▼
-GitHub:  Зелений/червоний статус на коміті + email якщо ❌
+GitHub:  зелений/червоний статус на коміті або PR
 ```
+
+Redis у CI **не** запускається: без `REDIS_URL` Channels використовує InMemory channel layer,
+і тестам consumer-ів цього достатньо.
 
 ---
 
-## Повний workflow YAML рядок за рядком
+## Workflow рядок за рядком
+
+### Назва і тригери
 
 ```yaml
-# .github/workflows/ci.yml
-name: CI — Test Suite
-```
+name: Django Tests
 
-Ця назва відображається у вкладці **Actions** у GitHub.
-
-```yaml
+# ── Тригери ───────────────────────────────────────────────────────────────────
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
+    paths:
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
+      - '.github/workflows/django-tests.yml'
   pull_request:
-    branches: [main, master]
-  workflow_dispatch:
+    branches: [ main, master ]
+    paths:
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
+      - '.github/workflows/django-tests.yml'
+  workflow_dispatch:   # кнопка "Run workflow" в GitHub UI → Actions
 ```
-
-**`on`** — визначає коли запускати workflow.
 
 | Ключ | Що означає |
 |------|-----------|
-| `push` | При кожному git push |
-| `branches` | Тільки для гілок `main` або `master` |
-| `pull_request` | При відкритті або оновленні PR |
-| `workflow_dispatch` | Кнопка "Run workflow" у GitHub UI → Actions |
+| `name` | Назва у вкладці **Actions**: `Django Tests` |
+| `push` / `pull_request` | Запуск при push у `main`/`master` або PR у ці гілки |
+| `paths` | Тільки якщо змінено код застосунку, шаблони, статику, залежності або сам workflow. Зміни лише в `docs/` цей workflow **не** запускають |
+| `workflow_dispatch` | Кнопка **Run workflow** у GitHub UI → Actions |
 
 ---
 
-### Job 1: Unit + Integration + Consumer Tests
+### Job 1: Unit, Integration & Consumer Tests
 
 ```yaml
 jobs:
-  test:
-    name: Unit + Integration + Consumer tests
+
+  # ── Job 1: Unit + Integration + WebSocket Consumer тести ──────────────────────
+  unit-and-integration:
+    name: Unit, Integration & Consumer Tests
     runs-on: ubuntu-latest
 ```
 
-**`runs-on: ubuntu-latest`** — свіжа Ubuntu 24.04 VM на Azure. Після завершення VM знищується. Між запусками немає стану.
+**`runs-on: ubuntu-latest`** — свіжа VM від GitHub. Після завершення вона знищується, між запусками немає стану.
 
 ```yaml
     services:
-      # PostgreSQL у GitHub Actions (окремий container)
-      postgres:
+      db:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB:       test_notes_db
-          POSTGRES_USER:     test_user
-          POSTGRES_PASSWORD: test_pass
-        ports: ['5432:5432']
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U test_user -d test_notes_db"
+          --health-cmd pg_isready
           --health-interval 5s
+          --health-timeout 5s
           --health-retries 5
 
-      # Redis для channel layer
-      redis:
-        image: redis:7-alpine
-        ports: ['6379:6379']
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 5s
-```
-
-**`services`** — додаткові Docker containers, що запускаються поруч з runner VM.
-`health-cmd` + `health-interval` + `health-retries` — GitHub Actions чекає поки сервіс стане healthy перед початком steps.
-
-```yaml
     env:
-      DATABASE_URL: postgres://test_user:test_pass@localhost:5432/test_notes_db
-      REDIS_URL:    redis://localhost:6379/0
-      SECRET_KEY:   ci-secret-key-not-for-production
-      DEBUG:        "False"
-      ALLOWED_HOSTS: localhost,127.0.0.1
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
 ```
 
-Змінні середовища для Django. `DATABASE_URL` вказує на PostgreSQL service container (`localhost:5432`).
+**`services`** — Docker-контейнери, які GitHub запускає поруч із job. Сервіс тут називається `db`,
+але порт прокинуто на `localhost:5432`, тому `DATABASE_URL` дивиться на `localhost`.
+`--health-cmd pg_isready` + `--health-retries 5` — GitHub чекає, поки PostgreSQL стане healthy, і лише тоді починає steps.
+
+Єдина змінна середовища — `DATABASE_URL`: без неї `notes_project/settings.py` зупиняється з
+`Exception: DATABASE_URL не встановлено. Запускай через docker compose.`
 
 ---
 
-**Step 1 — Checkout**
+**Steps 1–3 — checkout, Python, кеш pip**
 
 ```yaml
     steps:
-      - uses: actions/checkout@v4
-```
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-Клонує весь репозиторій на VM. Без цього кроку на runner немає жодного файлу з твоїм кодом.
-
----
-
-**Step 2 — Setup Python**
-
-```yaml
-      - uses: actions/setup-python@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pip
+          python-version: "3.12"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 ```
 
-Встановлює Python 3.12. `cache: pip` — кешує `~/.cache/pip` між запусками (аналог `actions/cache`, але вбудований у `setup-python`).
+- `actions/checkout@v4` — клонує репозиторій на runner. Без цього кроку на машині немає жодного файлу з твоїм кодом.
+- `actions/setup-python@v5` — встановлює Python 3.12.
+- `actions/cache@v4` — кешує `~/.cache/pip`. Ключ залежить від `hashFiles('requirements.txt')`: поки `requirements.txt` не змінився, пакети беруться з кешу.
 
 ---
 
-**Step 3 — Install dependencies**
+**Steps 4–5 — залежності і system check**
 
 ```yaml
       - name: Install dependencies
         run: pip install -r requirements.txt
+
+      - name: Django system check
+        run: python manage.py check
 ```
+
+`manage.py check` ловить помилки конфігурації (неправильний `INSTALLED_APPS`, зламані URL-и) ще до запуску тестів.
 
 ---
 
-**Step 4 — Run Unit + Integration tests**
+**Step 6 — тести**
 
 ```yaml
-      - name: Run Unit + Integration tests
+      - name: Run unit, integration and consumer tests
         run: |
           python manage.py test \
             notes_app.tests.test_models \
@@ -171,150 +190,203 @@ jobs:
             notes_app.tests.test_forms \
             notes_app.tests.test_views \
             notes_app.tests.test_consumers \
+            notes_app.tests.test_api \
             -v 2
 ```
 
-Запускає 123+ тестів. Явно перераховані модулі без `test_selenium` — Selenium в окремому job.
+Явно перераховані шість модулів — без `test_selenium` (він у Job 2) і без `test_tasks`.
+Разом це **209 тестів**: models 25, services 65, forms 22, views 84, consumers 9, api 4.
 
-`-v 2` — verbose: кожен тест виводиться окремим рядком. В CI це корисно: одразу видно яке ім'я тесту впало.
+`-v 2` — кожен тест окремим рядком. У CI це зручно: одразу видно, яке ім'я тесту впало.
 
-Якщо будь-який тест повертає `FAILED` → step повертає exit code 1 → GitHub Actions вважає step провалений → job зупиняється → Job 2 (selenium) не запускається.
+Якщо хоча б один тест падає → команда повертає exit code 1 → step провалений → job зупиняється → Job 2 не стартує.
 
 ---
 
-### Job 2: Selenium E2E
+**Steps 7–8 — coverage і артефакт**
+
+```yaml
+      - name: Generate coverage report
+        run: |
+          coverage run manage.py test \
+            notes_app.tests.test_models \
+            notes_app.tests.test_services \
+            notes_app.tests.test_forms \
+            notes_app.tests.test_views \
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api
+          coverage report --show-missing
+          coverage xml -o coverage.xml
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+```
+
+Тести проганяються вдруге, вже під `coverage`. `coverage xml` зберігає звіт у `coverage.xml`,
+а `actions/upload-artifact@v4` прикріплює його до run під іменем `coverage-xml`.
+
+---
+
+### Job 2: Selenium E2E Tests
 
 ```yaml
   selenium-e2e:
-    name: Selenium E2E tests
+    name: Selenium E2E Tests
     runs-on: ubuntu-latest
-    needs: test          # ← запускається ПІСЛЯ успіху unit тестів
+    needs: unit-and-integration
 ```
 
-**`needs: test`** — Job 2 запускається тільки після того як Job 1 завершився успішно. Якщо unit тести впали — Selenium навіть не стартує.
+**`needs: unit-and-integration`** — Job 2 стартує тільки після успіху Job 1. Якщо unit-тести впали, Selenium навіть не запускається.
 
 ```yaml
     services:
-      postgres:
+      db:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB:       test_notes_db
-          POSTGRES_USER:     test_user
-          POSTGRES_PASSWORD: test_pass
-        ports: ['5432:5432']
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U test_user"
+          --health-cmd pg_isready
           --health-interval 5s
+          --health-timeout 5s
           --health-retries 5
-
-      redis:
-        image: redis:7-alpine
-        ports: ['6379:6379']
 
       selenium:
         image: selenium/standalone-chrome:latest
-        ports: ['4444:4444']
-        options: --shm-size=2g   # Chrome потребує shared memory
-```
+        ports:
+          - 4444:4444
+        options: >-
+          --add-host=host.docker.internal:host-gateway
+          --shm-size=2gb
+          --health-cmd "curl -f http://localhost:4444/wd/hub/status"
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
 
-**`--shm-size=2g`** — Chrome потребує достатньо shared memory. Без цього Chrome може падати з OOM.
-
-```yaml
     env:
-      DATABASE_URL:        postgres://test_user:test_pass@localhost:5432/test_notes_db
-      REDIS_URL:           redis://localhost:6379/0
-      SECRET_KEY:          ci-secret-key
-      DEBUG:               "False"
-      ALLOWED_HOSTS:       localhost,127.0.0.1
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
       SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
-      WEB_HOST:            localhost
+      WEB_HOST: host.docker.internal
 ```
 
-- `SELENIUM_REMOTE_URL` — `_make_driver()` використовує Remote WebDriver замість локального Chrome
-- `WEB_HOST` — `_DockerLiveServerMixin` замінює `0.0.0.0` на `localhost` у `live_server_url`
+- `selenium/standalone-chrome:latest` — Chrome у контейнері, керується через WebDriver на порту 4444.
+- `--shm-size=2gb` — Chrome потребує багато shared memory, без цього він може падати.
+- `--add-host=host.docker.internal:host-gateway` — Chrome у контейнері відкриває `http://host.docker.internal:PORT` і бачить Django test server на runner.
+- `--health-cmd "curl -f http://localhost:4444/wd/hub/status"` — чекаємо, поки Selenium готовий приймати сесії.
+- `SELENIUM_REMOTE_URL` — `_make_headless_driver()` у `notes_app/tests/test_selenium.py` створює Remote WebDriver замість локального Chrome.
+- `WEB_HOST=host.docker.internal` — `_DockerLiveServerMixin` прив'язує test server до `0.0.0.0` і підставляє `host.docker.internal` у `live_server_url`.
 
 ```yaml
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pip
+          python-version: "3.12"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run migrations
-        run: python manage.py migrate --noinput
-
+      # SELENIUM_REMOTE_URL → _make_headless_driver() → Remote WebDriver → selenium контейнер
+      # WEB_HOST=host.docker.internal → Django test server bind 0.0.0.0, URL = host.docker.internal
       - name: Run Selenium E2E tests
         run: python manage.py test notes_app.tests.test_selenium -v 2
-
-      - name: Upload screenshots on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: selenium-screenshots
-          path: /tmp/selenium-*.png
 ```
 
-**`if: failure()`** — крок виконується ТІЛЬКИ якщо попередній крок провалився. Якщо тест падає і зберігає screenshot → він доступний у GitHub Actions → Artifacts.
+Окремого кроку `migrate` немає: `manage.py test` сам створює тестову БД і застосовує міграції.
 
 ---
 
-## Повний workflow (для копіювання)
+## Повний workflow (як у репозиторії)
 
 ```yaml
-# .github/workflows/ci.yml
-name: CI — Test Suite
+# GitHub Actions CI — Django Tests (notes_chat_app)
 
+# ЯК ПЕРЕГЛЯНУТИ РЕЗУЛЬТАТИ:
+#   https://github.com/NikoriakViktor/notes_chat_app/actions
+
+name: Django Tests
+
+# ── Тригери ───────────────────────────────────────────────────────────────────
 on:
   push:
-    branches: [main, master]
+    branches: [ main, master ]
+    paths:
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
+      - '.github/workflows/django-tests.yml'
   pull_request:
-    branches: [main, master]
-  workflow_dispatch:
+    branches: [ main, master ]
+    paths:
+      - 'notes_app/**'
+      - 'notes_project/**'
+      - 'templates/**'
+      - 'static/**'
+      - 'requirements.txt'
+      - '.github/workflows/django-tests.yml'
+  workflow_dispatch:   # кнопка "Run workflow" в GitHub UI → Actions
 
+# ── Jobs ──────────────────────────────────────────────────────────────────────
 jobs:
-  test:
-    name: Unit + Integration + Consumer tests
+
+  # ── Job 1: Unit + Integration + WebSocket Consumer тести ──────────────────────
+  unit-and-integration:
+    name: Unit, Integration & Consumer Tests
     runs-on: ubuntu-latest
 
     services:
-      postgres:
+      db:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB:       test_notes_db
-          POSTGRES_USER:     test_user
-          POSTGRES_PASSWORD: test_pass
-        ports: ['5432:5432']
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U test_user -d test_notes_db"
+          --health-cmd pg_isready
           --health-interval 5s
+          --health-timeout 5s
           --health-retries 5
 
-      redis:
-        image: redis:7-alpine
-        ports: ['6379:6379']
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 5s
-
     env:
-      DATABASE_URL: postgres://test_user:test_pass@localhost:5432/test_notes_db
-      REDIS_URL:    redis://localhost:6379/0
-      SECRET_KEY:   ci-secret-key-not-for-production
-      DEBUG:        "False"
-      ALLOWED_HOSTS: localhost,127.0.0.1
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pip
+          python-version: "3.12"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -322,7 +394,7 @@ jobs:
       - name: Django system check
         run: python manage.py check
 
-      - name: Run Unit + Integration tests
+      - name: Run unit, integration and consumer tests
         run: |
           python manage.py test \
             notes_app.tests.test_models \
@@ -330,6 +402,7 @@ jobs:
             notes_app.tests.test_forms \
             notes_app.tests.test_views \
             notes_app.tests.test_consumers \
+            notes_app.tests.test_api \
             -v 2
 
       - name: Generate coverage report
@@ -339,7 +412,8 @@ jobs:
             notes_app.tests.test_services \
             notes_app.tests.test_forms \
             notes_app.tests.test_views \
-            notes_app.tests.test_consumers
+            notes_app.tests.test_consumers \
+            notes_app.tests.test_api
           coverage report --show-missing
           coverage xml -o coverage.xml
 
@@ -349,177 +423,217 @@ jobs:
           name: coverage-xml
           path: coverage.xml
 
+
+  # ── Job 2: Selenium E2E тести ─────────────────────────────────────────────────
+  #
+  # Selenium через selenium/standalone-chrome контейнер (як у docker-compose.yml).
+  #
+  # Мережева схема:
+  #   runner (Django test server на 0.0.0.0:PORT)
+  #   ↕  через host.docker.internal (bridge gateway)
+  #   selenium container → SELENIUM_REMOTE_URL = http://localhost:4444/wd/hub
+  #
+  # --add-host=host.docker.internal:host-gateway:
+  #   Додає запис у /etc/hosts selenium-контейнера.
+  #   host.docker.internal → IP Docker gateway (= IP runner-машини).
+  #   Chrome всередині контейнера відкриває http://host.docker.internal:PORT
+  #   і бачить Django test server, що слухає на 0.0.0.0.
+  #
+  # WEB_HOST=host.docker.internal:
+  #   _DockerLiveServerMixin в test_selenium.py бачить WEB_HOST і:
+  #   1. Прив'язує Django test server до 0.0.0.0 (не тільки 127.0.0.1)
+  #   2. Замінює 0.0.0.0 на host.docker.internal у live_server_url
+  #   Тож Selenium отримує URL http://host.docker.internal:PORT — досяжний із контейнера.
   selenium-e2e:
-    name: Selenium E2E tests
+    name: Selenium E2E Tests
     runs-on: ubuntu-latest
-    needs: test
+    needs: unit-and-integration
 
     services:
-      postgres:
+      db:
         image: postgres:16-alpine
         env:
-          POSTGRES_DB:       test_notes_db
-          POSTGRES_USER:     test_user
-          POSTGRES_PASSWORD: test_pass
-        ports: ['5432:5432']
+          POSTGRES_DB: notes_db
+          POSTGRES_USER: notes_user
+          POSTGRES_PASSWORD: notes_pass
+        ports:
+          - 5432:5432
         options: >-
-          --health-cmd "pg_isready -U test_user"
+          --health-cmd pg_isready
           --health-interval 5s
+          --health-timeout 5s
           --health-retries 5
-
-      redis:
-        image: redis:7-alpine
-        ports: ['6379:6379']
 
       selenium:
         image: selenium/standalone-chrome:latest
-        ports: ['4444:4444']
-        options: --shm-size=2g
+        ports:
+          - 4444:4444
+        options: >-
+          --add-host=host.docker.internal:host-gateway
+          --shm-size=2gb
+          --health-cmd "curl -f http://localhost:4444/wd/hub/status"
+          --health-interval 5s
+          --health-timeout 10s
+          --health-retries 5
 
     env:
-      DATABASE_URL:        postgres://test_user:test_pass@localhost:5432/test_notes_db
-      REDIS_URL:           redis://localhost:6379/0
-      SECRET_KEY:          ci-secret-key
-      DEBUG:               "False"
-      ALLOWED_HOSTS:       localhost,127.0.0.1
+      DATABASE_URL: postgres://notes_user:notes_pass@localhost:5432/notes_db
       SELENIUM_REMOTE_URL: http://localhost:4444/wd/hub
-      WEB_HOST:            localhost
+      WEB_HOST: host.docker.internal
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: pip
+          python-version: "3.12"
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run migrations
-        run: python manage.py migrate --noinput
-
+      # SELENIUM_REMOTE_URL → _make_headless_driver() → Remote WebDriver → selenium контейнер
+      # WEB_HOST=host.docker.internal → Django test server bind 0.0.0.0, URL = host.docker.internal
       - name: Run Selenium E2E tests
         run: python manage.py test notes_app.tests.test_selenium -v 2
-
-      - name: Upload screenshots on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: selenium-screenshots
-          path: /tmp/selenium-*.png
 ```
 
 ---
 
 ## Coverage report
 
-```
-coverage run manage.py test ...
+Ті самі шість модулів під `coverage`, запущені локально проти PostgreSQL 16:
+
+```bash
+coverage run manage.py test \
+  notes_app.tests.test_models notes_app.tests.test_services notes_app.tests.test_forms \
+  notes_app.tests.test_views notes_app.tests.test_consumers notes_app.tests.test_api
 coverage report --show-missing
 ```
 
-Вивід:
+Реальний вивід (рядки модулів застосунку; повний звіт містить також міграції, тести і `notes_project/*`):
 
 ```
-Name                          Stmts   Miss  Cover   Missing
------------------------------------------------------------
-notes_app/models.py             87      3    97%   45, 67, 89
-notes_app/services.py          124      8    94%   34-41
-notes_app/views.py             198     12    94%   ...
-notes_app/consumers.py          56      4    93%   ...
------------------------------------------------------------
-TOTAL                          465     27    94%
+Found 209 test(s).
+...
+Ran 209 tests in 115.805s
+
+OK
 ```
 
-`coverage xml -o coverage.xml` — зберігає у XML для інтеграції з Codecov / SonarQube.
+```
+Name                                                                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------
+notes_app/api.py                                                                37      0   100%
+notes_app/consumers.py                                                          53      4    92%   173-174, 233-234
+notes_app/forms.py                                                             141      2    99%   249, 324
+notes_app/models.py                                                            138      6    96%   32, 143, 165, 181, 204, 272
+notes_app/selectors.py                                                          58      8    86%   30, 54, 121, 142-143, 156-158
+notes_app/services.py                                                          162      2    99%   40-41
+notes_app/views.py                                                             435     97    78%   73-74, 148-149, 187-188, ...
+----------------------------------------------------------------------------------------------------------
+TOTAL                                                                         2308    135    94%
+```
+
+`coverage xml -o coverage.xml` — XML-формат для Codecov, SonarQube або перегляду в IDE.
 
 ---
 
 ## Як переглянути результати
 
-**1. Actions tab у репозиторії**
+**1. Вкладка Actions репозиторію**
 
 ```
-https://github.com/<user>/<repo>/actions
+https://github.com/NikoriakViktor/notes_chat_app/actions
 ```
 
-Тут список всіх workflow runs. Зелений — all green. Червоний — щось впало.
+Список усіх запусків. Зелений — усе пройшло, червоний — щось впало.
 
-**2. Граф Jobs**
+**2. Граф jobs**
 
-Клікни на конкретний run → бачиш два прямокутники:
-
-```
-[Unit + Integration Tests] ──needs──► [Selenium E2E Tests]
-      ✅ 1m 23s                              ✅ 1m 47s
-```
-
-**3. Logs конкретного step**
-
-Клікни на job → клікни на step → розгорни:
+Клікни на конкретний run — побачиш два прямокутники:
 
 ```
-Run python manage.py test ...
+[Unit, Integration & Consumer Tests] ──needs──► [Selenium E2E Tests]
+```
 
-Creating test database for alias 'default' ...
-Found 123 test(s).
-test_str_returns_hash_name (notes_app.tests.test_models.TagModelTest) ... ok
-test_unique_together_same_user_same_name_raises (...) ... ok
+**3. Лог конкретного step**
+
+Клікни на job → на step → розгорни. Так виглядають рядки `-v 2` (реальний вивід для `TagModelTest`):
+
+```
+Found 4 test(s).
+...
+test_str_returns_hash_name (notes_app.tests.test_models.TagModelTest.test_str_returns_hash_name)
+ЩО ПЕРЕВІРЯЄМО: __str__ тегу повертає '#python', а не просто 'python'. ... ok
+test_unique_together_same_user_same_name_raises (notes_app.tests.test_models.TagModelTest.test_unique_together_same_user_same_name_raises)
+ЩО ПЕРЕВІРЯЄМО: не можна створити два теги з однаковою назвою ... ok
 ...
 ----------------------------------------------------------------------
-Ran 123 tests in 34.2s
+Ran 4 tests in 2.539s
+
 OK
 ```
 
-**4. Download artifacts**
+Другий рядок кожного тесту — перший рядок його docstring: Django виводить його при `-v 2`.
 
-Actions run → Artifacts (внизу сторінки) → `coverage-xml` → завантажити.
+**4. Завантажити артефакт**
+
+Run → розділ **Artifacts** унизу сторінки → `coverage-xml`.
 
 **5. Статус на коміті**
 
-Кожен коміт отримує значок:
-- `✅` — всі workflow пройшли
-- `❌` — хтось впав
-- `🟡` — виконується
+Кожен коміт і PR отримує значок: ✅ — workflow пройшов, ❌ — впав, 🟡 — виконується.
 
 ---
 
-## Зв'язок: тести ↔ CI/CD
+## Зв'язок: тести ↔ CI
 
 ```
-Ти пишеш:                  CI/CD запускає:            Ти отримуєш:
+Ти пишеш:                  CI запускає:                         Ти отримуєш:
 
-test_models.py    ─────►   Job 1 (unit+integration)  ──► ✅ або ❌ за 30 сек
-test_services.py  ─────►                             ──► Traceback прямо в GitHub
-test_forms.py     ─────►
+test_models.py    ─────►   Job 1 unit-and-integration    ──►  ✅ або ❌
+test_services.py  ─────►                                 ──►  Traceback прямо в GitHub
+test_forms.py     ─────►                                 ──►  артефакт coverage-xml
 test_views.py     ─────►
 test_consumers.py ─────►
+test_api.py       ─────►
 
-test_selenium.py  ─────►   Job 2 (needs: job1)       ──► ✅ або ❌ після Job 1
-                                                      ──► Chrome у Docker container
+test_selenium.py  ─────►   Job 2 selenium-e2e            ──►  ✅ або ❌ після Job 1
+                           (needs: unit-and-integration)       Chrome у Docker-контейнері
+
+test_tasks.py     ─────►   у CI не запускається — тільки локально
 ```
 
 ---
 
 ## Що означають рядки у лозі при помилці
 
-```
-FAIL: test_note_list_shows_only_user_notes
-      ↑ Назва тесту → одразу зрозуміло ЩО зламалось
+Приклад нижче — **навмисно зламаний** фільтр у `selectors` (такого бага в репозиторії немає).
+Тест `test_note_list_excludes_other_user_notes` перевіряє, що Alice не бачить нотаток Bob'а:
 
-(notes_app.tests.test_views.NoteListViewTest)
-      ↑ Клас і файл → можеш одразу відкрити
+```
+FAIL: test_note_list_excludes_other_user_notes (notes_app.tests.test_views.NoteListViewTest.test_note_list_excludes_other_user_notes)
+      ↑ Назва тесту, клас і модуль → одразу зрозуміло ЩО зламалось і де шукати
 
 Traceback (most recent call last):
-  File ".../test_views.py", line 89, in test_note_list_shows_only_user_notes
-    self.assertNotContains(response, "Bob's Secret Note")
-AssertionError: Response should not contain "Bob's Secret Note"
-      ↑ Очікували що рядка НЕМАЄ, але він є → нотатки Bob'а видимі Alice!
-      → Баг у selectors.get_user_notes() — забули фільтр по user
+  File ".../notes_app/tests/test_views.py", line ..., in test_note_list_excludes_other_user_notes
+    self.assertNotContains(response, 'Bob Secret Note')
+AssertionError: ...
+      ↑ Очікували, що рядка НЕМАЄ, але він є → нотатки Bob'а видимі Alice
+      → баг у фільтрі по user у selectors
 
 Process completed with exit code 1
-      ↑ Django test runner повернув 1 → GitHub Actions вважає step провалений
+      ↑ test runner повернув 1 → GitHub Actions вважає step проваленим
 ```
 
 ---
@@ -532,6 +646,7 @@ Process completed with exit code 1
 | Understanding GitHub Actions | https://docs.github.com/en/actions/about-github-actions/understanding-github-actions |
 | Events that trigger workflows | https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows |
 | Workflow syntax (повний довідник) | https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions |
+| Service containers | https://docs.github.com/en/actions/use-cases-and-examples/using-containerized-services/about-service-containers |
 | Caching dependencies | https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows |
 | GitHub-hosted runners | https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners |
 | actions/checkout | https://github.com/marketplace/actions/checkout |
@@ -541,18 +656,22 @@ Process completed with exit code 1
 | Coverage.py | https://coverage.readthedocs.io/en/latest/ |
 | Django system check | https://docs.djangoproject.com/en/5.2/topics/checks/ |
 
+Теорія CI/CD у книзі: [CI/CD](../../08_testing_and_quality/ci_cd_full.md).
+
 ---
 
-## Практика: перевір що CI/CD працює
+## Практика: перевір, що CI працює
 
-1. Відкрий у браузері: `https://github.com/<user>/<repo>/actions`
-2. Знайди workflow **"CI — Test Suite"**
-3. Клікни на останній run
-4. Розгорни Job 1 → Step "Run Unit + Integration tests"
-5. Знайди рядок `Ran ... tests in ... OK`
-6. Перейди до Job 2 → подивись як запускається Selenium у Docker container
+1. Відкрий `https://github.com/NikoriakViktor/notes_chat_app/actions` (або Actions свого форку).
+2. Знайди workflow **Django Tests**.
+3. Клікни на останній run.
+4. Розгорни Job **Unit, Integration & Consumer Tests** → step **Run unit, integration and consumer tests**.
+5. Знайди рядки `Ran 209 tests in ...` і `OK`.
+6. Перейди до Job **Selenium E2E Tests** — подивись, як піднімається контейнер `selenium/standalone-chrome`.
 
-**Самостійно:** зроби навмисну помилку в будь-якому тесті (`assertFalse(True)`), зроби `git push`, подивись як CI показує FAIL і Traceback у GitHub Actions.
+**Самостійно:** у своєму форку додай навмисну помилку в будь-який тест (`self.assertFalse(True)`) у `notes_app/tests/`,
+зроби `git push` і подивись, як CI показує FAIL і Traceback. Пам'ятай про `paths`: зміна має бути в `notes_app/**`,
+інакше workflow не запуститься.
 
 ---
 

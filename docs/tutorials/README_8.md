@@ -234,7 +234,7 @@ overengineering + складніший код + ті самі результат
 ### Крок 1: Перехід до директорії
 
 ```bash
-cd module_5/lesson_Django_Async/notes_chat_app
+cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 ```
 
 ### Крок 2: Створення virtualenv

@@ -1,6 +1,6 @@
 # Docker: A Complete Practical Guide
 
-> **Module 3 — Python Advanced · Viktor Nikoriak**  
+> **Viktor Nikoriak**  
 > An experienced engineer's guide to Docker: mental models, architecture, real-world workflows, and production patterns.
 
 ---
@@ -1433,4 +1433,4 @@ docker run --rm -it ubuntu:24.04 bash -c "
 
 ---
 
-*Docker Guide · Module 3 · Python Advanced · Viktor Nikoriak*
+*Docker Guide · Viktor Nikoriak*

@@ -1,8 +1,6 @@
-# Lesson 31 — HTTP Requests: Documentation and Architecture Diagrams
+# HTTP Requests: Documentation and Architecture Diagrams
 
-**Module 4 · Network & Concurrent Systems**
-
-> This file is a reference and architectural companion to `note_lesson_31_http_requests.ipynb`.
+> This file is a reference and architectural companion to hands-on practice with HTTP requests in Python.
 > It contains Mermaid diagrams, in-depth explanations and production patterns.
 
 ---
@@ -682,4 +680,4 @@ Step 5: Bypass Python
 
 ---
 
-*Documentation for Lesson 31 · Module 4 · Python Networking Course*
+*HTTP Requests · a Django book reference*

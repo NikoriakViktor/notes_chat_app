@@ -42,7 +42,7 @@ WITH TESTS:
 ## Lesson structure
 
 ```
-lesson_Django_Testing/
+testing/
 │
 ├── README.md                     ← YOU ARE HERE — overview and quick start
 │

@@ -7,7 +7,7 @@ with a **Navbar, cards, forms, alerts and an admin panel**.
 > **Prerequisites:**
 > This project is a continuation of `simple_django_project`.
 > You should already understand what a View, URL, Model and Template are.
-> If not, first go through `module_5/lesson_Django_Network_Architecture/simple_django_project/README.md`.
+> If not, first go through [README_1](README_1.md) (`simple_django_project`).
 
 ---
 
@@ -18,16 +18,16 @@ Here is how the steps relate to the documentation:
 
 | Step | What we do | Read the theory |
 |------|-----------|--------------|
-| A | HTML structure, `<!DOCTYPE>`, semantics | [HTML_BASICS.md](../HTML_BASICS.md) §0–5 |
-| B | Including Bootstrap via CDN | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §0–2 |
-| C | `base.html` — Template Inheritance, Sticky Footer | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §3–5, CSS_BASICS.md §9 |
-| D | Navbar + Grid | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §5–6 |
-| E | Card Grid for notes | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §6 |
-| F | Forms + django-bootstrap5 | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §9, [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §7 |
-| G | Django Messages → Bootstrap Alerts | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §4 |
-| H | Modal — delete confirmation | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §8 |
-| I | Django Debug Toolbar | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §9 |
-| J | Unfold Admin — a Tailwind-styled admin | [DJANGO_ADMIN_UNFOLD.md](../DJANGO_ADMIN_UNFOLD.md) §2, §7 |
+| A | HTML structure, `<!DOCTYPE>`, semantics | [HTML Basics](../05_frontend_and_templates/html_basics_full.md) §0–5 |
+| B | Including Bootstrap via CDN | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §0–2 |
+| C | `base.html` — Template Inheritance, Sticky Footer | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §3–5, CSS_BASICS.md §9 |
+| D | Navbar + Grid | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §5–6 |
+| E | Card Grid for notes | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §6 |
+| F | Forms + django-bootstrap5 | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §9, [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §7 |
+| G | Django Messages → Bootstrap Alerts | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §4 |
+| H | Modal — delete confirmation | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §8 |
+| I | Django Debug Toolbar | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §9 |
+| J | Unfold Admin — a Tailwind-styled admin | [Django Admin Unfold](../05_frontend_and_templates/django_admin_unfold_full.md) §2, §7 |
 
 ---
 
@@ -88,9 +88,9 @@ django_bootstrap_project/        ← you are here now
 **PyCharm:**
 `View → Tool Windows → Terminal` — opens a terminal already in the project folder.
 
-**A regular terminal** (from the repository root):
+**A regular terminal** (go to the folder where you create the project; your path is your own):
 ```bash
-cd module_5\lesson_HTML_CSS_Bootstrap\django_bootstrap_project
+cd C:\...\django_bootstrap_project
 ```
 
 ---
@@ -158,7 +158,7 @@ python manage.py migrate
 The `db.sqlite3` database will get the `hello_app_note` table (already described in `models.py`)
 and all the standard Django tables (`auth_user`, `django_session`, etc.).
 
-> **Theory:** [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §0 —
+> **Theory:** [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §0 —
 > the Django SSR lifecycle and where the model sits in MVT.
 
 ---
@@ -200,7 +200,7 @@ Add a few notes via the admin — they will appear on `/notes/`.
 ## Phase A — Understanding the existing code
 
 > **Theory before you start:**
-> Read [HTML_BASICS.md](../HTML_BASICS.md) §0–3 —
+> Read [HTML Basics](../05_frontend_and_templates/html_basics_full.md) §0–3 —
 > how the browser reads HTML, the DOM pipeline, the basic document structure.
 
 ### What the project already has
@@ -249,9 +249,9 @@ We will completely rewrite the templates and add new ones. We will extend the `m
 ## Phase B — Including Bootstrap 5
 
 > **Theory:**
-> Read [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §0–2 —
+> Read [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §0–2 —
 > why Bootstrap, the Mobile First philosophy, how to include it via CDN.
-> Read [CSS_BASICS.md](../CSS_BASICS.md) §0 —
+> Read [CSS Basics](../05_frontend_and_templates/css_basics_full.md) §0 —
 > the CSS Rendering Pipeline, to understand why Bootstrap CSS is included in `<head>`.
 
 ### Step B1 — Updating settings.py
@@ -300,7 +300,7 @@ MESSAGE_TAGS = {
 > Django Messages (flash messages after a POST) have their own levels: `success`, `error`, etc.
 > A Bootstrap Alert uses `alert-success`, `alert-danger`.
 > `MESSAGE_TAGS` maps between them.
-> More details: [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §4 — Bootstrap Alerts.
+> More details: [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §4 — Bootstrap Alerts.
 
 ### Step B2 — Updating urls.py
 
@@ -322,9 +322,9 @@ urlpatterns = [
 ## Phase C — Creating base.html
 
 > **Theory:**
-> Read [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §3–5 —
+> Read [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §3–5 —
 > Template Inheritance, `{% extends %}`, `{% block %}`.
-> Read [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §5 — the Navbar component.
+> Read [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §5 — the Navbar component.
 
 Django looks for templates in `<app>/templates/`.
 We will create `base.html` **outside** `hello_app/templates/hello_app/` —
@@ -533,8 +533,8 @@ When the content is shorter than the window height, the body ends, the footer co
 ## Phase D — The list of notes with Bootstrap Cards
 
 > **Theory:**
-> Read [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §6 — Card Grid, `row-cols-*`, `h-100`.
-> Read [CSS_BASICS.md](../CSS_BASICS.md) §9–10 — Flexbox and Grid (Bootstrap is built on them).
+> Read [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §6 — Card Grid, `row-cols-*`, `h-100`.
+> Read [CSS Basics](../05_frontend_and_templates/css_basics_full.md) §9–10 — Flexbox and Grid (Bootstrap is built on them).
 
 ### Step D1 — Rewrite `hello_app/templates/hello_app/note_list.html`
 
@@ -699,9 +699,9 @@ When the content is shorter than the window height, the body ends, the footer co
 ## Phase E — The note form with Bootstrap
 
 > **Theory:**
-> Read [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §9 — Bootstrap Forms.
-> Read [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §7 — Bootstrap Forms in Django.
-> Read [HTML_BASICS.md](../HTML_BASICS.md) §5 — HTML Forms, input types.
+> Read [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §9 — Bootstrap Forms.
+> Read [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §7 — Bootstrap Forms in Django.
+> Read [HTML Basics](../05_frontend_and_templates/html_basics_full.md) §5 — HTML Forms, input types.
 
 ### Step E1 — Create `hello_app/forms.py`
 
@@ -873,8 +873,8 @@ urlpatterns = [
 ## Phase F — Templates for detail, form and deletion
 
 > **Theory:**
-> Read [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §9 — Form validation, invalid-feedback.
-> Read [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §7 — the django-bootstrap5 tag.
+> Read [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §9 — Form validation, invalid-feedback.
+> Read [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §7 — the django-bootstrap5 tag.
 
 ### Step F1 — `hello_app/templates/hello_app/note_detail.html`
 
@@ -1041,7 +1041,7 @@ urlpatterns = [
 > {% bootstrap_form form %}
 > ```
 > The `django-bootstrap5` package automatically adds all Bootstrap classes, labels and errors.
-> Theory: [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §7 — django-bootstrap5.
+> Theory: [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §7 — django-bootstrap5.
 
 ### Step F3 — `hello_app/templates/hello_app/note_confirm_delete.html`
 
@@ -1112,7 +1112,7 @@ urlpatterns = [
 > It requires no changes to the logic — it only changes inheritance and adds an `UNFOLD` dictionary to `settings.py`.
 >
 > **Theory:**
-> Read [DJANGO_ADMIN_UNFOLD.md](../DJANGO_ADMIN_UNFOLD.md) §2 — ModelAdmin,
+> Read [Django Admin Unfold](../05_frontend_and_templates/django_admin_unfold_full.md) §2 — ModelAdmin,
 > §7 — `UNFOLD` config, sidebar navigation.
 
 ### Step G1 — Updating `hello_project/settings.py`
@@ -1273,8 +1273,8 @@ python manage.py runserver
 ## Phase H — Django Debug Toolbar (SQL panel)
 
 > **Theory:**
-> Read [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §9 — DjDT.
-> Read [DJANGO_ADMIN_UNFOLD.md](../DJANGO_ADMIN_UNFOLD.md) §5 — Query Architecture, N+1.
+> Read [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §9 — DjDT.
+> Read [Django Admin Unfold](../05_frontend_and_templates/django_admin_unfold_full.md) §5 — Query Architecture, N+1.
 
 The toolbar is already connected (we added it in Settings and URLs).
 Go to **http://localhost:8000/notes/** — a black DJDT panel will appear on the right.
@@ -1300,8 +1300,8 @@ Go to **http://localhost:8000/notes/** — a black DJDT panel will appear on the
 ## Summary: all commands in order
 
 ```bash
-# 1. Open the project folder
-cd module_5\lesson_HTML_CSS_Bootstrap\django_bootstrap_project
+# 1. Open the project folder (your path is your own)
+cd C:\...\django_bootstrap_project
 
 # 2. Create and activate venv
 python -m venv venv
@@ -1364,32 +1364,32 @@ You have built a full-fledged Bootstrap application. What's next:
 
 ### Level 1 — Extending the model
 Add fields to `Note`: `is_public`, `category`, `tags`.
-Read: [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §2 — Context, Dot-Lookup.
+Read: [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §2 — Context, Dot-Lookup.
 
 ### Level 2 — Search and filtering
 Add a search box to the `note_list` view (`request.GET.get('q')`).
-Read: [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §5 — SaaS Dashboard, filter form.
+Read: [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) §5 — SaaS Dashboard, filter form.
 
 ### Level 3 — Pagination
 Split the list into pages with Django's `Paginator`.
-Read: [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §5 — `components/pagination.html`.
+Read: [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) §5 — `components/pagination.html`.
 
 ### Level 4 — A Modal for deletion
 Instead of a separate delete page — a Bootstrap Modal right from the list.
-Read: [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §8 — Modal, JS Event Lifecycle.
+Read: [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §8 — Modal, JS Event Lifecycle.
 
 ### Level 5 — Django Ninja API
 Add a REST endpoint `/api/notes/` with Django Ninja.
-Read: [DJANGO_NINJA_TEMPLATES.md](../DJANGO_NINJA_TEMPLATES.md) §1–4.
+Read: [Django Ninja](../06_application_architecture/django_ninja_templates_full.md) §1–4.
 
 ### Level 6 — Unfold Admin ✓ (already implemented)
 `django-unfold` is connected. The next step is to extend the `UNFOLD` config:
 a custom dashboard (`DASHBOARD_CALLBACK`), colors (`COLORS`), a logo (`SITE_LOGO`).
-Read: [DJANGO_ADMIN_UNFOLD.md](../DJANGO_ADMIN_UNFOLD.md) §7–12.
+Read: [Django Admin Unfold](../05_frontend_and_templates/django_admin_unfold_full.md) §7–12.
 
 ### Level 7 — HTMX live search
 Replace page reloads with HTMX partial renders.
-Read: [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §7 — HTMX Architecture.
+Read: [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) §7 — HTMX Architecture.
 
 ---
 
@@ -1397,13 +1397,13 @@ Read: [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §7 — HTMX Architectur
 
 | Question | File |
 |---------|------|
-| How does the browser read HTML? | [HTML_BASICS.md](../HTML_BASICS.md) §0 |
-| What is the Box Model? | [CSS_BASICS.md](../CSS_BASICS.md) §6 |
-| How does the Bootstrap Grid work? | [BOOTSTRAP_5.md](../BOOTSTRAP_5.md) §2–3 |
-| What is Template Inheritance? | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §4 |
-| How does Django generate HTML? | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §0 |
-| What is CSRF? | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §8 |
-| How do I connect django-bootstrap5? | [DJANGO_TEMPLATES_BOOTSTRAP.md](../DJANGO_TEMPLATES_BOOTSTRAP.md) §7 |
-| What is an N+1 query? | [DJANGO_ADMIN_UNFOLD.md](../DJANGO_ADMIN_UNFOLD.md) §5 |
-| What is a Context Processor? | [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §1 |
-| How do I build HTMX search? | [ADVANCED_TEMPLATES.md](../ADVANCED_TEMPLATES.md) §7 |
+| How does the browser read HTML? | [HTML Basics](../05_frontend_and_templates/html_basics_full.md) §0 |
+| What is the Box Model? | [CSS Basics](../05_frontend_and_templates/css_basics_full.md) §6 |
+| How does the Bootstrap Grid work? | [Bootstrap 5](../05_frontend_and_templates/bootstrap_5_full.md) §2–3 |
+| What is Template Inheritance? | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §4 |
+| How does Django generate HTML? | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §0 |
+| What is CSRF? | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §8 |
+| How do I connect django-bootstrap5? | [Django Templates + Bootstrap](../05_frontend_and_templates/django_templates_bootstrap_full.md) §7 |
+| What is an N+1 query? | [Django Admin Unfold](../05_frontend_and_templates/django_admin_unfold_full.md) §5 |
+| What is a Context Processor? | [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) §1 |
+| How do I build HTMX search? | [Advanced Templates](../05_frontend_and_templates/advanced_templates_full.md) §7 |

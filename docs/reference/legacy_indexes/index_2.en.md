@@ -80,18 +80,18 @@ You see the page! 🎉
 > A continuation of the Django architecture. From a bare `HttpResponse("текст")`
 > to Bootstrap 5 SaaS interfaces, custom template tags, HTMX, and Unfold Admin.
 
-**Previous lesson:** `lesson_Django_Network_Architecture` — MVT, ORM, HttpResponse
-**This lesson:** frontend + templating + Django production architecture
+**Previous topic:** Django network architecture — MVT, ORM, HttpResponse
+**This topic:** frontend + templating + Django production architecture
 
 ---
 
-## Module 5 navigation
+## Navigation across related topics
 
-| Lesson | Key concepts | Practical project |
+| Topic | Key concepts | Practice in the book |
 |------|------------------|-------------------|
-| [lesson_Django_Network_Architecture](../legacy_source/legacy_missing_reference.md) | MVT, URL routing, HttpResponse, simple views | simple_django_project, news_portal |
-| [lesson_Django_ORM_Database](../legacy_source/legacy_missing_reference.md) | ORM, Services/Selectors, FBV, Bootstrap5 forms by hand | notes_chat_app, notes_chat_app |
-| **lesson_HTML_CSS_Bootstrap** (this lesson) | HTML/CSS/Bootstrap, Advanced Templates, Crispy Forms, Design Foundations | django_bootstrap_project, crispy_notes_chat_app |
+| [Django network architecture](../../02_django_core/README.md) | MVT, URL routing, HttpResponse, simple views | [Step 1. Hello Django](../../tutorials/01_hello_django/index.md) |
+| [Django ORM and the database](../../03_database_and_orm/README.md) | ORM, Services/Selectors, FBV, Bootstrap5 forms by hand | [Step 2](../../tutorials/02_first_model/index.md), [Step 3](../../tutorials/03_crud_and_architecture/index.md) |
+| **HTML, CSS and Bootstrap** (this topic) | HTML/CSS/Bootstrap, Advanced Templates, Crispy Forms, Design Foundations | [Step 4. Templates and forms](../../tutorials/04_templates_and_forms/index.md) |
 
 ---
 
@@ -99,7 +99,7 @@ You see the page! 🎉
 
 > **How to read this table:** Level 1 = absolute beginner, Level 3 = confident junior. The order matters — the files depend on each other.
 
-## Lesson files
+## Topic files
 
 | File | Lines | Level | Topic |
 |------|--------|--------|------|
@@ -114,8 +114,8 @@ You see the page! 🎉
 | [DJANGO_ADMIN_UNFOLD.md](../../05_frontend_and_templates/django_admin_unfold_full.md) | 2171 | 7 | Django Admin + Unfold: AdminSite, ModelAdmin, Dashboard, Widgets, Filters, Caching |
 
 **Practical projects:**
-- [django_bootstrap_project/README.md](../legacy_source/legacy_missing_reference.md) — CRUD notes: Navbar, Card Grid, Forms, Messages, Debug Toolbar
-- [crispy_notes_chat_app/README.md](../../../README.md) — Notes CRUD with `django-crispy-forms` FormHelper+Layout, a SaaS Dashboard (`layouts/` + `components/`), a comparison of 3 levels of form rendering
+- [README_2 — Bootstrap Notes](../../tutorials/README_2.md) — CRUD notes: Navbar, Card Grid, Forms, Messages, Debug Toolbar
+- [The notes_chat_app repository README](https://github.com/NikoriakViktor/notes_chat_app#readme) — Notes CRUD with `django-crispy-forms` FormHelper+Layout, a SaaS Dashboard (`layouts/` + `components/`), a comparison of 3 levels of form rendering
 
 ---
 
