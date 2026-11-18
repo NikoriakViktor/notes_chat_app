@@ -2875,15 +2875,15 @@ QuerySet API → selectors/services архітектура → тонкі views.
 </ol>
 <hr />
 <h2 id="чеклист-самоперевірки">Чеклист самоперевірки<a class="headerlink" href="#чеклист-самоперевірки" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] Я знаю різницю між <code>OneToOneField</code>, <code>ForeignKey</code>, <code>ManyToManyField</code></li>
-<li>[ ] Я знаю де живе FK (на "Many"-стороні)</li>
-<li>[ ] Я свідомо вибираю <code>on_delete</code> для кожного FK (не просто CASCADE)</li>
-<li>[ ] <code>selectors.py</code> містить тільки SELECT (filter, annotate, prefetch_related)</li>
-<li>[ ] <code>services.py</code> використовує <code>transaction.atomic()</code> де потрібна атомарність</li>
-<li>[ ] <code>views.py</code> не містить <code>Model.objects.*</code> напряму</li>
-<li>[ ] Я розумію N+1 і використовую <code>select_related</code>/<code>prefetch_related</code></li>
-<li>[ ] <code>Q</code> об'єкти — для OR умов у filter</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я знаю різницю між <code>OneToOneField</code>, <code>ForeignKey</code>, <code>ManyToManyField</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я знаю де живе FK (на "Many"-стороні)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я свідомо вибираю <code>on_delete</code> для кожного FK (не просто CASCADE)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>selectors.py</code> містить тільки SELECT (filter, annotate, prefetch_related)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>services.py</code> використовує <code>transaction.atomic()</code> де потрібна атомарність</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>views.py</code> не містить <code>Model.objects.*</code> напряму</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я розумію N+1 і використовую <code>select_related</code>/<code>prefetch_related</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>Q</code> об'єкти — для OR умов у filter</li>
 </ul>
 <hr />
 <h2 id="далі">Далі<a class="headerlink" href="#далі" title="Permanent link">&para;</a></h2>

@@ -1830,14 +1830,14 @@ Django lets you build templates as a tree: the parent defines the structure, the
 <tbody>
 <tr>
 <td><strong>1 — Raw</strong></td>
-<td><a href="../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py"><code>notes_project/forms.py</code></a></td>
+<td><a href="../README_3/">README_3 — forms without crispy</a></td>
 <td><code>{{ form.as_p }}</code></td>
 <td>~5 lines</td>
 <td>Nowhere (no styles)</td>
 </tr>
 <tr>
 <td><strong>2 — Manual</strong></td>
-<td><a href="../django_bootstrap_project/"><code>django_bootstrap_project/</code></a></td>
+<td><a href="../README_2/">README_2</a></td>
 <td>Manual HTML</td>
 <td>~80 lines</td>
 <td>In the template, by hand</td>
@@ -2119,7 +2119,7 @@ But passing them from every view by hand is duplication:</p>
 <hr />
 <h2 id="step-0--launch">Step 0 — Launch<a class="headerlink" href="#step-0--launch" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 1. Go to the folder</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>module_5/lesson_HTML_CSS_Bootstrap/crispy_notes_project
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>notes_chat_app<span class="w">   </span><span class="c1"># the repository root: manage.py and requirements.txt live here</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># 2. Install dependencies</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
@@ -2174,8 +2174,8 @@ But passing them from every view by hand is duplication:</p>
 </table>
 <blockquote>
 <p><strong>Tier 1 and Tier 2 as code for comparison</strong> (not as live URLs):
-- Tier 1 (<code>form.as_p</code>): <a href="../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py"><code>notes_project/hello_app/forms.py</code></a>
-- Tier 2 (manual Bootstrap): <a href="../django_bootstrap_project/"><code>django_bootstrap_project/</code></a></p>
+- Tier 1 (<code>form.as_p</code>): <a href="../README_3/">README_3 — forms without crispy</a>
+- Tier 2 (manual Bootstrap): <a href="../README_2/">README_2</a></p>
 </blockquote>
 <hr />
 <h2 id="step-1--settings">Step 1 — Settings<a class="headerlink" href="#step-1--settings" title="Permanent link">&para;</a></h2>
@@ -2462,7 +2462,7 @@ It is responsible only for: "I am a correct HTML5 document with Bootstrap".</p>
 <h2 id="step-5--tier-1-raw">Step 5 — Tier 1: Raw<a class="headerlink" href="#step-5--tier-1-raw" title="Permanent link">&para;</a></h2>
 <p><strong>Goal:</strong> show what Django provides "out of the box", without any styles.</p>
 <blockquote>
-<p>Tier 1 is implemented in <a href="../../lesson_Django_ORM_Database/notes_project/"><code>notes_project</code></a> — the forms there have no crispy.
+<p>Tier 1 is implemented in <a href="../README_3/"><code>notes_project</code></a> — the forms there have no crispy.
 The code below is for comparing the concepts.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># views.py</span>
@@ -2509,7 +2509,7 @@ The code below is for comparing the concepts.</p>
 <h2 id="step-6--tier-2-manual">Step 6 — Tier 2: Manual<a class="headerlink" href="#step-6--tier-2-manual" title="Permanent link">&para;</a></h2>
 <p><strong>Goal:</strong> show the full Bootstrap HTML — to understand what Tier 3 saves you from.</p>
 <blockquote>
-<p>Tier 2 is implemented in <a href="../django_bootstrap_project/"><code>django_bootstrap_project</code></a> — the forms there use manual Bootstrap HTML.
+<p>Tier 2 is implemented in <a href="../README_2/"><code>django_bootstrap_project</code></a> — the forms there use manual Bootstrap HTML.
 The code below is for comparing the concepts.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="cm">&lt;!-- note_form_manual.html — look how much code there is for ONE field --&gt;</span>
@@ -3022,23 +3022,23 @@ So the selector must be efficient — <code>select_related</code>, <code>annotat
 </thead>
 <tbody>
 <tr>
-<td><a href="../DESIGN_FOUNDATIONS.md"><code>../DESIGN_FOUNDATIONS.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/design_foundations_full/">Design Foundations</a></td>
 <td>UX, CRAP, Bootstrap, template hierarchy, Crispy — theory</td>
 </tr>
 <tr>
-<td><a href="../CRISPY_FORMS.md"><code>../CRISPY_FORMS.md</code></a></td>
+<td><a href="../../04_forms_and_validation/crispy_forms_full/">Crispy Forms</a></td>
 <td>Full reference: FormHelper, Layout, Bootstrap components, Dynamic API</td>
 </tr>
 <tr>
-<td><a href="../ADVANCED_TEMPLATES.md"><code>../ADVANCED_TEMPLATES.md §3</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates §3</a></td>
 <td>FormHelper + Layout — details</td>
 </tr>
 <tr>
-<td><a href="../ADVANCED_TEMPLATES.md"><code>../ADVANCED_TEMPLATES.md §5</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates §5</a></td>
 <td>SaaS Dashboard Architecture</td>
 </tr>
 <tr>
-<td><a href="../../lesson_Django_ORM_Database/notes_project/README.md"><code>../../lesson_Django_ORM_Database/notes_project/README.md</code></a></td>
+<td><a href="../README_3/">README_3</a></td>
 <td>ORM, Services/Selectors, migrations — the foundation of this project</td>
 </tr>
 </tbody>

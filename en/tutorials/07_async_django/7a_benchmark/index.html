@@ -4837,8 +4837,8 @@ Python may load <strong>the wrong project</strong>. Docker solves this once and 
 the container has only <code>/app</code> in <code>sys.path</code>, with no third-party packages from elsewhere.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Without Docker:                     With Docker:
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sys.path = [                        sys.path = [
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  lesson_Django_authentication/..., ← /app ← only notes_chat_app
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  lesson_Django_Async/...,          ]
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>  other_django_project/...,         ← /app ← only notes_chat_app
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>  another_django_project/...,       ]
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>  ...                               WORKDIR /app → ENV PYTHONPATH=/app
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>]
 </code></pre></div>
@@ -4870,8 +4870,8 @@ the container has only <code>/app</code> in <code>sys.path</code>, with no third
 </tbody>
 </table>
 <h3 id="running-it">Running it<a class="headerlink" href="#running-it" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c"># Go to the project folder (PowerShell / CMD)</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">victo</span><span class="p">\</span><span class="n">PycharmProjects</span><span class="p">\</span><span class="n">PY-Course-Victor-Nikoriak</span><span class="p">-</span><span class="n">23_02</span><span class="p">\</span><span class="n">module_5</span><span class="p">\</span><span class="n">lesson_Django_Async</span><span class="p">\</span><span class="n">notes_chat_app</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c"># Go to the root of the notes_chat_app repository, where docker-compose.yml lives (PowerShell / CMD)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\...\</span><span class="n">notes_chat_app</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c"># Build + start (the first time takes ~3-5 min)</span>
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="n">docker</span> <span class="n">compose</span> <span class="n">up</span> <span class="p">-</span><span class="n">-build</span>

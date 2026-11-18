@@ -3123,7 +3123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lesson_34_documentation/" class="md-nav__link">
+      <a href="../asyncio_event_loop/" class="md-nav__link">
         
   
   
@@ -5420,16 +5420,16 @@
 <hr />
 <h2 id="benchmarking-checklist">Benchmarking Checklist<a class="headerlink" href="#benchmarking-checklist" title="Permanent link">&para;</a></h2>
 <p>Before each test, check:</p>
-<ul>
-<li>[ ] You are testing an IO-bound workload (not CPU-bound)</li>
-<li>[ ] You are using a local mock API (not a public one)</li>
-<li>[ ] For sync — <code>gunicorn</code> with <code>--workers</code> or WSGI</li>
-<li>[ ] For async — <code>uvicorn</code> or <code>daphne</code> (ASGI)</li>
-<li>[ ] Middleware in the async stack — all async (verify it!)</li>
-<li>[ ] You use <code>asyncio.sleep()</code> to simulate latency (not <code>time.sleep()</code>)</li>
-<li>[ ] You test concurrency from 10 to 500+ simultaneous users</li>
-<li>[ ] You measure RPS (not only the latency of a single request)</li>
-<li>[ ] You checked the database connection pool — is it exhausted?</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You are testing an IO-bound workload (not CPU-bound)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You are using a local mock API (not a public one)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> For sync — <code>gunicorn</code> with <code>--workers</code> or WSGI</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> For async — <code>uvicorn</code> or <code>daphne</code> (ASGI)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Middleware in the async stack — all async (verify it!)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You use <code>asyncio.sleep()</code> to simulate latency (not <code>time.sleep()</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You test concurrency from 10 to 500+ simultaneous users</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You measure RPS (not only the latency of a single request)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> You checked the database connection pool — is it exhausted?</li>
 </ul>
 <hr />
 <h2 id="why-the-database-connection-pool-is-a-critical-bottleneck">Why the database connection pool is a critical bottleneck<a class="headerlink" href="#why-the-database-connection-pool-is-a-critical-bottleneck" title="Permanent link">&para;</a></h2>
@@ -5480,12 +5480,12 @@
 <h3 id="task-3">Task 3<a class="headerlink" href="#task-3" title="Permanent link">&para;</a></h3>
 <p>Check your Django project: are all the middleware in the <code>MIDDLEWARE</code> list async-compatible? How can you check this?</p>
 <h3 id="self-check">Self-check<a class="headerlink" href="#self-check" title="Permanent link">&para;</a></h3>
-<ul>
-<li>[ ] I understand the difference between latency and throughput</li>
-<li>[ ] I know that the benefits of async show only under concurrent load</li>
-<li>[ ] I understand why you must not test against public APIs</li>
-<li>[ ] I know that <code>time.sleep()</code> in async is a benchmarking mistake</li>
-<li>[ ] I understand the role of the database connection pool under async load</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I understand the difference between latency and throughput</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I know that the benefits of async show only under concurrent load</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I understand why you must not test against public APIs</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I know that <code>time.sleep()</code> in async is a benchmarking mistake</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I understand the role of the database connection pool under async load</li>
 </ul>
 <hr />
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>

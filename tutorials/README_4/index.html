@@ -2023,8 +2023,8 @@
 <p>Та сама платформа нотаток що і в <code>notes_project/</code>, але <strong>views.py та urls.py повністю переписані на CBV</strong>.</p>
 <p><strong>Що змінилось:</strong> тільки <code>hello_app/views.py</code> + <code>hello_app/urls.py</code><br />
 <strong>Що залишилось:</strong> models, forms, selectors, services, templates — без жодних змін  </p>
-<p>Порівняй з <a href="../notes_project/"><code>../notes_project/</code></a> — FBV оригінал.<br />
-Теорія CBV: <a href="../Django_Views.md"><code>../Django_Views.md</code></a></p>
+<p>Порівняй з <a href="../README_3/">README_3</a> — FBV оригінал.<br />
+Теорія CBV: <a href="../../02_django_core/views_full/">Views</a></p>
 </blockquote>
 <hr />
 <h2 id="зміст">Зміст<a class="headerlink" href="#зміст" title="Permanent link">&para;</a></h2>
@@ -3437,9 +3437,9 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 </code></pre></div>
 <blockquote>
 <p><strong>Посилання для глибшого вивчення Bootstrap форм:</strong>
-- Bootstrap 5 Forms (§7): <a href="../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md"><code>../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md</code></a>
-- Django Templates + Bootstrap Forms (§7): <a href="../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md"><code>../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md</code></a>
-- crispy-forms (автоматизований Bootstrap рендеринг): <a href="../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md"><code>../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md</code></a></p>
+- Bootstrap 5 Forms (§7): <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a>
+- Django Templates + Bootstrap Forms (§7): <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a>
+- crispy-forms (автоматизований Bootstrap рендеринг): <a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a></p>
 </blockquote>
 <hr />
 <h2 id="посилання-на-документацію">Посилання на документацію<a class="headerlink" href="#посилання-на-документацію" title="Permanent link">&para;</a></h2>
@@ -3455,27 +3455,27 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 <tbody>
 <tr>
 <td>CBV: dispatch, mixins, decorating, Generic Views</td>
-<td><a href="../Django_Views.md"><code>../Django_Views.md</code></a></td>
+<td><a href="../../02_django_core/views_full/">Views</a></td>
 <td>Основна теорія CBV цього проекту</td>
 </tr>
 <tr>
 <td>CBV: FBV vs CBV, Generic Views lifecycle</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_Views.md"><code>../../lesson_Django_Network_Architecture/Django_Views.md</code></a></td>
+<td><a href="../../02_django_core/views_full/">Views</a></td>
 <td>Огляд Views у контексті Django архітектури</td>
 </tr>
 <tr>
 <td>URL Routing: <code>path()</code>, <code>&lt;int:pk&gt;</code>, <code>include()</code>, namespace</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_URL_Routing.md"><code>../../lesson_Django_Network_Architecture/Django_URL_Routing.md</code></a></td>
+<td><a href="../../02_django_core/url_routing_full/">URL Routing</a></td>
 <td><code>as_view()</code> у <code>urls.py</code>, path converters</td>
 </tr>
 <tr>
 <td>Django Project Structure: роль кожного файлу</td>
-<td><a href="../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md"><code>../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md</code></a></td>
+<td><a href="../../02_django_core/project_structure_full/">Структура проєкту</a></td>
 <td>Навіщо <code>urls.py</code>, <code>views.py</code>, <code>apps.py</code></td>
 </tr>
 <tr>
 <td>Django архітектура як система (MVT, Middleware)</td>
-<td><a href="../../lesson_Django_Network_Architecture/django_architecture.md"><code>../../lesson_Django_Network_Architecture/django_architecture.md</code></a></td>
+<td><a href="../../02_django_core/django_architecture_full/">Архітектура Django</a></td>
 <td>Request Lifecycle, Middleware chain</td>
 </tr>
 <tr>
@@ -3502,27 +3502,27 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 <tbody>
 <tr>
 <td>Forms: Trust Boundary, Validation Pipeline, ModelForm</td>
-<td><a href="../DJANGO_FORMS.md"><code>../DJANGO_FORMS.md</code></a></td>
+<td><a href="../../04_forms_and_validation/django_forms_full/">Django Forms</a></td>
 <td>Основна теорія форм цього проекту</td>
 </tr>
 <tr>
 <td>Bootstrap 5 Forms §7: <code>form-control</code>, validation, <code>was-validated</code></td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md"><code>../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a></td>
 <td>Як Bootstrap стилізує форми</td>
 </tr>
 <tr>
 <td>Django Templates + Bootstrap Forms §7: Widget attrs, <code>{% bootstrap_form %}</code></td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md"><code>../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a></td>
 <td>Ручний рендеринг і django-bootstrap5</td>
 </tr>
 <tr>
 <td>crispy-forms §3: FormHelper, Layout, Row/Column</td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md"><code>../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a></td>
 <td>Автоматизований Bootstrap рендеринг</td>
 </tr>
 <tr>
 <td>Django Templates: DTL, Template Inheritance, Static</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_Templates.md"><code>../../lesson_Django_Network_Architecture/Django_Templates.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/django_templates_full/">Django Templates</a></td>
 <td>Шаблонний рушій, <code>{% extends %}</code>, <code>{% block %}</code></td>
 </tr>
 </tbody>
@@ -3539,22 +3539,22 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 <tbody>
 <tr>
 <td>Services + Selectors повна архітектура</td>
-<td><a href="../DJANGO_SERVICES_SELECTORS.md"><code>../DJANGO_SERVICES_SELECTORS.md</code></a></td>
+<td><a href="../../06_application_architecture/services_selectors_full/">Services та Selectors</a></td>
 <td>View→Service→Selector→ORM data flow</td>
 </tr>
 <tr>
 <td>Services: <code>@transaction.atomic</code>, <code>on_commit</code>, side effects</td>
-<td><a href="../DJANGO_SERVICES.md"><code>../DJANGO_SERVICES.md</code></a></td>
+<td><a href="../../06_application_architecture/django_services_full/">Services (поглиблено)</a></td>
 <td>Чому <code>form_valid()</code> викликає service, не <code>form.save()</code></td>
 </tr>
 <tr>
 <td>Selectors: CQRS-light, N+1 централізація, named queries</td>
-<td><a href="../DJANGO_SELECTORS.md"><code>../DJANGO_SELECTORS.md</code></a></td>
+<td><a href="../../06_application_architecture/django_selectors_full/">Selectors (поглиблено)</a></td>
 <td>Чому <code>get_queryset()</code> делегує у selector</td>
 </tr>
 <tr>
 <td>Архітектурні схеми Mermaid (Services/Selectors)</td>
-<td><a href="../ORM_MERMAID.md"><code>../ORM_MERMAID.md</code></a></td>
+<td><a href="../../03_database_and_orm/orm_mermaid_full/">ORM діаграми</a></td>
 <td>Візуальні схеми архітектури</td>
 </tr>
 </tbody>
@@ -3571,27 +3571,27 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 <tbody>
 <tr>
 <td>ORM: QuerySets, N+1, select_related, F(), atomic()</td>
-<td><a href="../DJANGO_ORM_DEEP.md"><code>../DJANGO_ORM_DEEP.md</code></a></td>
+<td><a href="../../03_database_and_orm/django_orm_full/">Django ORM</a></td>
 <td>Як ORM використовується у selectors/services</td>
 </tr>
 <tr>
 <td>Транзакції: <code>select_for_update()</code>, deadlocks, race conditions</td>
-<td><a href="../TRANSACTIONS_CONCURRENCY.md"><code>../TRANSACTIONS_CONCURRENCY.md</code></a></td>
+<td><a href="../../03_database_and_orm/transactions_concurrency_full/">Транзакції</a></td>
 <td>Чому services використовують <code>@atomic</code></td>
 </tr>
 <tr>
 <td>Головна карта навчання (всі файли ORM модуля)</td>
-<td><a href="../INDEX.md"><code>../INDEX.md</code></a></td>
+<td><a href="../../03_database_and_orm/">Огляд частини III</a></td>
 <td>Навігація по всіх матеріалах</td>
 </tr>
 <tr>
 <td>Головна карта навчання (Network Architecture модуль)</td>
-<td><a href="../../lesson_Django_Network_Architecture/INDEX.md"><code>../../lesson_Django_Network_Architecture/INDEX.md</code></a></td>
+<td><a href="../../02_django_core/">Огляд частини II</a></td>
 <td>Навігація по Views, Templates, URL Routing</td>
 </tr>
 <tr>
 <td>Bootstrap + CSS + HTML система знань</td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/INDEX.md"><code>../../lesson_HTML_CSS_Bootstrap/INDEX.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/">Огляд частини V</a></td>
 <td>Навігація по Bootstrap, Templates, Forms</td>
 </tr>
 </tbody>
@@ -3607,11 +3607,11 @@ Django відхиляє POST без цього токена з <code>403 Forbidd
 <tbody>
 <tr>
 <td>FBV оригінал (той самий проект на функціях)</td>
-<td><a href="../notes_project/README.md"><code>../notes_project/README.md</code></a></td>
+<td><a href="../README_3/">README_3 — FBV-версія</a></td>
 </tr>
 <tr>
 <td>FBV views.py з CBV-еквівалентами у кожній функції</td>
-<td><a href="hello_app/views_fbv_backup.py"><code>hello_app/views_fbv_backup.py</code></a></td>
+<td><a href="../../reference/legacy_source/legacy_missing_reference/">views_fbv_backup.py (не входить у цей репозиторій)</a></td>
 </tr>
 </tbody>
 </table>

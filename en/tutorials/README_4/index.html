@@ -2023,8 +2023,8 @@
 <p>The same notes platform as in <code>notes_project/</code>, but <strong>views.py and urls.py are completely rewritten as CBVs</strong>.</p>
 <p><strong>What changed:</strong> only <code>hello_app/views.py</code> + <code>hello_app/urls.py</code><br />
 <strong>What stayed the same:</strong> models, forms, selectors, services, templates — with no changes at all  </p>
-<p>Compare with <a href="../notes_project/"><code>../notes_project/</code></a> — the FBV original.<br />
-CBV theory: <a href="../Django_Views.md"><code>../Django_Views.md</code></a></p>
+<p>Compare with <a href="../README_3/">README_3</a> — the FBV original.<br />
+CBV theory: <a href="../../02_django_core/views_full/">Views</a></p>
 </blockquote>
 <hr />
 <h2 id="contents">Contents<a class="headerlink" href="#contents" title="Permanent link">&para;</a></h2>
@@ -3437,9 +3437,9 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 </code></pre></div>
 <blockquote>
 <p><strong>Links for a deeper study of Bootstrap forms:</strong>
-- Bootstrap 5 Forms (§7): <a href="../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md"><code>../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md</code></a>
-- Django Templates + Bootstrap Forms (§7): <a href="../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md"><code>../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md</code></a>
-- crispy-forms (automated Bootstrap rendering): <a href="../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md"><code>../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md</code></a></p>
+- Bootstrap 5 Forms (§7): <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a>
+- Django Templates + Bootstrap Forms (§7): <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a>
+- crispy-forms (automated Bootstrap rendering): <a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a></p>
 </blockquote>
 <hr />
 <h2 id="documentation-links">Documentation links<a class="headerlink" href="#documentation-links" title="Permanent link">&para;</a></h2>
@@ -3455,27 +3455,27 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 <tbody>
 <tr>
 <td>CBV: dispatch, mixins, decorating, Generic Views</td>
-<td><a href="../Django_Views.md"><code>../Django_Views.md</code></a></td>
+<td><a href="../../02_django_core/views_full/">Views</a></td>
 <td>The main CBV theory for this project</td>
 </tr>
 <tr>
 <td>CBV: FBV vs CBV, Generic Views lifecycle</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_Views.md"><code>../../lesson_Django_Network_Architecture/Django_Views.md</code></a></td>
+<td><a href="../../02_django_core/views_full/">Views</a></td>
 <td>Overview of Views in the context of Django architecture</td>
 </tr>
 <tr>
 <td>URL Routing: <code>path()</code>, <code>&lt;int:pk&gt;</code>, <code>include()</code>, namespace</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_URL_Routing.md"><code>../../lesson_Django_Network_Architecture/Django_URL_Routing.md</code></a></td>
+<td><a href="../../02_django_core/url_routing_full/">URL Routing</a></td>
 <td><code>as_view()</code> in <code>urls.py</code>, path converters</td>
 </tr>
 <tr>
 <td>Django Project Structure: the role of each file</td>
-<td><a href="../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md"><code>../../lesson_Django_Network_Architecture/DJANGO_PROJECT_STRUCTURE.md</code></a></td>
+<td><a href="../../02_django_core/project_structure_full/">Project Structure</a></td>
 <td>Why <code>urls.py</code>, <code>views.py</code>, <code>apps.py</code> exist</td>
 </tr>
 <tr>
 <td>Django architecture as a system (MVT, Middleware)</td>
-<td><a href="../../lesson_Django_Network_Architecture/django_architecture.md"><code>../../lesson_Django_Network_Architecture/django_architecture.md</code></a></td>
+<td><a href="../../02_django_core/django_architecture_full/">Django Architecture</a></td>
 <td>Request Lifecycle, Middleware chain</td>
 </tr>
 <tr>
@@ -3502,27 +3502,27 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 <tbody>
 <tr>
 <td>Forms: Trust Boundary, Validation Pipeline, ModelForm</td>
-<td><a href="../DJANGO_FORMS.md"><code>../DJANGO_FORMS.md</code></a></td>
+<td><a href="../../04_forms_and_validation/django_forms_full/">Django Forms</a></td>
 <td>The main forms theory for this project</td>
 </tr>
 <tr>
 <td>Bootstrap 5 Forms §7: <code>form-control</code>, validation, <code>was-validated</code></td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md"><code>../../lesson_HTML_CSS_Bootstrap/BOOTSTRAP_5.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a></td>
 <td>How Bootstrap styles forms</td>
 </tr>
 <tr>
 <td>Django Templates + Bootstrap Forms §7: Widget attrs, <code>{% bootstrap_form %}</code></td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md"><code>../../lesson_HTML_CSS_Bootstrap/DJANGO_TEMPLATES_BOOTSTRAP.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a></td>
 <td>Manual rendering and django-bootstrap5</td>
 </tr>
 <tr>
 <td>crispy-forms §3: FormHelper, Layout, Row/Column</td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md"><code>../../lesson_HTML_CSS_Bootstrap/ADVANCED_TEMPLATES.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a></td>
 <td>Automated Bootstrap rendering</td>
 </tr>
 <tr>
 <td>Django Templates: DTL, Template Inheritance, Static</td>
-<td><a href="../../lesson_Django_Network_Architecture/Django_Templates.md"><code>../../lesson_Django_Network_Architecture/Django_Templates.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/django_templates_full/">Django Templates</a></td>
 <td>The template engine, <code>{% extends %}</code>, <code>{% block %}</code></td>
 </tr>
 </tbody>
@@ -3539,22 +3539,22 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 <tbody>
 <tr>
 <td>Services + Selectors full architecture</td>
-<td><a href="../DJANGO_SERVICES_SELECTORS.md"><code>../DJANGO_SERVICES_SELECTORS.md</code></a></td>
+<td><a href="../../06_application_architecture/services_selectors_full/">Services and Selectors</a></td>
 <td>View→Service→Selector→ORM data flow</td>
 </tr>
 <tr>
 <td>Services: <code>@transaction.atomic</code>, <code>on_commit</code>, side effects</td>
-<td><a href="../DJANGO_SERVICES.md"><code>../DJANGO_SERVICES.md</code></a></td>
+<td><a href="../../06_application_architecture/django_services_full/">Services (in depth)</a></td>
 <td>Why <code>form_valid()</code> calls a service, not <code>form.save()</code></td>
 </tr>
 <tr>
 <td>Selectors: CQRS-light, N+1 centralization, named queries</td>
-<td><a href="../DJANGO_SELECTORS.md"><code>../DJANGO_SELECTORS.md</code></a></td>
+<td><a href="../../06_application_architecture/django_selectors_full/">Selectors (in depth)</a></td>
 <td>Why <code>get_queryset()</code> delegates to a selector</td>
 </tr>
 <tr>
 <td>Mermaid architecture diagrams (Services/Selectors)</td>
-<td><a href="../ORM_MERMAID.md"><code>../ORM_MERMAID.md</code></a></td>
+<td><a href="../../03_database_and_orm/orm_mermaid_full/">ORM Diagrams</a></td>
 <td>Visual architecture diagrams</td>
 </tr>
 </tbody>
@@ -3571,27 +3571,27 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 <tbody>
 <tr>
 <td>ORM: QuerySets, N+1, select_related, F(), atomic()</td>
-<td><a href="../DJANGO_ORM_DEEP.md"><code>../DJANGO_ORM_DEEP.md</code></a></td>
+<td><a href="../../03_database_and_orm/django_orm_full/">Django ORM</a></td>
 <td>How the ORM is used in selectors/services</td>
 </tr>
 <tr>
 <td>Transactions: <code>select_for_update()</code>, deadlocks, race conditions</td>
-<td><a href="../TRANSACTIONS_CONCURRENCY.md"><code>../TRANSACTIONS_CONCURRENCY.md</code></a></td>
+<td><a href="../../03_database_and_orm/transactions_concurrency_full/">Transactions</a></td>
 <td>Why services use <code>@atomic</code></td>
 </tr>
 <tr>
 <td>Main learning map (all files of the ORM module)</td>
-<td><a href="../INDEX.md"><code>../INDEX.md</code></a></td>
+<td><a href="../../03_database_and_orm/">Part III overview</a></td>
 <td>Navigation across all materials</td>
 </tr>
 <tr>
 <td>Main learning map (Network Architecture module)</td>
-<td><a href="../../lesson_Django_Network_Architecture/INDEX.md"><code>../../lesson_Django_Network_Architecture/INDEX.md</code></a></td>
+<td><a href="../../02_django_core/">Part II overview</a></td>
 <td>Navigation across Views, Templates, URL Routing</td>
 </tr>
 <tr>
 <td>Bootstrap + CSS + HTML knowledge system</td>
-<td><a href="../../lesson_HTML_CSS_Bootstrap/INDEX.md"><code>../../lesson_HTML_CSS_Bootstrap/INDEX.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/">Part V overview</a></td>
 <td>Navigation across Bootstrap, Templates, Forms</td>
 </tr>
 </tbody>
@@ -3607,11 +3607,11 @@ Django rejects a POST without this token with <code>403 Forbidden</code>. Protec
 <tbody>
 <tr>
 <td>The FBV original (the same project built with functions)</td>
-<td><a href="../notes_project/README.md"><code>../notes_project/README.md</code></a></td>
+<td><a href="../README_3/">README_3 — the FBV version</a></td>
 </tr>
 <tr>
 <td>FBV views.py with CBV equivalents in every function</td>
-<td><a href="hello_app/views_fbv_backup.py"><code>hello_app/views_fbv_backup.py</code></a></td>
+<td><a href="../../reference/legacy_source/legacy_missing_reference/">views_fbv_backup.py (not part of this repository)</a></td>
 </tr>
 </tbody>
 </table>

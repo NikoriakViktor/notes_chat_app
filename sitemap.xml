@@ -687,18 +687,18 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/async_09_async_use_cases_full/"/>
     </url>
     <url>
+        <loc>https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/asyncio_event_loop/</loc>
+        <lastmod>2026-11-18</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/asyncio_event_loop/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/asyncio_event_loop/"/>
+    </url>
+    <url>
         <loc>https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/channels_websocket/</loc>
         <lastmod>2026-11-18</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/channels_websocket/"/>
         <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/channels_websocket/"/>
-    </url>
-    <url>
-        <loc>https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/lesson_34_documentation/</loc>
-        <lastmod>2026-11-18</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/lesson_34_documentation/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/lesson_34_documentation/"/>
     </url>
     <url>
         <loc>https://nikoriakviktor.github.io/notes_chat_app/10_linux_and_devops/</loc>
@@ -2626,18 +2626,18 @@
         <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/async_09_async_use_cases_full/"/>
     </url>
     <url>
+        <loc>https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/asyncio_event_loop/</loc>
+        <lastmod>2026-11-18</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/asyncio_event_loop/"/>
+        <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/asyncio_event_loop/"/>
+    </url>
+    <url>
         <loc>https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/channels_websocket/</loc>
         <lastmod>2026-11-18</lastmod>
         <changefreq>daily</changefreq>
         <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/channels_websocket/"/>
         <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/channels_websocket/"/>
-    </url>
-    <url>
-        <loc>https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/lesson_34_documentation/</loc>
-        <lastmod>2026-11-18</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://nikoriakviktor.github.io/notes_chat_app/en/09_async_and_realtime/lesson_34_documentation/"/>
-        <xhtml:link rel="alternate" hreflang="uk" href="https://nikoriakviktor.github.io/notes_chat_app/09_async_and_realtime/lesson_34_documentation/"/>
     </url>
     <url>
         <loc>https://nikoriakviktor.github.io/notes_chat_app/en/10_linux_and_devops/</loc>

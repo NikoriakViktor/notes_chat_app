@@ -1980,25 +1980,25 @@
 <p>What happens if you run two instances of <code>celery-beat</code>? How can you protect against duplicate tasks? Hint: look up <code>celery beat --max-interval</code> and <code>django-celery-beat</code>.</p>
 <hr />
 <h2 id="self-check-checklist">Self-check checklist<a class="headerlink" href="#self-check-checklist" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>notes_project/celery.py</code> exists and contains <code>app = Celery('notes_project')</code></li>
-<li>[ ] <code>notes_project/__init__.py</code> imports <code>celery_app</code></li>
-<li>[ ] <code>CELERY_BROKER_URL</code> is configured in <code>settings.py</code></li>
-<li>[ ] Celery and Channels use different Redis DBs (0 and 1)</li>
-<li>[ ] <code>CELERY_BEAT_SCHEDULE</code> contains <code>send_reminder_notifications</code></li>
-<li>[ ] <code>celery-worker</code> and <code>celery-beat</code> are in <code>docker-compose.yml</code></li>
-<li>[ ] <code>celery-beat</code> — a single instance</li>
-<li>[ ] <code>@shared_task</code> (not <code>@app.task</code>) in <code>tasks.py</code></li>
-<li>[ ] <code>select_related('note__user')</code> in the pending reminders query</li>
-<li>[ ] <code>save(update_fields=['is_sent'])</code> — updating just one field</li>
-<li>[ ] <code>relativedelta</code> for monthly repetition</li>
-<li>[ ] <code>GET /reminders/check/</code> returns <code>{"reminders": [...]}</code></li>
-<li>[ ] <code>@login_required</code> on the <code>reminders_check</code> view</li>
-<li>[ ] <code>escapeHtml()</code> in JS before inserting into the DOM</li>
-<li>[ ] <code>sessionStorage</code> deduplicates Toasts within one session</li>
-<li>[ ] <code>aria-live="polite"</code> on the toast-container</li>
-<li>[ ] Unit tests for <code>send_reminder_notifications</code> — <code>@override_settings(EMAIL_BACKEND=...)</code></li>
-<li>[ ] <code>mail.outbox</code> checks the sent emails</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>notes_project/celery.py</code> exists and contains <code>app = Celery('notes_project')</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>notes_project/__init__.py</code> imports <code>celery_app</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CELERY_BROKER_URL</code> is configured in <code>settings.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Celery and Channels use different Redis DBs (0 and 1)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CELERY_BEAT_SCHEDULE</code> contains <code>send_reminder_notifications</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>celery-worker</code> and <code>celery-beat</code> are in <code>docker-compose.yml</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>celery-beat</code> — a single instance</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@shared_task</code> (not <code>@app.task</code>) in <code>tasks.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>select_related('note__user')</code> in the pending reminders query</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>save(update_fields=['is_sent'])</code> — updating just one field</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>relativedelta</code> for monthly repetition</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>GET /reminders/check/</code> returns <code>{"reminders": [...]}</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@login_required</code> on the <code>reminders_check</code> view</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>escapeHtml()</code> in JS before inserting into the DOM</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>sessionStorage</code> deduplicates Toasts within one session</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>aria-live="polite"</code> on the toast-container</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Unit tests for <code>send_reminder_notifications</code> — <code>@override_settings(EMAIL_BACKEND=...)</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>mail.outbox</code> checks the sent emails</li>
 </ul>
 <hr />
 <h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>

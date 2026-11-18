@@ -4046,18 +4046,18 @@ POST requires a CSRF token → impossible to perform from another site.</p>
 </table>
 <hr />
 <h2 id="self-check-checklist">Self-check checklist<a class="headerlink" href="#self-check-checklist" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>@login_required</code> and <code>LOGIN_URL</code> in <code>settings.py</code> are configured</li>
-<li>[ ] <code>include("django.contrib.auth.urls")</code> is connected in <code>urls.py</code></li>
-<li>[ ] The templates <code>registration/login.html</code> and <code>registration/register.html</code> exist</li>
-<li>[ ] <code>{% csrf_token %}</code> in every form with <code>method="post"</code></li>
-<li>[ ] Personal objects: <code>get_object_or_404(Model, pk=pk, user=request.user)</code>; shared (Note): Q-filter + <code>note.user != request.user</code> before writing</li>
-<li>[ ] The Password Reset flow is tested (the link is in <code>docker compose logs web</code>)</li>
-<li>[ ] The <code>validlink</code> check in <code>password_reset_confirm.html</code></li>
-<li>[ ] The Q-filter <code>Q(user=user) | Q(group__in=user_groups)</code> in <code>selectors.py</code></li>
-<li>[ ] <code>SESSION_COOKIE_HTTPONLY = True</code> and <code>X_FRAME_OPTIONS = "DENY"</code> in settings.py</li>
-<li>[ ] Logout is a POST request (not a GET link)</li>
-<li>[ ] Group delete explains that notes become personal (they are not deleted)</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@login_required</code> and <code>LOGIN_URL</code> in <code>settings.py</code> are configured</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>include("django.contrib.auth.urls")</code> is connected in <code>urls.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The templates <code>registration/login.html</code> and <code>registration/register.html</code> exist</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>{% csrf_token %}</code> in every form with <code>method="post"</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Personal objects: <code>get_object_or_404(Model, pk=pk, user=request.user)</code>; shared (Note): Q-filter + <code>note.user != request.user</code> before writing</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The Password Reset flow is tested (the link is in <code>docker compose logs web</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The <code>validlink</code> check in <code>password_reset_confirm.html</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The Q-filter <code>Q(user=user) | Q(group__in=user_groups)</code> in <code>selectors.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SESSION_COOKIE_HTTPONLY = True</code> and <code>X_FRAME_OPTIONS = "DENY"</code> in settings.py</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Logout is a POST request (not a GET link)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Group delete explains that notes become personal (they are not deleted)</li>
 </ul>
 <hr />
 <h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>

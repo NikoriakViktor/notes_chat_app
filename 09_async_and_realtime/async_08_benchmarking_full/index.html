@@ -3123,7 +3123,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../lesson_34_documentation/" class="md-nav__link">
+      <a href="../asyncio_event_loop/" class="md-nav__link">
         
   
   
@@ -5420,16 +5420,16 @@
 <hr />
 <h2 id="benchmarking-checklist">Benchmarking Checklist<a class="headerlink" href="#benchmarking-checklist" title="Permanent link">&para;</a></h2>
 <p>Перед кожним тестом перевір:</p>
-<ul>
-<li>[ ] Тестуєш IO-bound workload (не CPU-bound)</li>
-<li>[ ] Використовуєш локальний mock API (не публічний)</li>
-<li>[ ] Під sync — <code>gunicorn</code> з <code>--workers</code> або WSGI</li>
-<li>[ ] Під async — <code>uvicorn</code> або <code>daphne</code> (ASGI)</li>
-<li>[ ] Middleware у async-стеку — всі async (перевірити!)</li>
-<li>[ ] Використовуєш <code>asyncio.sleep()</code> для імітації затримки (не <code>time.sleep()</code>)</li>
-<li>[ ] Тестуєш concurrency від 10 до 500+ одночасних користувачів</li>
-<li>[ ] Вимірюєш RPS (не тільки latency одного запиту)</li>
-<li>[ ] Перевірив connection pool БД — він не вичерпаний?</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Тестуєш IO-bound workload (не CPU-bound)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Використовуєш локальний mock API (не публічний)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Під sync — <code>gunicorn</code> з <code>--workers</code> або WSGI</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Під async — <code>uvicorn</code> або <code>daphne</code> (ASGI)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Middleware у async-стеку — всі async (перевірити!)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Використовуєш <code>asyncio.sleep()</code> для імітації затримки (не <code>time.sleep()</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Тестуєш concurrency від 10 до 500+ одночасних користувачів</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Вимірюєш RPS (не тільки latency одного запиту)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Перевірив connection pool БД — він не вичерпаний?</li>
 </ul>
 <hr />
 <h2 id="чому-database-connection-pool--критичний-bottleneck">Чому database connection pool — критичний bottleneck<a class="headerlink" href="#чому-database-connection-pool--критичний-bottleneck" title="Permanent link">&para;</a></h2>
@@ -5480,12 +5480,12 @@
 <h3 id="завдання-3">Завдання 3<a class="headerlink" href="#завдання-3" title="Permanent link">&para;</a></h3>
 <p>Перевір свій Django-проект: всі middleware у <code>MIDDLEWARE</code> списку — async-сумісні? Як це перевірити?</p>
 <h3 id="самоперевірка">Самоперевірка<a class="headerlink" href="#самоперевірка" title="Permanent link">&para;</a></h3>
-<ul>
-<li>[ ] Я розумію різницю між latency і throughput</li>
-<li>[ ] Я знаю, що async переваги видно тільки при конкурентному навантаженні</li>
-<li>[ ] Я розумію, чому не можна тестувати проти публічних API</li>
-<li>[ ] Я знаю, що <code>time.sleep()</code> в async — помилка benchmark</li>
-<li>[ ] Я розумію роль database connection pool при async навантаженні</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я розумію різницю між latency і throughput</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я знаю, що async переваги видно тільки при конкурентному навантаженні</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я розумію, чому не можна тестувати проти публічних API</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я знаю, що <code>time.sleep()</code> в async — помилка benchmark</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Я розумію роль database connection pool при async навантаженні</li>
 </ul>
 <hr />
 <h2 id="підсумок">Підсумок<a class="headerlink" href="#підсумок" title="Permanent link">&para;</a></h2>

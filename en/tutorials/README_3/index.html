@@ -2036,7 +2036,7 @@ Different data types were chosen on purpose to show every type of relationship b
 - <a href="#03--application-layers">03 · APPLICATION LAYERS — layered architecture</a>
 - <a href="#04--normalization">04 · NORMALIZATION — one truth for one fact</a>
 - <a href="#05--migrations">05 · MIGRATIONS — Git for the DB schema</a></p>
-<p>🔬 <strong><a href="hello_app/orm_laboratory.ipynb">orm_laboratory.ipynb</a></strong> — an interactive lab: run each cell and look at the SQL</p>
+<p>🔬 <strong><a href="../../reference/legacy_source/orm_laboratory_reference/">ORM laboratory</a></strong> — an interactive lab: run each cell and look at the SQL</p>
 <p><strong>Step-by-step implementation</strong>
 1. <a href="#step-0--from-domain-to-schema">Step 0 — From domain to schema (the right start)</a>
 2. <a href="#step-1--designing-the-domain">Step 1 — Designing the domain: what we are building</a>
@@ -3013,8 +3013,8 @@ that are not there yet, in the <strong>topological order</strong> of dependencie
     Django--&gt;&gt;Dev: Applied 0002_extended_models</code></pre>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Steps for our project:</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># 1. Go to the project folder</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nb">cd</span><span class="w"> </span>module_5/lesson_Django_ORM_Database/notes_project
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1"># 1. Go to the project folder (your path is your own)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nb">cd</span><span class="w"> </span>.../notes_project
 <a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="c1"># 2. Check that hello_app is in INSTALLED_APPS</span>
 <a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># settings.py → INSTALLED_APPS must contain 'hello_app'</span>
@@ -3142,9 +3142,9 @@ that are not there yet, in the <strong>topological order</strong> of dependencie
 <h2 id="step-7--architecture-services--selectors">Step 7 — Architecture: Services &amp; Selectors<a class="headerlink" href="#step-7--architecture-services--selectors" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Detailed documentation (read separately):</strong>
-- <a href="../DJANGO_SERVICES_SELECTORS.md">DJANGO_SERVICES_SELECTORS.md</a> — the full architecture: View→Service→Selector→ORM, data flow, anti-patterns, a responsibility table
-- <a href="../DJANGO_SELECTORS.md">DJANGO_SELECTORS.md</a> — an in-depth look at Selectors: CQRS-light, naming convention, QuerySet vs evaluated list, centralizing N+1
-- <a href="../DJANGO_SERVICES.md">DJANGO_SERVICES.md</a> — an in-depth look at Services: stateless functions, <code>@transaction.atomic</code>, <code>on_commit()</code>, Celery as a transport layer</p>
+- <a href="../../06_application_architecture/services_selectors_full/">Services and Selectors</a> — the full architecture: View→Service→Selector→ORM, data flow, anti-patterns, a responsibility table
+- <a href="../../06_application_architecture/django_selectors_full/">Selectors (in depth)</a> — an in-depth look at Selectors: CQRS-light, naming convention, QuerySet vs evaluated list, centralizing N+1
+- <a href="../../06_application_architecture/django_services_full/">Services (in depth)</a> — an in-depth look at Services: stateless functions, <code>@transaction.atomic</code>, <code>on_commit()</code>, Celery as a transport layer</p>
 </blockquote>
 <hr />
 <blockquote>

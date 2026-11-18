@@ -4046,18 +4046,18 @@ POST вимагає CSRF токен → неможливо виконати з �
 </table>
 <hr />
 <h2 id="чеклист-самоперевірки">Чеклист самоперевірки<a class="headerlink" href="#чеклист-самоперевірки" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>@login_required</code> і <code>LOGIN_URL</code> у <code>settings.py</code> налаштовані</li>
-<li>[ ] <code>include("django.contrib.auth.urls")</code> підключено в <code>urls.py</code></li>
-<li>[ ] Шаблони <code>registration/login.html</code> і <code>registration/register.html</code> існують</li>
-<li>[ ] <code>{% csrf_token %}</code> у кожній формі з <code>method="post"</code></li>
-<li>[ ] Особисті об'єкти: <code>get_object_or_404(Model, pk=pk, user=request.user)</code>; спільні (Note): Q-filter + <code>note.user != request.user</code> перед записом</li>
-<li>[ ] Password Reset flow протестований (посилання у <code>docker compose logs web</code>)</li>
-<li>[ ] <code>validlink</code> перевірка у <code>password_reset_confirm.html</code></li>
-<li>[ ] Q-filter <code>Q(user=user) | Q(group__in=user_groups)</code> у <code>selectors.py</code></li>
-<li>[ ] <code>SESSION_COOKIE_HTTPONLY = True</code> і <code>X_FRAME_OPTIONS = "DENY"</code> у settings.py</li>
-<li>[ ] Logout — POST запит (не GET посилання)</li>
-<li>[ ] Group delete — пояснює що нотатки стають особистими (не видаляються)</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@login_required</code> і <code>LOGIN_URL</code> у <code>settings.py</code> налаштовані</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>include("django.contrib.auth.urls")</code> підключено в <code>urls.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Шаблони <code>registration/login.html</code> і <code>registration/register.html</code> існують</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>{% csrf_token %}</code> у кожній формі з <code>method="post"</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Особисті об'єкти: <code>get_object_or_404(Model, pk=pk, user=request.user)</code>; спільні (Note): Q-filter + <code>note.user != request.user</code> перед записом</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Password Reset flow протестований (посилання у <code>docker compose logs web</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>validlink</code> перевірка у <code>password_reset_confirm.html</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Q-filter <code>Q(user=user) | Q(group__in=user_groups)</code> у <code>selectors.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SESSION_COOKIE_HTTPONLY = True</code> і <code>X_FRAME_OPTIONS = "DENY"</code> у settings.py</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Logout — POST запит (не GET посилання)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Group delete — пояснює що нотатки стають особистими (не видаляються)</li>
 </ul>
 <hr />
 <h2 id="далі">Далі<a class="headerlink" href="#далі" title="Permanent link">&para;</a></h2>

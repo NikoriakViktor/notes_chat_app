@@ -1066,6 +1066,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#batch-t--сліди-старого-монорепозиторію-курсу-2026-11-18-done-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch T — Сліди старого монорепозиторію курсу (2026-11-18): DONE ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#batch-s--контрольні-точки-кроків-19-2026-11-18-done-" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Batch S — Контрольні точки кроків 1–9 (2026-11-18): DONE ✅
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#batch-r--rest-api-в-код-notes-chat-app-2026-09-27-done-" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1520,7 +1542,7 @@
 
 <h1 id="book-progress">Book Progress<a class="headerlink" href="#book-progress" title="Permanent link">&para;</a></h1>
 <p>Поточний стан роботи з документацією Notes Chat App.
-Оновлено: 2026-09-27 (ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).</p>
+Оновлено: 2026-11-18 (ревізія 12 — контрольні точки кроків 1–9 у форматі книги FastAPI, прибрано згадки старого репозиторію курсу; ревізія 11 — глава DRF у Частині VI; ревізія 10 — Zero to Hero restructuring).</p>
 <hr />
 <h2 id="поточна-фаза">Поточна фаза<a class="headerlink" href="#поточна-фаза" title="Permanent link">&para;</a></h2>
 <p><strong>Batch O — Zero to Hero Directory Restructuring: IN PROGRESS 🔄</strong></p>
@@ -1599,6 +1621,47 @@
 - <code>CONTENT_MIGRATION_PLAN.md</code> — section-level mapping ✅
 - <code>MKDOCS_NAVIGATION_PLAN.md</code> — нова директорійна навігація ✅</p>
 <hr />
+<h3 id="batch-t--сліди-старого-монорепозиторію-курсу-2026-11-18-done-">Batch T — Сліди старого монорепозиторію курсу (2026-11-18): DONE ✅<a class="headerlink" href="#batch-t--сліди-старого-монорепозиторію-курсу-2026-11-18-done-" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Прибрано <code>module_5/...</code>, <code>lesson_Django_*</code>, <code>lesson_HTML_*</code>, <code>note_lesson_*</code>, «Урок N / Модуль N» у docs/ (крім <code>_internal</code>) і mkdocs.yml, uk + en.</li>
+<li><code>cd module_5/...</code>: для кроків 5–8 і 7a команди йдуть з кореня репозиторію; для README_2/README_3/migrations (власний проєкт читача) — <code>cd C:\...\&lt;project&gt;</code> / <code>cd .../notes_project</code>, як у README_1.</li>
+<li>Мертві посилання README_2–7 (<code>../BOOTSTRAP_5.md</code>, <code>../../lesson_*/...</code> тощо) спрямовано на канонічні глави книги; відсутні файли (<code>views_fbv_backup.py</code>, <code>basics/</code>) — на <code>reference/legacy_source/legacy_missing_reference.md</code>.</li>
+<li><code>lesson_34_documentation(.en).md</code> перейменовано на <code>asyncio_event_loop(.en).md</code> (URL сторінки змінився).</li>
+<li><code>tutorials/06_testing/ci_github_actions(.en).md</code> переписано під реальний <code>.github/workflows/django-tests.yml</code>; coverage-вивід — реальний локальний запуск (209 tests OK, TOTAL 94%).</li>
+<li>Перевірки: <code>mkdocs build --strict</code> exit 0 без warning; link-check 54 зібраних сторінок (uk+en) — 0 битих внутрішніх посилань/якорів.</li>
+<li>Залишено навмисно: посилання на поточний курс (урок 36) у <code>06_application_architecture/drf_rest_api_full.md</code>, рядки 179 і 633.</li>
+</ul>
+<h3 id="batch-s--контрольні-точки-кроків-19-2026-11-18-done-">Batch S — Контрольні точки кроків 1–9 (2026-11-18): DONE ✅<a class="headerlink" href="#batch-s--контрольні-точки-кроків-19-2026-11-18-done-" title="Permanent link">&para;</a></h3>
+<p>Запит автора: прибрати згадки старого репозиторію курсу (<code>…-23_02</code>) і зробити чекліст «як у книзі FastAPI».</p>
+<table>
+<thead>
+<tr>
+<th>Що</th>
+<th>Файли</th>
+<th>Результат</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Згадки старого репозиторію курсу</td>
+<td><code>tutorials/README_1</code>, <code>README_7</code> (розділ CI переписано під <code>.github/workflows/django-tests.yml</code> цього репо), <code>README_8</code>, <code>07_async_django/7a_benchmark</code> (+ <code>.en.md</code>), коментар у <code>.github/workflows/django-tests.yml</code></td>
+<td><code>grep -rn "23_02"</code> поза <code>.git/</code>, <code>site/</code> — порожньо</td>
+</tr>
+<tr>
+<td>Формат контрольних точок</td>
+<td><code>tutorials/0N_*/checkpoint.md</code> + <code>.en.md</code> (9 пар)</td>
+<td>розділи <code>#check</code>, <code>#checklist</code>, <code>#mistakes</code>, <code>#practice</code>, <code>#summary</code>, <code>#self-check</code>, <code>#next</code> (порядок як у news_hub)</td>
+</tr>
+<tr>
+<td><code>pymdownx.tasklist</code> (<code>custom_checkbox: true</code>)</td>
+<td><code>mkdocs.yml</code></td>
+<td><code>- [ ]</code> рендеряться як checkbox</td>
+</tr>
+</tbody>
+</table>
+<p>Реальні перевірки, на яких побудовано розділи «Перевір» — див. <code>VALIDATION_REPORT.md</code>.
+Кроки 1–2 перевірено в окремому scratch-проєкті (<code>hello_project</code>/<code>hello_app</code>, код з глав); кроки 3–9 — на коді цього репо.
+Не перевірено: 7A (async views <code>hello_app</code> — немає в репо), повний <code>docker compose up</code>, <code>--profile test run selenium-tests</code>, ngrok.</p>
 <h3 id="batch-r--rest-api-в-код-notes-chat-app-2026-09-27-done-">Batch R — REST API в код Notes Chat App (2026-09-27): DONE ✅<a class="headerlink" href="#batch-r--rest-api-в-код-notes-chat-app-2026-09-27-done-" title="Permanent link">&para;</a></h3>
 <p>Рішення викладача: «додай в застосунок».</p>
 <table>
@@ -2722,8 +2785,8 @@ README.md, ARCHITECTURE.md, GLOSSARY.md, LEARNING_PATH.md, TROUBLESHOOTING.md, T
 </thead>
 <tbody>
 <tr>
-<td>mkdocs не встановлений локально</td>
-<td><code>mkdocs build --strict</code> — blocked</td>
+<td>~~mkdocs не встановлений локально~~</td>
+<td>зняти: 2026-11-18 <code>mkdocs build --strict</code> пройшов у scratch venv з <code>requirements-docs.txt</code></td>
 </tr>
 <tr>
 <td>crispy_notes_project не у поточному репо</td>

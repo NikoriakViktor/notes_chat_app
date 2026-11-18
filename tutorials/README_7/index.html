@@ -2116,10 +2116,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#job-1-unit--integration-tests" class="md-nav__link">
+  <a href="#job-1-unit-integration--consumer-tests" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Job 1: Unit &amp; Integration Tests
+        Job 1: Unit, Integration &amp; Consumer Tests
       
     </span>
   </a>
@@ -3270,15 +3270,13 @@ unit тести → сервіси → форми → integration (views) → E2
 <hr />
 <h2 id="крок-0--запуск">Крок 0 — Запуск<a class="headerlink" href="#крок-0--запуск" title="Permanent link">&para;</a></h2>
 <div class="admonition note">
-<p class="admonition-title">Шляхи у цьому розділі — з оригінального монорепозиторію курсу</p>
-<p>Команди нижче орієнтовані на структуру оригінального курсового монорепозиторію,
-де цей проєкт розташований за шляхом <code>module_5/lesson_Django_Testing/crispy_notes_project</code>.</p>
-<p>Якщо ти працюєш у standalone-репозиторії <strong>notes_chat_app</strong>, запускай команди
-з кореня репозиторію — <code>cd module_5/...</code> не потрібен.
+<p class="admonition-title">Звідки запускати команди</p>
+<p>Усі команди нижче виконуються з кореня репозиторію <strong>notes_chat_app</strong> —
+там лежать <code>manage.py</code>, <code>requirements.txt</code> і <code>docker-compose.yml</code>.
 CI-воркфлоу цього репозиторію слідкує за шляхами <code>notes_app/**</code> та <code>notes_project/**</code>.</p>
 </div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1"># 1. Перейти до папки проєкту</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="nb">cd</span><span class="w"> </span>module_5/lesson_Django_Testing/crispy_notes_project
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="nb">cd</span><span class="w"> </span>notes_chat_app<span class="w">   </span><span class="c1"># корінь репозиторію: тут manage.py і requirements.txt</span>
 <a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
 <a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="c1"># 2. Встановити залежності (якщо ще не встановлені)</span>
 <a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
@@ -3685,31 +3683,31 @@ CI-воркфлоу цього репозиторію слідкує за шля
 Без твоєї участі. На чистому сервері. З результатом у GitHub за 2–3 хвилини.</p>
 </blockquote>
 <h3 id="де-живе-workflow">Де живе workflow<a class="headerlink" href="#де-живе-workflow" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>PY-Course-Victor-Nikoriak-23_02/          ← корінь репозиторію
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>notes_chat_app/                           ← корінь репозиторію
 <a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>└── .github/
 <a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>    └── workflows/
 <a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>        └── django-tests.yml              ← ★ РЕАЛЬНИЙ файл, GitHub бачить його
 </code></pre></div>
-<p>Файл <code>crispy_notes_project/.github/workflows/django-tests.yml</code> — <strong>зразок/довідка</strong>.
-GitHub Actions читає workflow ТІЛЬКИ з кореневої папки репозиторію. Усе інше ігнорується.</p>
+<p>GitHub Actions читає workflow ТІЛЬКИ з <code>.github/workflows/</code> у корені репозиторію. Усе інше ігнорується.
+Сам проєкт (<code>manage.py</code>, <code>notes_app/</code>, <code>notes_project/</code>) теж лежить у корені, тому всі команди workflow виконуються звідти.</p>
 <hr />
 <h3 id="що-відбувається-при-git-push">Що відбувається при git push<a class="headerlink" href="#що-відбувається-при-git-push" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>Ти:  git push origin main
 <a id="__codelineno-72-2" name="__codelineno-72-2" href="#__codelineno-72-2"></a>         │
 <a id="__codelineno-72-3" name="__codelineno-72-3" href="#__codelineno-72-3"></a>         ▼
 <a id="__codelineno-72-4" name="__codelineno-72-4" href="#__codelineno-72-4"></a>GitHub:  Detect event → push до main
-<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a>         paths змінились? module_5/lesson_Django_Testing/** → YES
+<a id="__codelineno-72-5" name="__codelineno-72-5" href="#__codelineno-72-5"></a>         paths змінились? notes_app/**, notes_project/**, templates/** … → YES
 <a id="__codelineno-72-6" name="__codelineno-72-6" href="#__codelineno-72-6"></a>         │
 <a id="__codelineno-72-7" name="__codelineno-72-7" href="#__codelineno-72-7"></a>         ▼
-<a id="__codelineno-72-8" name="__codelineno-72-8" href="#__codelineno-72-8"></a>Azure:   Provision Ubuntu 22.04 VM (нова, чиста)
+<a id="__codelineno-72-8" name="__codelineno-72-8" href="#__codelineno-72-8"></a>Azure:   Provision Ubuntu VM (нова, чиста) + service container PostgreSQL 16
 <a id="__codelineno-72-9" name="__codelineno-72-9" href="#__codelineno-72-9"></a>         │
-<a id="__codelineno-72-10" name="__codelineno-72-10" href="#__codelineno-72-10"></a>         ├── Job 1: unit-and-integration (~1-2 хв)
+<a id="__codelineno-72-10" name="__codelineno-72-10" href="#__codelineno-72-10"></a>         ├── Job 1: unit-and-integration
 <a id="__codelineno-72-11" name="__codelineno-72-11" href="#__codelineno-72-11"></a>         │     checkout → python 3.12 → pip install → manage.py check → manage.py test
 <a id="__codelineno-72-12" name="__codelineno-72-12" href="#__codelineno-72-12"></a>         │     Результат: ✅ або ❌
 <a id="__codelineno-72-13" name="__codelineno-72-13" href="#__codelineno-72-13"></a>         │
-<a id="__codelineno-72-14" name="__codelineno-72-14" href="#__codelineno-72-14"></a>         └── Job 2: selenium-e2e (~1-2 хв) — тільки якщо Job 1 ✅
-<a id="__codelineno-72-15" name="__codelineno-72-15" href="#__codelineno-72-15"></a>               checkout → pip install → manage.py test test_selenium
-<a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a>               Chrome встановлений на ubuntu-latest, Selenium Manager = chromedriver
+<a id="__codelineno-72-14" name="__codelineno-72-14" href="#__codelineno-72-14"></a>         └── Job 2: selenium-e2e — тільки якщо Job 1 ✅
+<a id="__codelineno-72-15" name="__codelineno-72-15" href="#__codelineno-72-15"></a>               PostgreSQL + selenium/standalone-chrome як service containers
+<a id="__codelineno-72-16" name="__codelineno-72-16" href="#__codelineno-72-16"></a>               checkout → pip install → manage.py test notes_app.tests.test_selenium
 <a id="__codelineno-72-17" name="__codelineno-72-17" href="#__codelineno-72-17"></a>               Результат: ✅ або ❌
 <a id="__codelineno-72-18" name="__codelineno-72-18" href="#__codelineno-72-18"></a>         │
 <a id="__codelineno-72-19" name="__codelineno-72-19" href="#__codelineno-72-19"></a>         ▼
@@ -3717,33 +3715,31 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 </code></pre></div>
 <hr />
 <h3 id="повний-workflow-рядок-за-рядком">Повний workflow: рядок за рядком<a class="headerlink" href="#повний-workflow-рядок-за-рядком" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Цей workflow — з оригінального монорепозиторію курсу</p>
-<p>YAML-код нижче описує CI-воркфлоу, написаний для монорепозиторію курсу,
-де проєкт розташований за шляхом <code>module_5/lesson_Django_Testing/crispy_notes_project</code>.
-Відповідно, <code>paths:</code> і <code>working-directory:</code> вказують на цей шлях.</p>
-<p>У standalone-репозиторії <strong>notes_chat_app</strong> воркфлоу слідкує за шляхами
-<code>notes_app/**</code> та <code>notes_project/**</code> — без <code>module_5/</code> префіксу.
-Розбір нижче є навчальним прикладом структури GitHub Actions — концепції
-(<code>on</code>, <code>paths</code>, <code>jobs</code>, <code>steps</code>, <code>needs</code>) застосовні до будь-якого проєкту.</p>
-</div>
-<p>Файл: <a href="../../../../.github/workflows/django-tests.yml"><code>.github/workflows/django-tests.yml</code></a></p>
+<p>Файл: <a href="https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml"><code>.github/workflows/django-tests.yml</code></a></p>
 <h4 id="назва-і-тригери">Назва і тригери<a class="headerlink" href="#назва-і-тригери" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django Tests (module_5/lesson_Django_Testing)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django Tests</span>
 </code></pre></div>
 <p>Ця назва відображається у вкладці <strong>Actions</strong> у GitHub.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a><span class="nt">on</span><span class="p">:</span>
 <a id="__codelineno-74-2" name="__codelineno-74-2" href="#__codelineno-74-2"></a><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
 <a id="__codelineno-74-3" name="__codelineno-74-3" href="#__codelineno-74-3"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">master</span><span class="w"> </span><span class="p p-Indicator">]</span>
 <a id="__codelineno-74-4" name="__codelineno-74-4" href="#__codelineno-74-4"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-74-5" name="__codelineno-74-5" href="#__codelineno-74-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'module_5/lesson_Django_Testing/**'</span>
-<a id="__codelineno-74-6" name="__codelineno-74-6" href="#__codelineno-74-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'.github/workflows/django-tests.yml'</span>
-<a id="__codelineno-74-7" name="__codelineno-74-7" href="#__codelineno-74-7"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
-<a id="__codelineno-74-8" name="__codelineno-74-8" href="#__codelineno-74-8"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">master</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<a id="__codelineno-74-9" name="__codelineno-74-9" href="#__codelineno-74-9"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
-<a id="__codelineno-74-10" name="__codelineno-74-10" href="#__codelineno-74-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'module_5/lesson_Django_Testing/**'</span>
-<a id="__codelineno-74-11" name="__codelineno-74-11" href="#__codelineno-74-11"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'.github/workflows/django-tests.yml'</span>
-<a id="__codelineno-74-12" name="__codelineno-74-12" href="#__codelineno-74-12"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
+<a id="__codelineno-74-5" name="__codelineno-74-5" href="#__codelineno-74-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'notes_app/**'</span>
+<a id="__codelineno-74-6" name="__codelineno-74-6" href="#__codelineno-74-6"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'notes_project/**'</span>
+<a id="__codelineno-74-7" name="__codelineno-74-7" href="#__codelineno-74-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'templates/**'</span>
+<a id="__codelineno-74-8" name="__codelineno-74-8" href="#__codelineno-74-8"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'static/**'</span>
+<a id="__codelineno-74-9" name="__codelineno-74-9" href="#__codelineno-74-9"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'requirements.txt'</span>
+<a id="__codelineno-74-10" name="__codelineno-74-10" href="#__codelineno-74-10"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'.github/workflows/django-tests.yml'</span>
+<a id="__codelineno-74-11" name="__codelineno-74-11" href="#__codelineno-74-11"></a><span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span>
+<a id="__codelineno-74-12" name="__codelineno-74-12" href="#__codelineno-74-12"></a><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">main</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">master</span><span class="w"> </span><span class="p p-Indicator">]</span>
+<a id="__codelineno-74-13" name="__codelineno-74-13" href="#__codelineno-74-13"></a><span class="w">    </span><span class="nt">paths</span><span class="p">:</span>
+<a id="__codelineno-74-14" name="__codelineno-74-14" href="#__codelineno-74-14"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'notes_app/**'</span>
+<a id="__codelineno-74-15" name="__codelineno-74-15" href="#__codelineno-74-15"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'notes_project/**'</span>
+<a id="__codelineno-74-16" name="__codelineno-74-16" href="#__codelineno-74-16"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'templates/**'</span>
+<a id="__codelineno-74-17" name="__codelineno-74-17" href="#__codelineno-74-17"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'static/**'</span>
+<a id="__codelineno-74-18" name="__codelineno-74-18" href="#__codelineno-74-18"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'requirements.txt'</span>
+<a id="__codelineno-74-19" name="__codelineno-74-19" href="#__codelineno-74-19"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'.github/workflows/django-tests.yml'</span>
+<a id="__codelineno-74-20" name="__codelineno-74-20" href="#__codelineno-74-20"></a><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
 </code></pre></div>
 <p><strong><code>on</code></strong> — визначає коли запускати workflow.
 📖 <a href="https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows">Документація: Events that trigger workflows</a></p>
@@ -3765,7 +3761,7 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 </tr>
 <tr>
 <td><code>paths</code></td>
-<td><strong>Тільки якщо ці файли змінились.</strong> Якщо ти правиш module_1 — workflow не запускається</td>
+<td><strong>Тільки якщо ці файли змінились.</strong> Якщо ти правиш лише <code>docs/</code> — workflow не запускається</td>
 </tr>
 <tr>
 <td><code>pull_request</code></td>
@@ -3778,48 +3774,63 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 </tbody>
 </table>
 <p><strong>Навіщо <code>paths</code>?</strong></p>
-<p>Без <code>paths</code> — кожен push до будь-якого файлу курсу запускав би тести Django уроку. З <code>paths</code> — workflow запускається тільки коли змінились файли саме цього уроку або сам workflow. Економить хвилини CI.</p>
+<p>Без <code>paths</code> кожен push (навіть правка книги в <code>docs/</code>) запускав би тести Django. З <code>paths</code> workflow запускається тільки коли змінився код застосунку, шаблони, статика, залежності або сам workflow. Економить хвилини CI.</p>
 <hr />
-<h4 id="job-1-unit--integration-tests">Job 1: Unit &amp; Integration Tests<a class="headerlink" href="#job-1-unit--integration-tests" title="Permanent link">&para;</a></h4>
+<h4 id="job-1-unit-integration--consumer-tests">Job 1: Unit, Integration &amp; Consumer Tests<a class="headerlink" href="#job-1-unit-integration--consumer-tests" title="Permanent link">&para;</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a><span class="nt">jobs</span><span class="p">:</span>
 <a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a><span class="w">  </span><span class="nt">unit-and-integration</span><span class="p">:</span>
-<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unit &amp; Integration Tests</span>
+<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Unit, Integration &amp; Consumer Tests</span>
 <a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-75-5" name="__codelineno-75-5" href="#__codelineno-75-5"></a>
+<a id="__codelineno-75-6" name="__codelineno-75-6" href="#__codelineno-75-6"></a><span class="w">    </span><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-75-7" name="__codelineno-75-7" href="#__codelineno-75-7"></a><span class="w">      </span><span class="nt">db</span><span class="p">:</span>
+<a id="__codelineno-75-8" name="__codelineno-75-8" href="#__codelineno-75-8"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres:16-alpine</span>
+<a id="__codelineno-75-9" name="__codelineno-75-9" href="#__codelineno-75-9"></a><span class="w">        </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-75-10" name="__codelineno-75-10" href="#__codelineno-75-10"></a><span class="w">          </span><span class="nt">POSTGRES_DB</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notes_db</span>
+<a id="__codelineno-75-11" name="__codelineno-75-11" href="#__codelineno-75-11"></a><span class="w">          </span><span class="nt">POSTGRES_USER</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notes_user</span>
+<a id="__codelineno-75-12" name="__codelineno-75-12" href="#__codelineno-75-12"></a><span class="w">          </span><span class="nt">POSTGRES_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">notes_pass</span>
+<a id="__codelineno-75-13" name="__codelineno-75-13" href="#__codelineno-75-13"></a><span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-75-14" name="__codelineno-75-14" href="#__codelineno-75-14"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5432:5432</span>
+<a id="__codelineno-75-15" name="__codelineno-75-15" href="#__codelineno-75-15"></a><span class="w">        </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<a id="__codelineno-75-16" name="__codelineno-75-16" href="#__codelineno-75-16"></a><span class="w">          </span><span class="no">--health-cmd pg_isready</span>
+<a id="__codelineno-75-17" name="__codelineno-75-17" href="#__codelineno-75-17"></a><span class="w">          </span><span class="no">--health-interval 5s</span>
+<a id="__codelineno-75-18" name="__codelineno-75-18" href="#__codelineno-75-18"></a><span class="w">          </span><span class="no">--health-timeout 5s</span>
+<a id="__codelineno-75-19" name="__codelineno-75-19" href="#__codelineno-75-19"></a><span class="w">          </span><span class="no">--health-retries 5</span>
+<a id="__codelineno-75-20" name="__codelineno-75-20" href="#__codelineno-75-20"></a>
+<a id="__codelineno-75-21" name="__codelineno-75-21" href="#__codelineno-75-21"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-75-22" name="__codelineno-75-22" href="#__codelineno-75-22"></a><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres://notes_user:notes_pass@localhost:5432/notes_db</span>
 </code></pre></div>
-<p><strong><code>runs-on: ubuntu-latest</code></strong> — тип runner. Це свіжа Ubuntu 22.04 VM на Azure. Після завершення job VM знищується. Між запусками немає ніякого стану.</p>
+<p><strong><code>runs-on: ubuntu-latest</code></strong> — тип runner. Це свіжа Ubuntu VM на Azure. Після завершення job VM знищується. Між запусками немає ніякого стану.</p>
 <p>📖 <a href="https://docs.github.com/en/actions/using-github-hosted-runners/using-github-hosted-runners/about-github-hosted-runners#standard-github-hosted-runners-for-public-repositories">Документація: GitHub-hosted runners</a></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="w">    </span><span class="nt">defaults</span><span class="p">:</span>
-<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="w">      </span><span class="nt">run</span><span class="p">:</span>
-<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="w">        </span><span class="nt">working-directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">module_5/lesson_Django_Testing/crispy_notes_project</span>
-</code></pre></div>
-<p><strong><code>defaults.run.working-directory</code></strong> — усі команди <code>run:</code> у цьому job виконуються з цієї директорії. Без цього кожна команда починалась би з кореня репозиторію і треба було б писати <code>cd module_5/...</code> перед кожним кроком.</p>
-<p>📖 <a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#defaultsrun">Документація: defaults.run</a></p>
+<p><strong><code>services.db</code></strong> — PostgreSQL 16 у контейнері поруч із runner. <code>notes_project/settings.py</code> без <code>DATABASE_URL</code> не стартує (<code>Exception: DATABASE_URL не встановлено</code>), тому job задає <code>DATABASE_URL</code> на <code>localhost:5432</code>. <code>--health-cmd pg_isready</code> — кроки починаються тільки коли база готова приймати з'єднання.</p>
+<p><code>working-directory</code> не потрібен: <code>manage.py</code> лежить у корені репозиторію, а саме звідти виконуються всі <code>run:</code>.</p>
+<p>📖 <a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idservices">Документація: services</a></p>
 <hr />
 <p><strong>Step 1 — Checkout</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout repository</span>
-<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
+<a id="__codelineno-76-2" name="__codelineno-76-2" href="#__codelineno-76-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout repository</span>
+<a id="__codelineno-76-3" name="__codelineno-76-3" href="#__codelineno-76-3"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
 </code></pre></div>
 <p>Клонує весь репозиторій на VM. Без цього кроку на runner немає жодного файлу з твоїм кодом.</p>
 <p>📖 <a href="https://github.com/marketplace/actions/checkout">actions/checkout на GitHub Marketplace</a></p>
 <hr />
 <p><strong>Step 2 — Setup Python</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python 3.12</span>
-<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
-<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.12"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Set up Python 3.12</span>
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/setup-python@v5</span>
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a><span class="w">          </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="s">"3.12"</span>
 </code></pre></div>
 <p>Встановлює потрібну версію Python. Ubuntu-latest має кілька версій Python, цей action обирає і активує потрібну.</p>
 <p>📖 <a href="https://github.com/marketplace/actions/setup-up-a-specific-version-of-python">actions/setup-python на GitHub Marketplace</a></p>
 <hr />
 <p><strong>Step 3 — Cache pip</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cache pip dependencies</span>
-<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
-<a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.cache/pip</span>
-<a id="__codelineno-79-5" name="__codelineno-79-5" href="#__codelineno-79-5"></a><span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-pip-${{ hashFiles('module_5/lesson_Django_Testing/crispy_notes_project/requirements.txt') }}</span>
-<a id="__codelineno-79-6" name="__codelineno-79-6" href="#__codelineno-79-6"></a><span class="w">          </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-79-7" name="__codelineno-79-7" href="#__codelineno-79-7"></a><span class="w">            </span><span class="no">${{ runner.os }}-pip-</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Cache pip dependencies</span>
+<a id="__codelineno-78-2" name="__codelineno-78-2" href="#__codelineno-78-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/cache@v4</span>
+<a id="__codelineno-78-3" name="__codelineno-78-3" href="#__codelineno-78-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-78-4" name="__codelineno-78-4" href="#__codelineno-78-4"></a><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">~/.cache/pip</span>
+<a id="__codelineno-78-5" name="__codelineno-78-5" href="#__codelineno-78-5"></a><span class="w">          </span><span class="nt">key</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}</span>
+<a id="__codelineno-78-6" name="__codelineno-78-6" href="#__codelineno-78-6"></a><span class="w">          </span><span class="nt">restore-keys</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-78-7" name="__codelineno-78-7" href="#__codelineno-78-7"></a><span class="w">            </span><span class="no">${{ runner.os }}-pip-</span>
 </code></pre></div>
 <p>Кешує папку <code>~/.cache/pip</code> між запусками workflow.</p>
 <p><strong>Як це працює:</strong>
@@ -3831,14 +3842,14 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 📖 <a href="https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/caching-dependencies-to-speed-up-workflows">Документація: Caching dependencies</a></p>
 <hr />
 <p><strong>Step 4 — Install dependencies</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
-<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
+<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip install -r requirements.txt</span>
 </code></pre></div>
-<p>Проста shell команда. Виконується з <code>working-directory</code> → тобто з <code>crispy_notes_project/</code>.</p>
+<p>Проста shell команда. Виконується з кореня репозиторію, де лежить <code>requirements.txt</code>.</p>
 <hr />
 <p><strong>Step 5 — Django system check</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django system check</span>
-<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py check</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Django system check</span>
+<a id="__codelineno-80-2" name="__codelineno-80-2" href="#__codelineno-80-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py check</span>
 </code></pre></div>
 <p><code>manage.py check</code> — вбудована Django команда. Перевіряє:
 - Правильність <code>settings.py</code>
@@ -3849,118 +3860,128 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 <p>📖 <a href="https://docs.djangoproject.com/en/5.2/topics/checks/">Документація: Django system check framework</a></p>
 <hr />
 <p><strong>Step 6 — Run tests</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run unit and integration tests</span>
-<a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-82-3" name="__codelineno-82-3" href="#__codelineno-82-3"></a><span class="w">          </span><span class="no">python manage.py test \</span>
-<a id="__codelineno-82-4" name="__codelineno-82-4" href="#__codelineno-82-4"></a><span class="w">            </span><span class="no">hello_app.tests.test_models \</span>
-<a id="__codelineno-82-5" name="__codelineno-82-5" href="#__codelineno-82-5"></a><span class="w">            </span><span class="no">hello_app.tests.test_services \</span>
-<a id="__codelineno-82-6" name="__codelineno-82-6" href="#__codelineno-82-6"></a><span class="w">            </span><span class="no">hello_app.tests.test_forms \</span>
-<a id="__codelineno-82-7" name="__codelineno-82-7" href="#__codelineno-82-7"></a><span class="w">            </span><span class="no">hello_app.tests.test_views \</span>
-<a id="__codelineno-82-8" name="__codelineno-82-8" href="#__codelineno-82-8"></a><span class="w">            </span><span class="no">-v 2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run unit, integration and consumer tests</span>
+<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a><span class="w">          </span><span class="no">python manage.py test \</span>
+<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a><span class="w">            </span><span class="no">notes_app.tests.test_models \</span>
+<a id="__codelineno-81-5" name="__codelineno-81-5" href="#__codelineno-81-5"></a><span class="w">            </span><span class="no">notes_app.tests.test_services \</span>
+<a id="__codelineno-81-6" name="__codelineno-81-6" href="#__codelineno-81-6"></a><span class="w">            </span><span class="no">notes_app.tests.test_forms \</span>
+<a id="__codelineno-81-7" name="__codelineno-81-7" href="#__codelineno-81-7"></a><span class="w">            </span><span class="no">notes_app.tests.test_views \</span>
+<a id="__codelineno-81-8" name="__codelineno-81-8" href="#__codelineno-81-8"></a><span class="w">            </span><span class="no">notes_app.tests.test_consumers \</span>
+<a id="__codelineno-81-9" name="__codelineno-81-9" href="#__codelineno-81-9"></a><span class="w">            </span><span class="no">notes_app.tests.test_api \</span>
+<a id="__codelineno-81-10" name="__codelineno-81-10" href="#__codelineno-81-10"></a><span class="w">            </span><span class="no">-v 2</span>
 </code></pre></div>
-<p>Запускає 123 тести (unit + integration). Явно перераховані модулі без <code>test_selenium</code> — Selenium в окремому job.</p>
+<p>Запускає 209 тестів (25 models + 65 services + 22 forms + 84 views + 9 consumers + 4 API). Явно перераховані модулі без <code>test_selenium</code> — Selenium в окремому job.</p>
 <p><code>-v 2</code> — verbose: кожен тест виводиться окремим рядком. В CI це корисно: одразу видно яке ім'я тесту впало.</p>
 <p>Якщо будь-який тест повертає <code>FAILED</code> → step повертає exit code 1 → GitHub Actions вважає step провалений → job зупиняється → Job 2 (selenium) не запускається.</p>
 <hr />
 <p><strong>Step 7 — Coverage</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate coverage report</span>
-<a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a><span class="w">          </span><span class="no">coverage run manage.py test \</span>
-<a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a><span class="w">            </span><span class="no">hello_app.tests.test_models \</span>
-<a id="__codelineno-83-5" name="__codelineno-83-5" href="#__codelineno-83-5"></a><span class="w">            </span><span class="no">hello_app.tests.test_services \</span>
-<a id="__codelineno-83-6" name="__codelineno-83-6" href="#__codelineno-83-6"></a><span class="w">            </span><span class="no">hello_app.tests.test_forms \</span>
-<a id="__codelineno-83-7" name="__codelineno-83-7" href="#__codelineno-83-7"></a><span class="w">            </span><span class="no">hello_app.tests.test_views</span>
-<a id="__codelineno-83-8" name="__codelineno-83-8" href="#__codelineno-83-8"></a><span class="w">          </span><span class="no">coverage report --show-missing</span>
-<a id="__codelineno-83-9" name="__codelineno-83-9" href="#__codelineno-83-9"></a><span class="w">          </span><span class="no">coverage xml -o coverage.xml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate coverage report</span>
+<a id="__codelineno-82-2" name="__codelineno-82-2" href="#__codelineno-82-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<a id="__codelineno-82-3" name="__codelineno-82-3" href="#__codelineno-82-3"></a><span class="w">          </span><span class="no">coverage run manage.py test \</span>
+<a id="__codelineno-82-4" name="__codelineno-82-4" href="#__codelineno-82-4"></a><span class="w">            </span><span class="no">notes_app.tests.test_models \</span>
+<a id="__codelineno-82-5" name="__codelineno-82-5" href="#__codelineno-82-5"></a><span class="w">            </span><span class="no">notes_app.tests.test_services \</span>
+<a id="__codelineno-82-6" name="__codelineno-82-6" href="#__codelineno-82-6"></a><span class="w">            </span><span class="no">notes_app.tests.test_forms \</span>
+<a id="__codelineno-82-7" name="__codelineno-82-7" href="#__codelineno-82-7"></a><span class="w">            </span><span class="no">notes_app.tests.test_views \</span>
+<a id="__codelineno-82-8" name="__codelineno-82-8" href="#__codelineno-82-8"></a><span class="w">            </span><span class="no">notes_app.tests.test_consumers \</span>
+<a id="__codelineno-82-9" name="__codelineno-82-9" href="#__codelineno-82-9"></a><span class="w">            </span><span class="no">notes_app.tests.test_api</span>
+<a id="__codelineno-82-10" name="__codelineno-82-10" href="#__codelineno-82-10"></a><span class="w">          </span><span class="no">coverage report --show-missing</span>
+<a id="__codelineno-82-11" name="__codelineno-82-11" href="#__codelineno-82-11"></a><span class="w">          </span><span class="no">coverage xml -o coverage.xml</span>
 </code></pre></div>
 <p><code>coverage run</code> — запускає тести через <code>coverage</code>, відстежуючи які рядки коду виконуються.</p>
-<p><code>coverage report --show-missing</code> — виводить таблицю:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>Name                          Stmts   Miss  Cover   Missing
-<a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a>-----------------------------------------------------------
-<a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a>hello_app/models.py             87      3    97%   45, 67, 89
-<a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a>hello_app/services.py          124      8    94%   34-41
-<a id="__codelineno-84-5" name="__codelineno-84-5" href="#__codelineno-84-5"></a>hello_app/views.py             198     12    94%   ...
-<a id="__codelineno-84-6" name="__codelineno-84-6" href="#__codelineno-84-6"></a>-----------------------------------------------------------
-<a id="__codelineno-84-7" name="__codelineno-84-7" href="#__codelineno-84-7"></a>TOTAL                          409     23    94%
+<p><code>coverage report --show-missing</code> — виводить таблицю (формат; числа у твоєму запуску будуть інші):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>Name                          Stmts   Miss  Cover   Missing
+<a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a>-----------------------------------------------------------
+<a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a>notes_app/models.py             ...    ...   ...%   ...
+<a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a>notes_app/services.py           ...    ...   ...%   ...
+<a id="__codelineno-83-5" name="__codelineno-83-5" href="#__codelineno-83-5"></a>notes_app/views.py              ...    ...   ...%   ...
+<a id="__codelineno-83-6" name="__codelineno-83-6" href="#__codelineno-83-6"></a>-----------------------------------------------------------
+<a id="__codelineno-83-7" name="__codelineno-83-7" href="#__codelineno-83-7"></a>TOTAL                           ...    ...   ...%
 </code></pre></div>
 <p><code>coverage xml -o coverage.xml</code> — зберігає у XML для інтеграції з Codecov / SonarQube.</p>
 <p>📖 <a href="https://coverage.readthedocs.io/en/latest/">Coverage.py документація</a></p>
 <hr />
 <p><strong>Step 8 — Upload artifact</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage report</span>
-<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
-<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-xml</span>
-<a id="__codelineno-85-5" name="__codelineno-85-5" href="#__codelineno-85-5"></a><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">module_5/lesson_Django_Testing/crispy_notes_project/coverage.xml</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload coverage report</span>
+<a id="__codelineno-84-2" name="__codelineno-84-2" href="#__codelineno-84-2"></a><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<a id="__codelineno-84-3" name="__codelineno-84-3" href="#__codelineno-84-3"></a><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
+<a id="__codelineno-84-4" name="__codelineno-84-4" href="#__codelineno-84-4"></a><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage-xml</span>
+<a id="__codelineno-84-5" name="__codelineno-84-5" href="#__codelineno-84-5"></a><span class="w">          </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">coverage.xml</span>
 </code></pre></div>
 <p>Зберігає <code>coverage.xml</code> як артефакт — файл прикріплюється до workflow run і його можна завантажити з GitHub UI.</p>
-<p>Шлях вказаний відносно кореня репозиторію (не <code>working-directory</code>) — artifact upload не успадковує <code>defaults.run.working-directory</code>.</p>
+<p>Шлях вказаний відносно кореня репозиторію — там <code>coverage xml</code> і створив файл.</p>
 <p>📖 <a href="https://github.com/marketplace/actions/upload-a-build-artifact">actions/upload-artifact на GitHub Marketplace</a></p>
 <hr />
 <h4 id="job-2-selenium-e2e">Job 2: Selenium E2E<a class="headerlink" href="#job-2-selenium-e2e" title="Permanent link">&para;</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="w">  </span><span class="nt">selenium-e2e</span><span class="p">:</span>
-<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Selenium E2E Tests</span>
-<a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
-<a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit-and-integration</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a><span class="w">  </span><span class="nt">selenium-e2e</span><span class="p">:</span>
+<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Selenium E2E Tests</span>
+<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span>
+<a id="__codelineno-85-4" name="__codelineno-85-4" href="#__codelineno-85-4"></a><span class="w">    </span><span class="nt">needs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">unit-and-integration</span>
 </code></pre></div>
 <p><strong><code>needs: unit-and-integration</code></strong> — Job 2 запускається тільки після того як Job 1 завершився успішно. Якщо unit тести впали — Selenium навіть не стартує. Це правильно: нема сенсу перевіряти браузерний flow якщо базова логіка вже зламана.</p>
 <p>📖 <a href="https://docs.github.com/en/actions/writing-workflows/workflow-syntax-for-github-actions#jobsjob_idneeds">Документація: needs</a></p>
 <hr />
-<p><strong>Чому без service container для Selenium</strong></p>
-<p>У зразку всередині проєкту (<code>crispy_notes_project/.github/...</code>) є секція <code>services: selenium: image: selenium/standalone-chrome</code>. Реальний workflow її <strong>не використовує</strong>. Ось чому:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>Проблема з service container:
-<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>
-<a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a>  Runner VM                     Docker container (selenium/standalone-chrome)
-<a id="__codelineno-87-4" name="__codelineno-87-4" href="#__codelineno-87-4"></a>  ┌─────────────────────┐       ┌─────────────────────────────────────┐
-<a id="__codelineno-87-5" name="__codelineno-87-5" href="#__codelineno-87-5"></a>  │ Django test server  │       │ Chrome                              │
-<a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a>  │ http://localhost:PORT│       │                                     │
-<a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a>  │                     │       │  Chrome відкриває                   │
-<a id="__codelineno-87-8" name="__codelineno-87-8" href="#__codelineno-87-8"></a>  │                     │◄──────│  http://localhost:PORT              │
-<a id="__codelineno-87-9" name="__codelineno-87-9" href="#__codelineno-87-9"></a>  └─────────────────────┘       │                                     │
-<a id="__codelineno-87-10" name="__codelineno-87-10" href="#__codelineno-87-10"></a>                                │  ALE! localhost контейнера ≠        │
-<a id="__codelineno-87-11" name="__codelineno-87-11" href="#__codelineno-87-11"></a>                                │  localhost runner-а                 │
-<a id="__codelineno-87-12" name="__codelineno-87-12" href="#__codelineno-87-12"></a>                                │  → ERR_CONNECTION_REFUSED           │
-<a id="__codelineno-87-13" name="__codelineno-87-13" href="#__codelineno-87-13"></a>                                └─────────────────────────────────────┘
-<a id="__codelineno-87-14" name="__codelineno-87-14" href="#__codelineno-87-14"></a>
-<a id="__codelineno-87-15" name="__codelineno-87-15" href="#__codelineno-87-15"></a>Рішення (реальний workflow):
-<a id="__codelineno-87-16" name="__codelineno-87-16" href="#__codelineno-87-16"></a>
-<a id="__codelineno-87-17" name="__codelineno-87-17" href="#__codelineno-87-17"></a>  Runner VM — все на одній машині
-<a id="__codelineno-87-18" name="__codelineno-87-18" href="#__codelineno-87-18"></a>  ┌─────────────────────────────────────────────────────┐
-<a id="__codelineno-87-19" name="__codelineno-87-19" href="#__codelineno-87-19"></a>  │ Django test server       Chrome (вже встановлений)  │
-<a id="__codelineno-87-20" name="__codelineno-87-20" href="#__codelineno-87-20"></a>  │ http://localhost:PORT ◄─ http://localhost:PORT ✅    │
-<a id="__codelineno-87-21" name="__codelineno-87-21" href="#__codelineno-87-21"></a>  │                                                     │
-<a id="__codelineno-87-22" name="__codelineno-87-22" href="#__codelineno-87-22"></a>  │ Selenium Manager автоматично завантажує chromedriver│
-<a id="__codelineno-87-23" name="__codelineno-87-23" href="#__codelineno-87-23"></a>  └─────────────────────────────────────────────────────┘
+<p><strong>Selenium як service container</strong></p>
+<p>Крім PostgreSQL, Job 2 піднімає контейнер <code>selenium/standalone-chrome:latest</code> — той самий образ, що й сервіс <code>selenium</code> у <code>docker-compose.yml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a><span class="w">      </span><span class="nt">selenium</span><span class="p">:</span>
+<a id="__codelineno-86-2" name="__codelineno-86-2" href="#__codelineno-86-2"></a><span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">selenium/standalone-chrome:latest</span>
+<a id="__codelineno-86-3" name="__codelineno-86-3" href="#__codelineno-86-3"></a><span class="w">        </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-86-4" name="__codelineno-86-4" href="#__codelineno-86-4"></a><span class="w">          </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4444:4444</span>
+<a id="__codelineno-86-5" name="__codelineno-86-5" href="#__codelineno-86-5"></a><span class="w">        </span><span class="nt">options</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">&gt;-</span>
+<a id="__codelineno-86-6" name="__codelineno-86-6" href="#__codelineno-86-6"></a><span class="w">          </span><span class="no">--add-host=host.docker.internal:host-gateway</span>
+<a id="__codelineno-86-7" name="__codelineno-86-7" href="#__codelineno-86-7"></a><span class="w">          </span><span class="no">--shm-size=2gb</span>
+<a id="__codelineno-86-8" name="__codelineno-86-8" href="#__codelineno-86-8"></a><span class="w">          </span><span class="no">--health-cmd "curl -f http://localhost:4444/wd/hub/status"</span>
+<a id="__codelineno-86-9" name="__codelineno-86-9" href="#__codelineno-86-9"></a><span class="w">          </span><span class="no">--health-interval 5s</span>
+<a id="__codelineno-86-10" name="__codelineno-86-10" href="#__codelineno-86-10"></a><span class="w">          </span><span class="no">--health-timeout 10s</span>
+<a id="__codelineno-86-11" name="__codelineno-86-11" href="#__codelineno-86-11"></a><span class="w">          </span><span class="no">--health-retries 5</span>
+<a id="__codelineno-86-12" name="__codelineno-86-12" href="#__codelineno-86-12"></a>
+<a id="__codelineno-86-13" name="__codelineno-86-13" href="#__codelineno-86-13"></a><span class="w">   </span><span class="w w-Error"> </span><span class="nt">env</span><span class="p">:</span>
+<a id="__codelineno-86-14" name="__codelineno-86-14" href="#__codelineno-86-14"></a><span class="w">      </span><span class="nt">DATABASE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">postgres://notes_user:notes_pass@localhost:5432/notes_db</span>
+<a id="__codelineno-86-15" name="__codelineno-86-15" href="#__codelineno-86-15"></a><span class="w">      </span><span class="nt">SELENIUM_REMOTE_URL</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:4444/wd/hub</span>
+<a id="__codelineno-86-16" name="__codelineno-86-16" href="#__codelineno-86-16"></a><span class="w">      </span><span class="nt">WEB_HOST</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">host.docker.internal</span>
 </code></pre></div>
-<p><code>ubuntu-latest</code> включає Chrome. <code>selenium&gt;=4.6</code> має вбудований Selenium Manager — він сам знаходить встановлений Chrome і завантажує відповідну версію <code>chromedriver</code>. Нічого додатково не треба.</p>
+<p>Проблема: Chrome живе в контейнері, а Django test server — на runner. <code>localhost</code> контейнера ≠ <code>localhost</code> runner-а:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>  Runner VM                          Docker container (selenium/standalone-chrome)
+<a id="__codelineno-87-2" name="__codelineno-87-2" href="#__codelineno-87-2"></a>  ┌──────────────────────────┐       ┌──────────────────────────────────────┐
+<a id="__codelineno-87-3" name="__codelineno-87-3" href="#__codelineno-87-3"></a>  │ Django test server       │       │ Chrome                               │
+<a id="__codelineno-87-4" name="__codelineno-87-4" href="#__codelineno-87-4"></a>  │ слухає 0.0.0.0:PORT      │◄──────│ http://host.docker.internal:PORT ✅  │
+<a id="__codelineno-87-5" name="__codelineno-87-5" href="#__codelineno-87-5"></a>  │                          │       │                                      │
+<a id="__codelineno-87-6" name="__codelineno-87-6" href="#__codelineno-87-6"></a>  │ тести → Remote WebDriver │──────►│ :4444/wd/hub                         │
+<a id="__codelineno-87-7" name="__codelineno-87-7" href="#__codelineno-87-7"></a>  └──────────────────────────┘       └──────────────────────────────────────┘
+</code></pre></div>
+<p>Як це розв'язано:</p>
+<ul>
+<li><code>--add-host=host.docker.internal:host-gateway</code> додає в <code>/etc/hosts</code> контейнера ім'я <code>host.docker.internal</code> → IP runner-а;</li>
+<li><code>WEB_HOST=host.docker.internal</code> → <code>_DockerLiveServerMixin</code> у <code>test_selenium.py</code> прив'язує test server до <code>0.0.0.0</code> і підставляє <code>host.docker.internal</code> у <code>live_server_url</code>;</li>
+<li><code>SELENIUM_REMOTE_URL</code> → <code>_make_headless_driver()</code> створює Remote WebDriver до контейнера замість локального Chrome.</li>
+</ul>
 <hr />
 <p><strong>Step — Run Selenium</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Run Selenium E2E tests</span>
-<a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py test hello_app.tests.test_selenium -v 2</span>
+<a id="__codelineno-88-2" name="__codelineno-88-2" href="#__codelineno-88-2"></a><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python manage.py test notes_app.tests.test_selenium -v 2</span>
 </code></pre></div>
-<p>Без змінної <code>SELENIUM_REMOTE_URL</code> → <code>_make_driver()</code> у коді тестів використовує локальний Chrome з headless режимом. Django <code>StaticLiveServerTestCase</code> запускає сервер на випадковому порту, Chrome підключається до нього на тому ж <code>localhost</code>.</p>
+<p>Без змінної <code>SELENIUM_REMOTE_URL</code> (наприклад, локально без Docker) <code>_make_headless_driver()</code> запускає локальний headless Chrome.</p>
 <hr />
 <h3 id="як-переглянути-результати">Як переглянути результати<a class="headerlink" href="#як-переглянути-результати" title="Permanent link">&para;</a></h3>
 <p><strong>1. Actions tab у репозиторії</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>https://github.com/NikoriakViktor/notes_chat_app/actions
 </code></pre></div>
 <p>Тут список всіх workflow runs. Зелений — all green. Червоний — щось впало.</p>
 <p><strong>2. Граф Jobs</strong></p>
 <p>Клікни на конкретний run → бачиш два прямокутники:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>[Unit &amp; Integration Tests] ──needs──► [Selenium E2E Tests]
-<a id="__codelineno-90-2" name="__codelineno-90-2" href="#__codelineno-90-2"></a>      ✅ 1m 23s                              ✅ 1m 47s
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>[Unit, Integration &amp; Consumer Tests] ──needs──► [Selenium E2E Tests]
 </code></pre></div>
 <p><strong>3. Logs конкретного step</strong></p>
 <p>Клікни на job → клікни на step → розгорни:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>Run python manage.py test ...
 <a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>
-<a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a>Creating test database for alias 'default' ...
-<a id="__codelineno-91-4" name="__codelineno-91-4" href="#__codelineno-91-4"></a>Found 123 test(s).
-<a id="__codelineno-91-5" name="__codelineno-91-5" href="#__codelineno-91-5"></a>test_str_returns_hash_name (hello_app.tests.test_models.TagModelTest) ... ok
-<a id="__codelineno-91-6" name="__codelineno-91-6" href="#__codelineno-91-6"></a>test_unique_together_same_user_same_name_raises (...) ... ok
-<a id="__codelineno-91-7" name="__codelineno-91-7" href="#__codelineno-91-7"></a>...
-<a id="__codelineno-91-8" name="__codelineno-91-8" href="#__codelineno-91-8"></a>----------------------------------------------------------------------
-<a id="__codelineno-91-9" name="__codelineno-91-9" href="#__codelineno-91-9"></a>Ran 123 tests in 34.2s
+<a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a>Found 209 test(s).
+<a id="__codelineno-91-4" name="__codelineno-91-4" href="#__codelineno-91-4"></a>Creating test database for alias 'default'...
+<a id="__codelineno-91-5" name="__codelineno-91-5" href="#__codelineno-91-5"></a>System check identified no issues (0 silenced).
+<a id="__codelineno-91-6" name="__codelineno-91-6" href="#__codelineno-91-6"></a>...
+<a id="__codelineno-91-7" name="__codelineno-91-7" href="#__codelineno-91-7"></a>----------------------------------------------------------------------
+<a id="__codelineno-91-8" name="__codelineno-91-8" href="#__codelineno-91-8"></a>Ran 209 tests in ...s
+<a id="__codelineno-91-9" name="__codelineno-91-9" href="#__codelineno-91-9"></a>
 <a id="__codelineno-91-10" name="__codelineno-91-10" href="#__codelineno-91-10"></a>OK
 </code></pre></div>
 <p><strong>4. Download artifacts</strong></p>
@@ -3975,13 +3996,13 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 <div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>FAIL: test_note_list_excludes_other_user_notes
 <a id="__codelineno-92-2" name="__codelineno-92-2" href="#__codelineno-92-2"></a>      ↑ Назва тесту → одразу зрозуміло ЩО зламалось
 <a id="__codelineno-92-3" name="__codelineno-92-3" href="#__codelineno-92-3"></a>
-<a id="__codelineno-92-4" name="__codelineno-92-4" href="#__codelineno-92-4"></a>(hello_app.tests.test_views.NoteListViewTest)
+<a id="__codelineno-92-4" name="__codelineno-92-4" href="#__codelineno-92-4"></a>(notes_app.tests.test_views.NoteListViewTest)
 <a id="__codelineno-92-5" name="__codelineno-92-5" href="#__codelineno-92-5"></a>      ↑ Клас і файл → можеш одразу відкрити
 <a id="__codelineno-92-6" name="__codelineno-92-6" href="#__codelineno-92-6"></a>
 <a id="__codelineno-92-7" name="__codelineno-92-7" href="#__codelineno-92-7"></a>Traceback (most recent call last):
-<a id="__codelineno-92-8" name="__codelineno-92-8" href="#__codelineno-92-8"></a>  File ".../test_views.py", line 89, in test_note_list_excludes_other_user_notes
-<a id="__codelineno-92-9" name="__codelineno-92-9" href="#__codelineno-92-9"></a>    self.assertNotContains(response, "Bob's Secret Note")
-<a id="__codelineno-92-10" name="__codelineno-92-10" href="#__codelineno-92-10"></a>AssertionError: Response should not contain "Bob's Secret Note"
+<a id="__codelineno-92-8" name="__codelineno-92-8" href="#__codelineno-92-8"></a>  File ".../test_views.py", line ..., in test_note_list_excludes_other_user_notes
+<a id="__codelineno-92-9" name="__codelineno-92-9" href="#__codelineno-92-9"></a>    self.assertNotContains(response, ...)
+<a id="__codelineno-92-10" name="__codelineno-92-10" href="#__codelineno-92-10"></a>AssertionError: ... unexpectedly found in the following response
 <a id="__codelineno-92-11" name="__codelineno-92-11" href="#__codelineno-92-11"></a>      ↑ Очікували що рядка НЕМАЄ, але він є → нотатки Bob'а видимі Alice!
 <a id="__codelineno-92-12" name="__codelineno-92-12" href="#__codelineno-92-12"></a>      → Баг у selectors.get_user_notes() — забули фільтр по user
 <a id="__codelineno-92-13" name="__codelineno-92-13" href="#__codelineno-92-13"></a>
@@ -3992,13 +4013,15 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 <h3 id="звязок-тести--cicd">Зв'язок: тести ↔ CI/CD<a class="headerlink" href="#звязок-тести--cicd" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>Ти пишеш:                  CI/CD запускає:           Ти отримуєш:
 <a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a>
-<a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a>test_models.py    ─────►   Job 1, Step 6         ──► ✅ або ❌ за 30 сек
-<a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a>test_services.py  ─────►   (unit + integration)  ──► Traceback прямо в GitHub
-<a id="__codelineno-93-5" name="__codelineno-93-5" href="#__codelineno-93-5"></a>test_forms.py     ─────►
+<a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a>test_models.py    ─────►   Job 1, Step 6         ──► ✅ або ❌
+<a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a>test_services.py  ─────►   (unit + integration   ──► Traceback прямо в GitHub
+<a id="__codelineno-93-5" name="__codelineno-93-5" href="#__codelineno-93-5"></a>test_forms.py     ─────►    + consumer + API)
 <a id="__codelineno-93-6" name="__codelineno-93-6" href="#__codelineno-93-6"></a>test_views.py     ─────►
-<a id="__codelineno-93-7" name="__codelineno-93-7" href="#__codelineno-93-7"></a>
-<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a>test_selenium.py  ─────►   Job 2                 ──► ✅ або ❌ після Job 1
-<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a>                            (E2E, needs: job1)    ──► Chrome headless на Azure
+<a id="__codelineno-93-7" name="__codelineno-93-7" href="#__codelineno-93-7"></a>test_consumers.py ─────►
+<a id="__codelineno-93-8" name="__codelineno-93-8" href="#__codelineno-93-8"></a>test_api.py       ─────►
+<a id="__codelineno-93-9" name="__codelineno-93-9" href="#__codelineno-93-9"></a>
+<a id="__codelineno-93-10" name="__codelineno-93-10" href="#__codelineno-93-10"></a>test_selenium.py  ─────►   Job 2                 ──► ✅ або ❌ після Job 1
+<a id="__codelineno-93-11" name="__codelineno-93-11" href="#__codelineno-93-11"></a>                            (E2E, needs: job1)    ──► Chrome у selenium-контейнері
 </code></pre></div>
 <p>Кожен тест, який ти написав у кроках 2–6, автоматично запускається у CI при кожному push.</p>
 <hr />
@@ -4072,12 +4095,12 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 <hr />
 <h3 id="практика-перевір-що-cicd-працює">Практика: перевір що CI/CD працює<a class="headerlink" href="#практика-перевір-що-cicd-працює" title="Permanent link">&para;</a></h3>
 <ol>
-<li>Відкрий у браузері: <code>https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-23_02/actions</code></li>
-<li>Знайди workflow <strong>"Django Tests (module_5/lesson_Django_Testing)"</strong></li>
+<li>Відкрий у браузері: <code>https://github.com/NikoriakViktor/notes_chat_app/actions</code></li>
+<li>Знайди workflow <strong>"Django Tests"</strong></li>
 <li>Клікни на останній run</li>
-<li>Розгорни Job 1 → Step "Run unit and integration tests"</li>
-<li>Знайди рядок <code>Ran 123 tests in ... OK</code></li>
-<li>Перейди до Job 2 → подивись як запускається Selenium на Ubuntu runner</li>
+<li>Розгорни Job 1 → Step "Run unit, integration and consumer tests"</li>
+<li>Знайди рядок <code>Ran 209 tests in ...</code> і <code>OK</code></li>
+<li>Перейди до Job 2 → подивись як Selenium запускається через Remote WebDriver у контейнері</li>
 </ol>
 <p><strong>Самостійно:</strong> зроби навмисну помилку в будь-якому тесті (<code>assertFalse(True)</code>), зроби <code>git push</code>, подивись як CI показує FAIL і Traceback.</p>
 <hr />
@@ -4266,55 +4289,51 @@ GitHub Actions читає workflow ТІЛЬКИ з кореневої папки
 </thead>
 <tbody>
 <tr>
-<td><a href="../README.md"><code>../README.md</code></a></td>
+<td><a href="../../08_testing_and_quality/">Огляд частини VIII</a></td>
 <td>Навігація по всьому уроку тестування</td>
 </tr>
 <tr>
-<td><a href="../TESTING_FOUNDATIONS.md"><code>../TESTING_FOUNDATIONS.md</code></a></td>
+<td><a href="../../08_testing_and_quality/testing_foundations_full/">Основи тестування</a></td>
 <td>Піраміда, принципи, AAA</td>
 </tr>
 <tr>
-<td><a href="../UNITTEST_BASICS.md"><code>../UNITTEST_BASICS.md</code></a></td>
+<td><a href="../../08_testing_and_quality/unittest_basics_full/">unittest</a></td>
 <td>Python unittest: TestCase, lifecycle</td>
 </tr>
 <tr>
-<td><a href="../PYTEST_BASICS.md"><code>../PYTEST_BASICS.md</code></a></td>
+<td><a href="../../08_testing_and_quality/pytest_basics_full/">pytest</a></td>
 <td>pytest: fixtures, parametrize</td>
 </tr>
 <tr>
-<td><a href="../DJANGO_TESTING.md"><code>../DJANGO_TESTING.md</code></a></td>
+<td><a href="../../08_testing_and_quality/django_testing_full/">Django Testing</a></td>
 <td>Django: TestCase, Client, тестова БД</td>
 </tr>
 <tr>
-<td><a href="../TEST_DATA_AND_FIXTURES.md"><code>../TEST_DATA_AND_FIXTURES.md</code></a></td>
+<td><a href="../../08_testing_and_quality/test_data_and_fixtures_full/">Test Data</a></td>
 <td>factory_boy, fixtures</td>
 </tr>
 <tr>
-<td><a href="../MOCKING_AND_PATCHING.md"><code>../MOCKING_AND_PATCHING.md</code></a></td>
+<td><a href="../../08_testing_and_quality/mocking_and_patching_full/">Mocking</a></td>
 <td>Mock, patch, зовнішні сервіси</td>
 </tr>
 <tr>
-<td><a href="../TESTING_PRACTICE_PROJECT.md"><code>../TESTING_PRACTICE_PROJECT.md</code></a></td>
+<td><a href="../../08_testing_and_quality/testing_practice_project_full/">Практика тестування</a></td>
 <td>E2E, Selenium, повний сценарій</td>
 </tr>
 <tr>
-<td><a href="../SELENIUM.md"><code>../SELENIUM.md</code></a></td>
+<td><a href="../../08_testing_and_quality/selenium_full/">Selenium</a></td>
 <td>Selenium WebDriver: By стратегії, waits, StaticLiveServerTestCase, session cookie trick</td>
 </tr>
 <tr>
-<td><a href="../CI_CD.md"><code>../CI_CD.md</code></a></td>
+<td><a href="../../08_testing_and_quality/ci_cd_full/">CI/CD</a></td>
 <td>CI/CD теорія, GitHub Actions компоненти, events, runners</td>
 </tr>
 <tr>
-<td><a href=".github/workflows/django-tests.yml"><code>.github/workflows/django-tests.yml</code></a></td>
+<td><a href="https://github.com/NikoriakViktor/notes_chat_app/blob/main/.github/workflows/django-tests.yml">.github/workflows/django-tests.yml</a></td>
 <td>Зразок workflow для цього проєкту</td>
 </tr>
 <tr>
-<td><a href="../../../../.github/workflows/django-tests.yml"><code>../../../../.github/workflows/django-tests.yml</code></a></td>
-<td>Реальний workflow (корінь репо)</td>
-</tr>
-<tr>
-<td><a href="../basics/"><code>../basics/</code></a></td>
+<td><a href="../../reference/legacy_source/legacy_missing_reference/">basics/ (не входить у цей репозиторій)</a></td>
 <td>Runnable Python приклади тестів</td>
 </tr>
 </tbody>

@@ -1830,14 +1830,14 @@ Django дозволяє будувати шаблони як дерево: ба�
 <tbody>
 <tr>
 <td><strong>1 — Raw</strong></td>
-<td><a href="../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py"><code>notes_project/forms.py</code></a></td>
+<td><a href="../README_3/">README_3 — форми без crispy</a></td>
 <td><code>{{ form.as_p }}</code></td>
 <td>~5 рядків</td>
 <td>Ніде (немає стилів)</td>
 </tr>
 <tr>
 <td><strong>2 — Manual</strong></td>
-<td><a href="../django_bootstrap_project/"><code>django_bootstrap_project/</code></a></td>
+<td><a href="../README_2/">README_2</a></td>
 <td>Ручний HTML</td>
 <td>~80 рядків</td>
 <td>У шаблоні вручну</td>
@@ -2119,7 +2119,7 @@ Gmail, Notion, Linear — всі побудовані на цьому патте
 <hr />
 <h2 id="крок-0--запуск">Крок 0 — Запуск<a class="headerlink" href="#крок-0--запуск" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 1. Переходимо до папки</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>module_5/lesson_HTML_CSS_Bootstrap/crispy_notes_project
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">cd</span><span class="w"> </span>notes_chat_app<span class="w">   </span><span class="c1"># корінь репозиторію: тут manage.py і requirements.txt</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># 2. Встановлюємо залежності</span>
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
@@ -2174,8 +2174,8 @@ Gmail, Notion, Linear — всі побудовані на цьому патте
 </table>
 <blockquote>
 <p><strong>Tier 1 і Tier 2 як код для порівняння</strong> (не як живі URL):
-- Tier 1 (<code>form.as_p</code>): <a href="../../lesson_Django_ORM_Database/notes_project/hello_app/forms.py"><code>notes_project/hello_app/forms.py</code></a>
-- Tier 2 (manual Bootstrap): <a href="../django_bootstrap_project/"><code>django_bootstrap_project/</code></a></p>
+- Tier 1 (<code>form.as_p</code>): <a href="../README_3/">README_3 — форми без crispy</a>
+- Tier 2 (manual Bootstrap): <a href="../README_2/">README_2</a></p>
 </blockquote>
 <hr />
 <h2 id="крок-1--settings">Крок 1 — Settings<a class="headerlink" href="#крок-1--settings" title="Permanent link">&para;</a></h2>
@@ -2462,7 +2462,7 @@ Django шукає шаблони у двох місцях: <code>DIRS</code> (г
 <h2 id="крок-5--tier-1-raw">Крок 5 — Tier 1: Raw<a class="headerlink" href="#крок-5--tier-1-raw" title="Permanent link">&para;</a></h2>
 <p><strong>Мета:</strong> показати що є у Django "з коробки", без жодних стилів.</p>
 <blockquote>
-<p>Tier 1 реалізовано у <a href="../../lesson_Django_ORM_Database/notes_project/"><code>notes_project</code></a> — там форми без crispy.
+<p>Tier 1 реалізовано у <a href="../README_3/"><code>notes_project</code></a> — там форми без crispy.
 Код нижче — для порівняння концепцій.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># views.py</span>
@@ -2509,7 +2509,7 @@ Django шукає шаблони у двох місцях: <code>DIRS</code> (г
 <h2 id="крок-6--tier-2-manual">Крок 6 — Tier 2: Manual<a class="headerlink" href="#крок-6--tier-2-manual" title="Permanent link">&para;</a></h2>
 <p><strong>Мета:</strong> показати повний Bootstrap HTML — щоб зрозуміти від чого рятує Tier 3.</p>
 <blockquote>
-<p>Tier 2 реалізовано у <a href="../django_bootstrap_project/"><code>django_bootstrap_project</code></a> — там форми з ручним Bootstrap HTML.
+<p>Tier 2 реалізовано у <a href="../README_2/"><code>django_bootstrap_project</code></a> — там форми з ручним Bootstrap HTML.
 Код нижче — для порівняння концепцій.</p>
 </blockquote>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="cm">&lt;!-- note_form_manual.html — дивись скільки коду для ОДНОГО поля --&gt;</span>
@@ -3022,23 +3022,23 @@ Context processor виконується при <strong>кожному</strong> 
 </thead>
 <tbody>
 <tr>
-<td><a href="../DESIGN_FOUNDATIONS.md"><code>../DESIGN_FOUNDATIONS.md</code></a></td>
+<td><a href="../../05_frontend_and_templates/design_foundations_full/">Дизайн-основи</a></td>
 <td>UX, CRAP, Bootstrap, ієрархія шаблонів, Crispy — теорія</td>
 </tr>
 <tr>
-<td><a href="../CRISPY_FORMS.md"><code>../CRISPY_FORMS.md</code></a></td>
+<td><a href="../../04_forms_and_validation/crispy_forms_full/">Crispy Forms</a></td>
 <td>Повний довідник: FormHelper, Layout, Bootstrap компоненти, Dynamic API</td>
 </tr>
 <tr>
-<td><a href="../ADVANCED_TEMPLATES.md"><code>../ADVANCED_TEMPLATES.md §3</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates §3</a></td>
 <td>FormHelper + Layout — деталі</td>
 </tr>
 <tr>
-<td><a href="../ADVANCED_TEMPLATES.md"><code>../ADVANCED_TEMPLATES.md §5</code></a></td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates §5</a></td>
 <td>SaaS Dashboard Architecture</td>
 </tr>
 <tr>
-<td><a href="../../lesson_Django_ORM_Database/notes_project/README.md"><code>../../lesson_Django_ORM_Database/notes_project/README.md</code></a></td>
+<td><a href="../README_3/">README_3</a></td>
 <td>ORM, Services/Selectors, міграції — фундамент цього проєкту</td>
 </tr>
 </tbody>

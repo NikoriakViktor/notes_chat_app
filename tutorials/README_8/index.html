@@ -2438,7 +2438,7 @@ overengineering + складніший код + ті самі результат
 <hr />
 <h2 id="06-запуск-sync-django-через-runserver">06. Запуск sync Django через runserver<a class="headerlink" href="#06-запуск-sync-django-через-runserver" title="Permanent link">&para;</a></h2>
 <h3 id="крок-1-перехід-до-директорії">Крок 1: Перехід до директорії<a class="headerlink" href="#крок-1-перехід-до-директорії" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>module_5/lesson_Django_Async/notes_chat_app
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">cd</span><span class="w"> </span>notes_chat_app<span class="w">   </span><span class="c1"># корінь репозиторію: тут manage.py і requirements.txt</span>
 </code></pre></div>
 <h3 id="крок-2-створення-virtualenv">Крок 2: Створення virtualenv<a class="headerlink" href="#крок-2-створення-virtualenv" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Створення virtualenv</span>
@@ -3739,8 +3739,8 @@ Python може завантажити <strong>не той проєкт</strong>
 контейнер має лише <code>/app</code> у <code>sys.path</code>, жодних сторонніх пакетів.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>Без Docker:                         З Docker:
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a>sys.path = [                        sys.path = [
-<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>  lesson_Django_authentication/..., ← /app ← тільки notes_chat_app
-<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>  lesson_Django_Async/...,          ]
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a>  other_django_project/...,         ← /app ← тільки notes_chat_app
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a>  another_django_project/...,       ]
 <a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a>  ...                               WORKDIR /app → ENV PYTHONPATH=/app
 <a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a>]
 </code></pre></div>
@@ -3772,8 +3772,8 @@ Python може завантажити <strong>не той проєкт</strong>
 </tbody>
 </table>
 <h3 id="193-запуск">19.3. Запуск<a class="headerlink" href="#193-запуск" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c"># Перейти до папки проєкту (PowerShell / CMD)</span>
-<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\</span><span class="n">Users</span><span class="p">\</span><span class="n">victo</span><span class="p">\</span><span class="n">PycharmProjects</span><span class="p">\</span><span class="n">PY-Course-Victor-Nikoriak</span><span class="p">-</span><span class="n">23_02</span><span class="p">\</span><span class="n">module_5</span><span class="p">\</span><span class="n">lesson_Django_Async</span><span class="p">\</span><span class="n">notes_chat_app</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="c"># Перейти до кореня репозиторію notes_chat_app — там лежить docker-compose.yml (PowerShell / CMD)</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="nb">cd </span><span class="n">C</span><span class="p">:\...\</span><span class="n">notes_chat_app</span>
 <a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a>
 <a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="c"># Білд + старт (перший раз ~3-5 хв)</span>
 <a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="n">docker</span> <span class="n">compose</span> <span class="n">up</span> <span class="p">-</span><span class="n">-build</span>

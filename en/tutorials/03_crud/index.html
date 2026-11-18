@@ -2875,15 +2875,15 @@ In addition, <code>notes_chat_app.Note</code> has a <code>group = ForeignKey(Gro
 </ol>
 <hr />
 <h2 id="self-check-checklist">Self-check checklist<a class="headerlink" href="#self-check-checklist" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] I know the difference between <code>OneToOneField</code>, <code>ForeignKey</code>, <code>ManyToManyField</code></li>
-<li>[ ] I know where the FK lives (on the "Many" side)</li>
-<li>[ ] I consciously choose <code>on_delete</code> for each FK (not just CASCADE)</li>
-<li>[ ] <code>selectors.py</code> contains only SELECTs (filter, annotate, prefetch_related)</li>
-<li>[ ] <code>services.py</code> uses <code>transaction.atomic()</code> where atomicity is needed</li>
-<li>[ ] <code>views.py</code> does not contain <code>Model.objects.*</code> directly</li>
-<li>[ ] I understand N+1 and use <code>select_related</code>/<code>prefetch_related</code></li>
-<li>[ ] <code>Q</code> objects — for OR conditions in filter</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I know the difference between <code>OneToOneField</code>, <code>ForeignKey</code>, <code>ManyToManyField</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I know where the FK lives (on the "Many" side)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I consciously choose <code>on_delete</code> for each FK (not just CASCADE)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>selectors.py</code> contains only SELECTs (filter, annotate, prefetch_related)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>services.py</code> uses <code>transaction.atomic()</code> where atomicity is needed</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>views.py</code> does not contain <code>Model.objects.*</code> directly</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> I understand N+1 and use <code>select_related</code>/<code>prefetch_related</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>Q</code> objects — for OR conditions in filter</li>
 </ul>
 <hr />
 <h2 id="next">Next<a class="headerlink" href="#next" title="Permanent link">&para;</a></h2>

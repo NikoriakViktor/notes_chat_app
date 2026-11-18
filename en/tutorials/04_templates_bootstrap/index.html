@@ -2467,16 +2467,16 @@ If you pass them from every view — code duplication in 20 places.</p>
 </ol>
 <hr />
 <h2 id="self-check-checklist">Self-check checklist<a class="headerlink" href="#self-check-checklist" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] 3 levels: <code>base.html</code> → <code>layouts/dashboard.html</code> → page template</li>
-<li>[ ] <code>{% block body %}</code> in <code>base.html</code>, <code>{% block content %}</code> in <code>dashboard.html</code></li>
-<li>[ ] The Context Processor is registered in <code>settings.py</code> → <code>context_processors</code></li>
-<li>[ ] <code>sidebar_notebooks</code> and <code>sidebar_tags</code> are available in the template without passing them explicitly</li>
-<li>[ ] <code>{% crispy form %}</code> renders the form with Bootstrap classes</li>
-<li>[ ] <code>FormHelper.layout</code> describes the form structure in Python code</li>
-<li>[ ] Active state via <code>request.resolver_match.url_name</code></li>
-<li>[ ] Logout — a POST form (not a GET link) for CSRF protection</li>
-<li>[ ] <code>DIRS = [BASE_DIR / 'templates']</code> in <code>TEMPLATES</code> — for global templates</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> 3 levels: <code>base.html</code> → <code>layouts/dashboard.html</code> → page template</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>{% block body %}</code> in <code>base.html</code>, <code>{% block content %}</code> in <code>dashboard.html</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> The Context Processor is registered in <code>settings.py</code> → <code>context_processors</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>sidebar_notebooks</code> and <code>sidebar_tags</code> are available in the template without passing them explicitly</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>{% crispy form %}</code> renders the form with Bootstrap classes</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>FormHelper.layout</code> describes the form structure in Python code</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Active state via <code>request.resolver_match.url_name</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Logout — a POST form (not a GET link) for CSRF protection</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>DIRS = [BASE_DIR / 'templates']</code> in <code>TEMPLATES</code> — for global templates</li>
 </ul>
 <hr />
 <h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>

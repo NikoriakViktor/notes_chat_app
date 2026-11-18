@@ -1649,7 +1649,7 @@ with a <strong>Navbar, cards, forms, alerts and an admin panel</strong>.</p>
 <p><strong>Prerequisites:</strong>
 This project is a continuation of <code>simple_django_project</code>.
 You should already understand what a View, URL, Model and Template are.
-If not, first go through <code>module_5/lesson_Django_Network_Architecture/simple_django_project/README.md</code>.</p>
+If not, first go through <a href="../README_1/">README_1</a> (<code>simple_django_project</code>).</p>
 </blockquote>
 <hr />
 <h2 id="learning-map">Learning map<a class="headerlink" href="#learning-map" title="Permanent link">&para;</a></h2>
@@ -1667,52 +1667,52 @@ Here is how the steps relate to the documentation:</p>
 <tr>
 <td>A</td>
 <td>HTML structure, <code>&lt;!DOCTYPE&gt;</code>, semantics</td>
-<td><a href="../HTML_BASICS.md">HTML_BASICS.md</a> §0–5</td>
+<td><a href="../../05_frontend_and_templates/html_basics_full/">HTML Basics</a> §0–5</td>
 </tr>
 <tr>
 <td>B</td>
 <td>Including Bootstrap via CDN</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §0–2</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §0–2</td>
 </tr>
 <tr>
 <td>C</td>
 <td><code>base.html</code> — Template Inheritance, Sticky Footer</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §3–5, CSS_BASICS.md §9</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §3–5, CSS_BASICS.md §9</td>
 </tr>
 <tr>
 <td>D</td>
 <td>Navbar + Grid</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §5–6</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §5–6</td>
 </tr>
 <tr>
 <td>E</td>
 <td>Card Grid for notes</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §6</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §6</td>
 </tr>
 <tr>
 <td>F</td>
 <td>Forms + django-bootstrap5</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §9, <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §7</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §9, <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §7</td>
 </tr>
 <tr>
 <td>G</td>
 <td>Django Messages → Bootstrap Alerts</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §4</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §4</td>
 </tr>
 <tr>
 <td>H</td>
 <td>Modal — delete confirmation</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §8</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §8</td>
 </tr>
 <tr>
 <td>I</td>
 <td>Django Debug Toolbar</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §9</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §9</td>
 </tr>
 <tr>
 <td>J</td>
 <td>Unfold Admin — a Tailwind-styled admin</td>
-<td><a href="../DJANGO_ADMIN_UNFOLD.md">DJANGO_ADMIN_UNFOLD.md</a> §2, §7</td>
+<td><a href="../../05_frontend_and_templates/django_admin_unfold_full/">Django Admin Unfold</a> §2, §7</td>
 </tr>
 </tbody>
 </table>
@@ -1762,8 +1762,8 @@ Here is how the steps relate to the documentation:</p>
 <h3 id="step-1--open-a-terminal-in-this-folder">Step 1 — Open a terminal in this folder<a class="headerlink" href="#step-1--open-a-terminal-in-this-folder" title="Permanent link">&para;</a></h3>
 <p><strong>PyCharm:</strong>
 <code>View → Tool Windows → Terminal</code> — opens a terminal already in the project folder.</p>
-<p><strong>A regular terminal</strong> (from the repository root):
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>module_5<span class="se">\l</span>esson_HTML_CSS_Bootstrap<span class="se">\d</span>jango_bootstrap_project
+<p><strong>A regular terminal</strong> (go to the folder where you create the project; your path is your own):
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>C:<span class="se">\.</span>..<span class="se">\d</span>jango_bootstrap_project
 </code></pre></div></p>
 <hr />
 <h3 id="step-2--create-a-virtual-environment">Step 2 — Create a virtual environment<a class="headerlink" href="#step-2--create-a-virtual-environment" title="Permanent link">&para;</a></h3>
@@ -1826,7 +1826,7 @@ Here is how the steps relate to the documentation:</p>
 <p>The <code>db.sqlite3</code> database will get the <code>hello_app_note</code> table (already described in <code>models.py</code>)
 and all the standard Django tables (<code>auth_user</code>, <code>django_session</code>, etc.).</p>
 <blockquote>
-<p><strong>Theory:</strong> <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §0 —
+<p><strong>Theory:</strong> <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §0 —
 the Django SSR lifecycle and where the model sits in MVT.</p>
 </blockquote>
 <hr />
@@ -1869,7 +1869,7 @@ Here is what we will do next.</p>
 <h2 id="phase-a--understanding-the-existing-code">Phase A — Understanding the existing code<a class="headerlink" href="#phase-a--understanding-the-existing-code" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory before you start:</strong>
-Read <a href="../HTML_BASICS.md">HTML_BASICS.md</a> §0–3 —
+Read <a href="../../05_frontend_and_templates/html_basics_full/">HTML Basics</a> §0–3 —
 how the browser reads HTML, the DOM pipeline, the basic document structure.</p>
 </blockquote>
 <h3 id="what-the-project-already-has">What the project already has<a class="headerlink" href="#what-the-project-already-has" title="Permanent link">&para;</a></h3>
@@ -1908,9 +1908,9 @@ how the browser reads HTML, the DOM pipeline, the basic document structure.</p>
 <h2 id="phase-b--including-bootstrap-5">Phase B — Including Bootstrap 5<a class="headerlink" href="#phase-b--including-bootstrap-5" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §0–2 —
+Read <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §0–2 —
 why Bootstrap, the Mobile First philosophy, how to include it via CDN.
-Read <a href="../CSS_BASICS.md">CSS_BASICS.md</a> §0 —
+Read <a href="../../05_frontend_and_templates/css_basics_full/">CSS Basics</a> §0 —
 the CSS Rendering Pipeline, to understand why Bootstrap CSS is included in <code>&lt;head&gt;</code>.</p>
 </blockquote>
 <h3 id="step-b1--updating-settingspy">Step B1 — Updating settings.py<a class="headerlink" href="#step-b1--updating-settingspy" title="Permanent link">&para;</a></h3>
@@ -1956,7 +1956,7 @@ the CSS Rendering Pipeline, to understand why Bootstrap CSS is included in <code
 Django Messages (flash messages after a POST) have their own levels: <code>success</code>, <code>error</code>, etc.
 A Bootstrap Alert uses <code>alert-success</code>, <code>alert-danger</code>.
 <code>MESSAGE_TAGS</code> maps between them.
-More details: <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §4 — Bootstrap Alerts.</p>
+More details: <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §4 — Bootstrap Alerts.</p>
 </blockquote>
 <h3 id="step-b2--updating-urlspy">Step B2 — Updating urls.py<a class="headerlink" href="#step-b2--updating-urlspy" title="Permanent link">&para;</a></h3>
 <p>Open <code>hello_project/urls.py</code>:</p>
@@ -1973,9 +1973,9 @@ More details: <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §4 — Bootstrap A
 <h2 id="phase-c--creating-basehtml">Phase C — Creating base.html<a class="headerlink" href="#phase-c--creating-basehtml" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §3–5 —
+Read <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §3–5 —
 Template Inheritance, <code>{% extends %}</code>, <code>{% block %}</code>.
-Read <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §5 — the Navbar component.</p>
+Read <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §5 — the Navbar component.</p>
 </blockquote>
 <p>Django looks for templates in <code>&lt;app&gt;/templates/</code>.
 We will create <code>base.html</code> <strong>outside</strong> <code>hello_app/templates/hello_app/</code> —
@@ -2192,8 +2192,8 @@ This is a standard pattern for any site where the footer must be at the bottom o
 <h2 id="phase-d--the-list-of-notes-with-bootstrap-cards">Phase D — The list of notes with Bootstrap Cards<a class="headerlink" href="#phase-d--the-list-of-notes-with-bootstrap-cards" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §6 — Card Grid, <code>row-cols-*</code>, <code>h-100</code>.
-Read <a href="../CSS_BASICS.md">CSS_BASICS.md</a> §9–10 — Flexbox and Grid (Bootstrap is built on them).</p>
+Read <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §6 — Card Grid, <code>row-cols-*</code>, <code>h-100</code>.
+Read <a href="../../05_frontend_and_templates/css_basics_full/">CSS Basics</a> §9–10 — Flexbox and Grid (Bootstrap is built on them).</p>
 </blockquote>
 <h3 id="step-d1--rewrite-hello_apptemplateshello_appnote_listhtml">Step D1 — Rewrite <code>hello_app/templates/hello_app/note_list.html</code><a class="headerlink" href="#step-d1--rewrite-hello_apptemplateshello_appnote_listhtml" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>{% extends 'hello_app/base.html' %}
@@ -2354,9 +2354,9 @@ Read <a href="../CSS_BASICS.md">CSS_BASICS.md</a> §9–10 — Flexbox and Grid 
 <h2 id="phase-e--the-note-form-with-bootstrap">Phase E — The note form with Bootstrap<a class="headerlink" href="#phase-e--the-note-form-with-bootstrap" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §9 — Bootstrap Forms.
-Read <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §7 — Bootstrap Forms in Django.
-Read <a href="../HTML_BASICS.md">HTML_BASICS.md</a> §5 — HTML Forms, input types.</p>
+Read <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §9 — Bootstrap Forms.
+Read <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §7 — Bootstrap Forms in Django.
+Read <a href="../../05_frontend_and_templates/html_basics_full/">HTML Basics</a> §5 — HTML Forms, input types.</p>
 </blockquote>
 <h3 id="step-e1--create-hello_appformspy">Step E1 — Create <code>hello_app/forms.py</code><a class="headerlink" href="#step-e1--create-hello_appformspy" title="Permanent link">&para;</a></h3>
 <p>Create a <strong>new file</strong> <code>hello_app/forms.py</code>:</p>
@@ -2516,8 +2516,8 @@ A path converter — it captures an integer from the URL and passes it to the vi
 <h2 id="phase-f--templates-for-detail-form-and-deletion">Phase F — Templates for detail, form and deletion<a class="headerlink" href="#phase-f--templates-for-detail-form-and-deletion" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §9 — Form validation, invalid-feedback.
-Read <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §7 — the django-bootstrap5 tag.</p>
+Read <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §9 — Form validation, invalid-feedback.
+Read <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §7 — the django-bootstrap5 tag.</p>
 </blockquote>
 <h3 id="step-f1--hello_apptemplateshello_appnote_detailhtml">Step F1 — <code>hello_app/templates/hello_app/note_detail.html</code><a class="headerlink" href="#step-f1--hello_apptemplateshello_appnote_detailhtml" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>{% extends 'hello_app/base.html' %}
@@ -2677,7 +2677,7 @@ Read <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>{% bootstrap_form form %}
 </code></pre></div>
 The <code>django-bootstrap5</code> package automatically adds all Bootstrap classes, labels and errors.
-Theory: <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §7 — django-bootstrap5.</p>
+Theory: <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §7 — django-bootstrap5.</p>
 </blockquote>
 <h3 id="step-f3--hello_apptemplateshello_appnote_confirm_deletehtml">Step F3 — <code>hello_app/templates/hello_app/note_confirm_delete.html</code><a class="headerlink" href="#step-f3--hello_apptemplateshello_appnote_confirm_deletehtml" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>{{% extends 'hello_app/base.html' %}
@@ -2743,7 +2743,7 @@ Theory: <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md
 A library that replaces the standard Django Admin with a Tailwind-CSS-styled interface.
 It requires no changes to the logic — it only changes inheritance and adds an <code>UNFOLD</code> dictionary to <code>settings.py</code>.</p>
 <p><strong>Theory:</strong>
-Read <a href="../DJANGO_ADMIN_UNFOLD.md">DJANGO_ADMIN_UNFOLD.md</a> §2 — ModelAdmin,
+Read <a href="../../05_frontend_and_templates/django_admin_unfold_full/">Django Admin Unfold</a> §2 — ModelAdmin,
 §7 — <code>UNFOLD</code> config, sidebar navigation.</p>
 </blockquote>
 <h3 id="step-g1--updating-hello_projectsettingspy">Step G1 — Updating <code>hello_project/settings.py</code><a class="headerlink" href="#step-g1--updating-hello_projectsettingspy" title="Permanent link">&para;</a></h3>
@@ -2937,8 +2937,8 @@ If you added fields, run:</p>
 <h2 id="phase-h--django-debug-toolbar-sql-panel">Phase H — Django Debug Toolbar (SQL panel)<a class="headerlink" href="#phase-h--django-debug-toolbar-sql-panel" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><strong>Theory:</strong>
-Read <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §9 — DjDT.
-Read <a href="../DJANGO_ADMIN_UNFOLD.md">DJANGO_ADMIN_UNFOLD.md</a> §5 — Query Architecture, N+1.</p>
+Read <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §9 — DjDT.
+Read <a href="../../05_frontend_and_templates/django_admin_unfold_full/">Django Admin Unfold</a> §5 — Query Architecture, N+1.</p>
 </blockquote>
 <p>The toolbar is already connected (we added it in Settings and URLs).
 Go to <strong>http://localhost:8000/notes/</strong> — a black DJDT panel will appear on the right.</p>
@@ -2979,8 +2979,8 @@ Go to <strong>http://localhost:8000/notes/</strong> — a black DJDT panel will 
 </blockquote>
 <hr />
 <h2 id="summary-all-commands-in-order">Summary: all commands in order<a class="headerlink" href="#summary-all-commands-in-order" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># 1. Open the project folder</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nb">cd</span><span class="w"> </span>module_5<span class="se">\l</span>esson_HTML_CSS_Bootstrap<span class="se">\d</span>jango_bootstrap_project
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1"># 1. Open the project folder (your path is your own)</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nb">cd</span><span class="w"> </span>C:<span class="se">\.</span>..<span class="se">\d</span>jango_bootstrap_project
 <a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
 <a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="c1"># 2. Create and activate venv</span>
 <a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>venv
@@ -3119,26 +3119,26 @@ Go to <strong>http://localhost:8000/notes/</strong> — a black DJDT panel will 
 <p>You have built a full-fledged Bootstrap application. What's next:</p>
 <h3 id="level-1--extending-the-model">Level 1 — Extending the model<a class="headerlink" href="#level-1--extending-the-model" title="Permanent link">&para;</a></h3>
 <p>Add fields to <code>Note</code>: <code>is_public</code>, <code>category</code>, <code>tags</code>.
-Read: <a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §2 — Context, Dot-Lookup.</p>
+Read: <a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §2 — Context, Dot-Lookup.</p>
 <h3 id="level-2--search-and-filtering">Level 2 — Search and filtering<a class="headerlink" href="#level-2--search-and-filtering" title="Permanent link">&para;</a></h3>
 <p>Add a search box to the <code>note_list</code> view (<code>request.GET.get('q')</code>).
-Read: <a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §5 — SaaS Dashboard, filter form.</p>
+Read: <a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a> §5 — SaaS Dashboard, filter form.</p>
 <h3 id="level-3--pagination">Level 3 — Pagination<a class="headerlink" href="#level-3--pagination" title="Permanent link">&para;</a></h3>
 <p>Split the list into pages with Django's <code>Paginator</code>.
-Read: <a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §5 — <code>components/pagination.html</code>.</p>
+Read: <a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a> §5 — <code>components/pagination.html</code>.</p>
 <h3 id="level-4--a-modal-for-deletion">Level 4 — A Modal for deletion<a class="headerlink" href="#level-4--a-modal-for-deletion" title="Permanent link">&para;</a></h3>
 <p>Instead of a separate delete page — a Bootstrap Modal right from the list.
-Read: <a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §8 — Modal, JS Event Lifecycle.</p>
+Read: <a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §8 — Modal, JS Event Lifecycle.</p>
 <h3 id="level-5--django-ninja-api">Level 5 — Django Ninja API<a class="headerlink" href="#level-5--django-ninja-api" title="Permanent link">&para;</a></h3>
 <p>Add a REST endpoint <code>/api/notes/</code> with Django Ninja.
-Read: <a href="../DJANGO_NINJA_TEMPLATES.md">DJANGO_NINJA_TEMPLATES.md</a> §1–4.</p>
+Read: <a href="../../06_application_architecture/django_ninja_templates_full/">Django Ninja</a> §1–4.</p>
 <h3 id="level-6--unfold-admin--already-implemented">Level 6 — Unfold Admin ✓ (already implemented)<a class="headerlink" href="#level-6--unfold-admin--already-implemented" title="Permanent link">&para;</a></h3>
 <p><code>django-unfold</code> is connected. The next step is to extend the <code>UNFOLD</code> config:
 a custom dashboard (<code>DASHBOARD_CALLBACK</code>), colors (<code>COLORS</code>), a logo (<code>SITE_LOGO</code>).
-Read: <a href="../DJANGO_ADMIN_UNFOLD.md">DJANGO_ADMIN_UNFOLD.md</a> §7–12.</p>
+Read: <a href="../../05_frontend_and_templates/django_admin_unfold_full/">Django Admin Unfold</a> §7–12.</p>
 <h3 id="level-7--htmx-live-search">Level 7 — HTMX live search<a class="headerlink" href="#level-7--htmx-live-search" title="Permanent link">&para;</a></h3>
 <p>Replace page reloads with HTMX partial renders.
-Read: <a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §7 — HTMX Architecture.</p>
+Read: <a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a> §7 — HTMX Architecture.</p>
 <hr />
 <h2 id="where-to-read-the-theory--a-quick-reference">Where to read the theory — a quick reference<a class="headerlink" href="#where-to-read-the-theory--a-quick-reference" title="Permanent link">&para;</a></h2>
 <table>
@@ -3151,43 +3151,43 @@ Read: <a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §7 — HTMX 
 <tbody>
 <tr>
 <td>How does the browser read HTML?</td>
-<td><a href="../HTML_BASICS.md">HTML_BASICS.md</a> §0</td>
+<td><a href="../../05_frontend_and_templates/html_basics_full/">HTML Basics</a> §0</td>
 </tr>
 <tr>
 <td>What is the Box Model?</td>
-<td><a href="../CSS_BASICS.md">CSS_BASICS.md</a> §6</td>
+<td><a href="../../05_frontend_and_templates/css_basics_full/">CSS Basics</a> §6</td>
 </tr>
 <tr>
 <td>How does the Bootstrap Grid work?</td>
-<td><a href="../BOOTSTRAP_5.md">BOOTSTRAP_5.md</a> §2–3</td>
+<td><a href="../../05_frontend_and_templates/bootstrap_5_full/">Bootstrap 5</a> §2–3</td>
 </tr>
 <tr>
 <td>What is Template Inheritance?</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §4</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §4</td>
 </tr>
 <tr>
 <td>How does Django generate HTML?</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §0</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §0</td>
 </tr>
 <tr>
 <td>What is CSRF?</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §8</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §8</td>
 </tr>
 <tr>
 <td>How do I connect django-bootstrap5?</td>
-<td><a href="../DJANGO_TEMPLATES_BOOTSTRAP.md">DJANGO_TEMPLATES_BOOTSTRAP.md</a> §7</td>
+<td><a href="../../05_frontend_and_templates/django_templates_bootstrap_full/">Django Templates + Bootstrap</a> §7</td>
 </tr>
 <tr>
 <td>What is an N+1 query?</td>
-<td><a href="../DJANGO_ADMIN_UNFOLD.md">DJANGO_ADMIN_UNFOLD.md</a> §5</td>
+<td><a href="../../05_frontend_and_templates/django_admin_unfold_full/">Django Admin Unfold</a> §5</td>
 </tr>
 <tr>
 <td>What is a Context Processor?</td>
-<td><a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §1</td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a> §1</td>
 </tr>
 <tr>
 <td>How do I build HTMX search?</td>
-<td><a href="../ADVANCED_TEMPLATES.md">ADVANCED_TEMPLATES.md</a> §7</td>
+<td><a href="../../05_frontend_and_templates/advanced_templates_full/">Advanced Templates</a> §7</td>
 </tr>
 </tbody>
 </table>

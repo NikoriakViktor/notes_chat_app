@@ -3238,20 +3238,20 @@
 </code></pre></div></p>
 <hr />
 <h2 id="чеклист-самоперевірки">Чеклист самоперевірки<a class="headerlink" href="#чеклист-самоперевірки" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>daphne</code> — перший у <code>INSTALLED_APPS</code></li>
-<li>[ ] <code>channels</code> — у <code>INSTALLED_APPS</code></li>
-<li>[ ] <code>ASGI_APPLICATION = 'notes_project.asgi.application'</code> у settings.py</li>
-<li>[ ] <code>CHANNEL_LAYERS</code> налаштовано (InMemory або Redis)</li>
-<li>[ ] <code>"socket_timeout": None</code> у RedisChannelLayer CONFIG</li>
-<li>[ ] <code>asgi.py</code>: <code>get_asgi_application()</code> ПЕРЕД будь-яким імпортом з notes_app</li>
-<li>[ ] <code>routing.py</code> підключено до <code>asgi.py</code></li>
-<li>[ ] Всі ORM-виклики у Consumer — <code>@database_sync_to_async</code></li>
-<li>[ ] <code>load_history</code> повертає <code>list(qs.values(...))</code>, не QuerySet</li>
-<li>[ ] <code>disconnect()</code> викликає <code>group_discard()</code></li>
-<li>[ ] JS клієнт: <code>escapeHtml()</code> для user content (XSS захист)</li>
-<li>[ ] nginx: <code>proxy_http_version 1.1</code> + <code>Upgrade</code> + <code>Connection</code> headers</li>
-<li>[ ] Consumer тести проходять: <code>docker compose run --rm web python manage.py test notes_app.tests.test_consumers</code></li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>daphne</code> — перший у <code>INSTALLED_APPS</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>channels</code> — у <code>INSTALLED_APPS</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>ASGI_APPLICATION = 'notes_project.asgi.application'</code> у settings.py</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CHANNEL_LAYERS</code> налаштовано (InMemory або Redis)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>"socket_timeout": None</code> у RedisChannelLayer CONFIG</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>asgi.py</code>: <code>get_asgi_application()</code> ПЕРЕД будь-яким імпортом з notes_app</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>routing.py</code> підключено до <code>asgi.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Всі ORM-виклики у Consumer — <code>@database_sync_to_async</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>load_history</code> повертає <code>list(qs.values(...))</code>, не QuerySet</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>disconnect()</code> викликає <code>group_discard()</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> JS клієнт: <code>escapeHtml()</code> для user content (XSS захист)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> nginx: <code>proxy_http_version 1.1</code> + <code>Upgrade</code> + <code>Connection</code> headers</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Consumer тести проходять: <code>docker compose run --rm web python manage.py test notes_app.tests.test_consumers</code></li>
 </ul>
 <hr />
 <h2 id="далі">Далі<a class="headerlink" href="#далі" title="Permanent link">&para;</a></h2>

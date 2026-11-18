@@ -1980,25 +1980,25 @@
 <p>Що станеться якщо запустити два екземпляри <code>celery-beat</code>? Як можна захиститись від дублювання задач? Підказка: шукай <code>celery beat --max-interval</code> і <code>django-celery-beat</code>.</p>
 <hr />
 <h2 id="чеклист-самоперевірки">Чеклист самоперевірки<a class="headerlink" href="#чеклист-самоперевірки" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>notes_project/celery.py</code> існує і містить <code>app = Celery('notes_project')</code></li>
-<li>[ ] <code>notes_project/__init__.py</code> імпортує <code>celery_app</code></li>
-<li>[ ] <code>CELERY_BROKER_URL</code> налаштований у <code>settings.py</code></li>
-<li>[ ] Celery і Channels використовують різні Redis DB (0 і 1)</li>
-<li>[ ] <code>CELERY_BEAT_SCHEDULE</code> містить <code>send_reminder_notifications</code></li>
-<li>[ ] <code>celery-worker</code> і <code>celery-beat</code> у <code>docker-compose.yml</code></li>
-<li>[ ] <code>celery-beat</code> — один екземпляр</li>
-<li>[ ] <code>@shared_task</code> (не <code>@app.task</code>) у <code>tasks.py</code></li>
-<li>[ ] <code>select_related('note__user')</code> у запиті pending reminders</li>
-<li>[ ] <code>save(update_fields=['is_sent'])</code> — оновлення лише одного поля</li>
-<li>[ ] <code>relativedelta</code> для місячного повторення</li>
-<li>[ ] <code>GET /reminders/check/</code> повертає <code>{"reminders": [...]}</code></li>
-<li>[ ] <code>@login_required</code> на <code>reminders_check</code> view</li>
-<li>[ ] <code>escapeHtml()</code> у JS перед вставкою у DOM</li>
-<li>[ ] <code>sessionStorage</code> дедуплікує Toast-и в одній сесії</li>
-<li>[ ] <code>aria-live="polite"</code> на toast-container</li>
-<li>[ ] Unit тести для <code>send_reminder_notifications</code> — <code>@override_settings(EMAIL_BACKEND=...)</code></li>
-<li>[ ] <code>mail.outbox</code> перевіряє надіслані email</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>notes_project/celery.py</code> існує і містить <code>app = Celery('notes_project')</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>notes_project/__init__.py</code> імпортує <code>celery_app</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CELERY_BROKER_URL</code> налаштований у <code>settings.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Celery і Channels використовують різні Redis DB (0 і 1)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CELERY_BEAT_SCHEDULE</code> містить <code>send_reminder_notifications</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>celery-worker</code> і <code>celery-beat</code> у <code>docker-compose.yml</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>celery-beat</code> — один екземпляр</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@shared_task</code> (не <code>@app.task</code>) у <code>tasks.py</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>select_related('note__user')</code> у запиті pending reminders</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>save(update_fields=['is_sent'])</code> — оновлення лише одного поля</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>relativedelta</code> для місячного повторення</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>GET /reminders/check/</code> повертає <code>{"reminders": [...]}</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>@login_required</code> на <code>reminders_check</code> view</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>escapeHtml()</code> у JS перед вставкою у DOM</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>sessionStorage</code> дедуплікує Toast-и в одній сесії</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>aria-live="polite"</code> на toast-container</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Unit тести для <code>send_reminder_notifications</code> — <code>@override_settings(EMAIL_BACKEND=...)</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>mail.outbox</code> перевіряє надіслані email</li>
 </ul>
 <hr />
 <h2 id="далі">Далі<a class="headerlink" href="#далі" title="Permanent link">&para;</a></h2>

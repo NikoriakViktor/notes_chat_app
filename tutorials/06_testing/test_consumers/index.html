@@ -4377,13 +4377,13 @@
 </div>
 <hr />
 <h2 id="чеклист-для-consumer-тестів">Чеклист для consumer тестів<a class="headerlink" href="#чеклист-для-consumer-тестів" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] Використовується <code>TransactionTestCase</code>, а не <code>TestCase</code></li>
-<li>[ ] <code>setUp()</code> — синхронний (не <code>asyncSetUp</code>)</li>
-<li>[ ] <code>communicator.scope['user']</code> встановлений перед <code>connect()</code></li>
-<li>[ ] <code>await communicator.disconnect()</code> у кожному тесті (навіть якщо <code>connected=False</code>)</li>
-<li>[ ] Звернення до БД з async — через <code>database_sync_to_async</code></li>
-<li>[ ] Імпорт <code>application</code> з <code>notes_project.asgi</code>, не з views</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Використовується <code>TransactionTestCase</code>, а не <code>TestCase</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>setUp()</code> — синхронний (не <code>asyncSetUp</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>communicator.scope['user']</code> встановлений перед <code>connect()</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>await communicator.disconnect()</code> у кожному тесті (навіть якщо <code>connected=False</code>)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Звернення до БД з async — через <code>database_sync_to_async</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Імпорт <code>application</code> з <code>notes_project.asgi</code>, не з views</li>
 </ul>
 <hr />
 <h2 id="далі">Далі<a class="headerlink" href="#далі" title="Permanent link">&para;</a></h2>

@@ -4521,17 +4521,17 @@
 </code></pre></div>
 <hr />
 <h2 id="безпека-обовязково">Безпека (обов'язково)<a class="headerlink" href="#безпека-обовязково" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>SECRET_KEY</code> — унікальний, 50+ символів, згенерований <code>get_random_secret_key()</code></li>
-<li>[ ] <code>DEBUG = False</code> — <strong>НІКОЛИ True в production</strong></li>
-<li>[ ] <code>ALLOWED_HOSTS</code> — конкретні домени, не <code>['*']</code></li>
-<li>[ ] <code>CSRF_TRUSTED_ORIGINS</code> — містить prod домен і ngrok домен</li>
-<li>[ ] <code>SESSION_COOKIE_SECURE = True</code> — cookie тільки HTTPS</li>
-<li>[ ] <code>CSRF_COOKIE_SECURE = True</code></li>
-<li>[ ] <code>SECURE_SSL_REDIRECT = True</code> — HTTP → HTTPS redirect</li>
-<li>[ ] <code>SECURE_HSTS_SECONDS = 31536000</code> — HSTS на 1 рік</li>
-<li>[ ] <code>.env</code> у <code>.gitignore</code> — перевір <code>git status</code> перед push</li>
-<li>[ ] Паролі у <code>.env</code>, не у коді чи Dockerfile</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SECRET_KEY</code> — унікальний, 50+ символів, згенерований <code>get_random_secret_key()</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>DEBUG = False</code> — <strong>НІКОЛИ True в production</strong></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>ALLOWED_HOSTS</code> — конкретні домени, не <code>['*']</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CSRF_TRUSTED_ORIGINS</code> — містить prod домен і ngrok домен</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SESSION_COOKIE_SECURE = True</code> — cookie тільки HTTPS</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CSRF_COOKIE_SECURE = True</code></li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SECURE_SSL_REDIRECT = True</code> — HTTP → HTTPS redirect</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>SECURE_HSTS_SECONDS = 31536000</code> — HSTS на 1 рік</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>.env</code> у <code>.gitignore</code> — перевір <code>git status</code> перед push</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Паролі у <code>.env</code>, не у коді чи Dockerfile</li>
 </ul>
 <h3 id="налаштування-https-у-settingspy">Налаштування HTTPS у settings.py<a class="headerlink" href="#налаштування-https-у-settingspy" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># settings.py — розкоментуй коли є SSL сертифікат:</span>
@@ -4544,13 +4544,13 @@
 </code></pre></div>
 <hr />
 <h2 id="продуктивність">Продуктивність<a class="headerlink" href="#продуктивність" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>--reload</code> прибрати з <code>entrypoint.sh</code> (uvicorn)</li>
-<li>[ ] <code>--workers 4</code> додати до uvicorn (4 = 2 × CPU cores)</li>
-<li>[ ] <code>CONN_MAX_AGE = 0</code> для ASGI (async-compatible)</li>
-<li>[ ] nginx <code>expires 7d</code> для статики (кешування)</li>
-<li>[ ] PostgreSQL <code>max_connections</code> відповідає кількості uvicorn workers</li>
-<li>[ ] Redis <code>maxmemory-policy allkeys-lru</code> (не дозволяти Redis заповнити RAM)</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>--reload</code> прибрати з <code>entrypoint.sh</code> (uvicorn)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>--workers 4</code> додати до uvicorn (4 = 2 × CPU cores)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>CONN_MAX_AGE = 0</code> для ASGI (async-compatible)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> nginx <code>expires 7d</code> для статики (кешування)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> PostgreSQL <code>max_connections</code> відповідає кількості uvicorn workers</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Redis <code>maxmemory-policy allkeys-lru</code> (не дозволяти Redis заповнити RAM)</li>
 </ul>
 <h3 id="production-entrypointsh">Production entrypoint.sh<a class="headerlink" href="#production-entrypointsh" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># entrypoint.sh у production — прибираємо --reload, додаємо --workers:</span>
@@ -4627,11 +4627,11 @@
 </code></pre></div>
 <hr />
 <h2 id="моніторинг-і-логування">Моніторинг і логування<a class="headerlink" href="#моніторинг-і-логування" title="Permanent link">&para;</a></h2>
-<ul>
-<li>[ ] <code>LOGGING</code> у <code>settings.py</code> → файли або stdout для Docker</li>
-<li>[ ] nginx access log → analysis (Grafana Loki або ELK)</li>
-<li>[ ] Health check endpoints відповідають</li>
-<li>[ ] Uptime monitor (UptimeRobot, Better Stack)</li>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> <code>LOGGING</code> у <code>settings.py</code> → файли або stdout для Docker</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> nginx access log → analysis (Grafana Loki або ELK)</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Health check endpoints відповідають</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled/><span class="task-list-indicator"></span></label> Uptime monitor (UptimeRobot, Better Stack)</li>
 </ul>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># settings.py — базова конфігурація логування:</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">LOGGING</span> <span class="o">=</span> <span class="p">{</span>
