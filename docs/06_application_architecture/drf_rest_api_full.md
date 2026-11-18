@@ -176,7 +176,7 @@ sequenceDiagram
 
 ## Мінімальний незалежний приклад
 
-Нижче — мінімальний незалежний приклад: модель `Note` без власника, API «як з коробки». У [курсі](https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/) той самий API (урок 36) побудовано поверх проєкту нотаток із власниками: [`lesson_36_drf_fastapi/crispy_notes_project`](https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-22-09-2026/tree/main/module_4/lessons/lesson_36_drf_fastapi/crispy_notes_project).
+Нижче — мінімальний незалежний приклад: модель `Note` без власника, API «як з коробки». Той самий API з власниками нотаток і правами доступу — у розділі [Приклад із Notes Chat App](#приклад-із-notes-chat-app) нижче.
 
 **1. Встановлення і налаштування.**
 
@@ -630,5 +630,4 @@ flowchart TD
 - [Права доступу](../07_auth_and_security/permissions_full.md) і [OWASP Top 10](../07_auth_and_security/owasp_top_10_full.md) — IDOR і контроль доступу.
 - [Django Testing](../08_testing_and_quality/django_testing_full.md) — `APITestCase` і тестова база.
 - [Django Ninja](django_ninja_templates_full.md) — альтернативний підхід до API на Django.
-- Курс: [урок 36 «DRF overview + Django vs FastAPI»](https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/) — покроково, з `curl`, browsable API, OpenAPI і тим самим API на FastAPI.
 - Документація: [Django REST framework](https://www.django-rest-framework.org/), [drf-spectacular](https://drf-spectacular.readthedocs.io/).
