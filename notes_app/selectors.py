@@ -1,10 +1,10 @@
 """
 selectors.py — SELECT queries only (no mutations).
 
-Скопійовано з notes_project. Детальна документація ORM оптимізацій:
-lesson_Django_ORM_Database/notes_project/notes_app/selectors.py
+Детально про оптимізацію запитів ORM:
+https://nikoriakviktor.github.io/notes_chat_app/tutorials/03_crud_and_architecture/queryset_deep/
 
-Auth lesson additions:
+Доповнення кроку 5 (автентифікація):
   - get_user_notes: includes group notes (Q filter)
   - get_user_shopping_lists: includes group lists
   - get_user_groups, get_group_members: group management selectors

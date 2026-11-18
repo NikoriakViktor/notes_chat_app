@@ -1,9 +1,9 @@
 """
 models.py — Персональний менеджер записів
 
-Скопійовано з lesson_Django_ORM_Database/notes_project.
+Модель з'явилась у кроці 3 книги (CRUD і архітектура).
 У цьому проєкті акцент на Templates + Crispy Forms, а не на ORM.
-Детальні коментарі до ORM: ../lesson_Django_ORM_Database/notes_project/notes_app/models.py
+Детально про ORM: https://nikoriakviktor.github.io/notes_chat_app/tutorials/03_crud_and_architecture/models/
 
 Архітектура (зв'язки між моделями):
     User ──1:1──► UserProfile
