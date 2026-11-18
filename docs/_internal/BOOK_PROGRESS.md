@@ -58,7 +58,7 @@
 |------|----|
 | `docs/javascripts/mermaid_labels.js` | **новий**: Material кладе в shadow DOM кожної схеми правило `.nodeLabel p { color: var(--md-mermaid-label-fg-color) }`, а Mermaid 11 загортає текст вузла в `<p>` — через це колір із `classDef … color:#fff` і `style X … color:#fff` не доходив до тексту: на темних вузлах текст був темним (зачеплено 27 файлів: 5 з `classDef color:`, 22 з `style … color:`). Скрипт додає в кожен shadow root `.nodeLabel p { color: inherit !important }` |
 | `docs/javascripts/sidebars.js`, `docs/stylesheets/extra.css` | **нові**: кнопки «☰ Меню» і «≡ Зміст» у шапці — згорнути ліве меню і правий зміст; стан у `localStorage` (перенесено з курсу PY-Course-Victor-Nikoriak-22-09-2026) |
-| `mkdocs.yml` | `extra_css`, `extra_javascript`; `pymdownx.tabbed` (вкладки `=== "..."`); `site_url` виправлено: `nikoriakviktor` → `nikoriakviktot` (адреса GitHub Pages за іменем акаунта) |
+| `mkdocs.yml` | `extra_css`, `extra_javascript`; `pymdownx.tabbed` (вкладки `=== "..."`); `site_url` виправлено: `nikoriakviktor` → `nikoriakviktot` (адреса GitHub Pages за іменем акаунта; після перейменування акаунта на `NikoriakViktor` у 2026-11 — знову `nikoriakviktor`) |
 
 **Перевірено:** `mkdocs build --strict`; Playwright: `01_web_foundations/server` і `02_django_core/django_mermaid_full` — білий текст на темних вузлах видно, вузли без кольору не змінились, 0 помилок Mermaid; кнопки працюють і зберігають стан між сторінками.
 

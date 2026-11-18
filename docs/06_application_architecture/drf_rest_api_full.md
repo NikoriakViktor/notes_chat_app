@@ -176,7 +176,7 @@ sequenceDiagram
 
 ## Мінімальний незалежний приклад
 
-Навчальний проєкт `hello_project` з уроків 33 і 35 [курсу](https://nikoriakviktot.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_35/) — модель `Note` без власника, API «як з коробки». Повний код: [`lesson_35_drf_fastapi/hello_project`](https://github.com/NikoriakViktot/PY-Course-Victor-Nikoriak-22-09-2026/tree/main/module_4/lessons/lesson_35_drf_fastapi/hello_project).
+Нижче — мінімальний незалежний приклад: модель `Note` без власника, API «як з коробки». У [курсі](https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/) той самий API (урок 36) побудовано поверх проєкту нотаток із власниками: [`lesson_36_drf_fastapi/crispy_notes_project`](https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-22-09-2026/tree/main/module_4/lessons/lesson_36_drf_fastapi/crispy_notes_project).
 
 **1. Встановлення і налаштування.**
 
@@ -290,7 +290,7 @@ $ curl -s -u admin:lesson33-pass -X DELETE http://127.0.0.1:8000/api/notes/4/ -o
 ## Приклад із Notes Chat App
 
 !!! info "Стан коду"
-    REST API — частина Notes Chat App: [`notes_app/api.py`](https://github.com/NikoriakViktot/notes_chat_app/blob/main/notes_app/api.py), маршрути в `notes_project/urls.py`, налаштування `REST_FRAMEWORK` у `notes_project/settings.py`, тести [`notes_app/tests/test_api.py`](https://github.com/NikoriakViktot/notes_chat_app/blob/main/notes_app/tests/test_api.py) (входять у CI). API побудовано **поверх наявних** `selectors.py` і `services.py` — в них нічого не змінено. Вивід і тести нижче — з реальних запусків (Django 5.2.17, DRF 3.18.1, PostgreSQL 16).
+    REST API — частина Notes Chat App: [`notes_app/api.py`](https://github.com/NikoriakViktor/notes_chat_app/blob/main/notes_app/api.py), маршрути в `notes_project/urls.py`, налаштування `REST_FRAMEWORK` у `notes_project/settings.py`, тести [`notes_app/tests/test_api.py`](https://github.com/NikoriakViktor/notes_chat_app/blob/main/notes_app/tests/test_api.py) (входять у CI). API побудовано **поверх наявних** `selectors.py` і `services.py` — в них нічого не змінено. Вивід і тести нижче — з реальних запусків (Django 5.2.17, DRF 3.18.1, PostgreSQL 16).
 
 У Notes Chat App вже є все, що потрібно API:
 
@@ -630,5 +630,5 @@ flowchart TD
 - [Права доступу](../07_auth_and_security/permissions_full.md) і [OWASP Top 10](../07_auth_and_security/owasp_top_10_full.md) — IDOR і контроль доступу.
 - [Django Testing](../08_testing_and_quality/django_testing_full.md) — `APITestCase` і тестова база.
 - [Django Ninja](django_ninja_templates_full.md) — альтернативний підхід до API на Django.
-- Курс: [урок 35 «DRF overview + Django vs FastAPI»](https://nikoriakviktot.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_35/) — покроково, з `curl`, browsable API, OpenAPI і тим самим API на FastAPI.
+- Курс: [урок 36 «DRF overview + Django vs FastAPI»](https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/) — покроково, з `curl`, browsable API, OpenAPI і тим самим API на FastAPI.
 - Документація: [Django REST framework](https://www.django-rest-framework.org/), [drf-spectacular](https://drf-spectacular.readthedocs.io/).
