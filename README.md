@@ -4,6 +4,33 @@
 
 Навчальний Django-репозиторій, який веде студента від web foundations до фінального Django-застосунку з нотатками, списками, груповим доступом і WebSocket-чатом.
 
+### Структура документації
+
+| Розділ | Опис |
+|--------|------|
+| [Книга](docs/00_getting_started/README.md) | 12 модулів: Web → Django → DB → Forms → Frontend → Architecture → Auth → Testing → Async → Linux → Deploy |
+| [Notes Chat App](docs/12_final_project/README.md) | Архітектура, моделі, тести, деплоймент фінального проєкту |
+| [Практика](docs/tutorials/README.md) | Туторіали та labs |
+| [Довідник](docs/reference/README.md) | Cheatsheets, глосарій, troubleshooting |
+| [Викладачу](docs/TEACHING_GUIDE.md) | Teaching guide, learning path |
+
+## Навчальний маршрут
+
+1. [Getting started](docs/00_getting_started/README.md)
+2. [Web foundations](docs/01_web_foundations/README.md)
+3. [Django core](docs/02_django_core/README.md)
+4. [Database and ORM](docs/03_database_and_orm/README.md)
+5. [Forms and validation](docs/04_forms_and_validation/README.md)
+6. [Frontend and templates](docs/05_frontend_and_templates/README.md)
+7. [Application architecture](docs/06_application_architecture/README.md)
+8. [Auth and security](docs/07_auth_and_security/README.md)
+9. [Testing and quality](docs/08_testing_and_quality/README.md)
+10. [Async and realtime](docs/09_async_and_realtime/README.md)
+11. [Linux and DevOps](docs/10_linux_and_devops/README.md)
+12. [Deployment](docs/11_deployment/README.md)
+13. [Final project](docs/12_final_project/README.md)
+
+
 ## Про проєкт
 
 `Notes Chat App` показує, як виростає Django-застосунок:
@@ -134,31 +161,6 @@ GitHub Actions автоматично збудує сайт і задеплої�
 
 > **Перший деплой:** зайди в **Settings → Pages**, вибери Source = `gh-pages` / `/ (root)`, натисни Save.
 
-### Структура документації
-
-| Розділ | Опис |
-|--------|------|
-| [Книга](docs/00_getting_started/README.md) | 12 модулів: Web → Django → DB → Forms → Frontend → Architecture → Auth → Testing → Async → Linux → Deploy |
-| [Notes Chat App](docs/12_final_project/README.md) | Архітектура, моделі, тести, деплоймент фінального проєкту |
-| [Практика](docs/tutorials/README.md) | Туторіали та labs |
-| [Довідник](docs/reference/README.md) | Cheatsheets, глосарій, troubleshooting |
-| [Викладачу](docs/TEACHING_GUIDE.md) | Teaching guide, learning path |
-
-## Навчальний маршрут
-
-1. [Getting started](docs/00_getting_started/README.md)
-2. [Web foundations](docs/01_web_foundations/README.md)
-3. [Django core](docs/02_django_core/README.md)
-4. [Database and ORM](docs/03_database_and_orm/README.md)
-5. [Forms and validation](docs/04_forms_and_validation/README.md)
-6. [Frontend and templates](docs/05_frontend_and_templates/README.md)
-7. [Application architecture](docs/06_application_architecture/README.md)
-8. [Auth and security](docs/07_auth_and_security/README.md)
-9. [Testing and quality](docs/08_testing_and_quality/README.md)
-10. [Async and realtime](docs/09_async_and_realtime/README.md)
-11. [Linux and DevOps](docs/10_linux_and_devops/README.md)
-12. [Deployment](docs/11_deployment/README.md)
-13. [Final project](docs/12_final_project/README.md)
 
 ## Демо-дані (`seed_demo_data`)
 
