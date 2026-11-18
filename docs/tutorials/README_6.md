@@ -533,6 +533,15 @@ SQL (спрощено):
 # 1. Перейти до папки проєкту
 cd notes_chat_app   # корінь репозиторію: тут manage.py і requirements.txt
 
+# PostgreSQL: settings.py без DATABASE_URL не стартує
+# («DATABASE_URL не встановлено. Запускай через docker compose.»)
+docker run -d --name notes-pg -p 5432:5432 \
+  -e POSTGRES_USER=notes_user -e POSTGRES_PASSWORD=notes_pass -e POSTGRES_DB=notes_db \
+  postgres:16-alpine
+export DATABASE_URL=postgres://notes_user:notes_pass@localhost:5432/notes_db
+# Windows PowerShell: $env:DATABASE_URL="postgres://notes_user:notes_pass@localhost:5432/notes_db"
+# DATABASE_URL задай у кожному терміналі, де запускаєш manage.py
+
 # 2. Встановити залежності
 pip install -r requirements.txt
 # Django>=5.2, django-crispy-forms>=2.3, crispy-bootstrap5, django-debug-toolbar
@@ -546,6 +555,10 @@ python manage.py createsuperuser
 # 5. Запустити сервер
 python manage.py runserver
 ```
+
+!!! tip "Без локального Python і PostgreSQL"
+    `docker compose up --build` з кореня репозиторію піднімає PostgreSQL, Redis і застосунок разом; сторінки — на `http://localhost:8001/`.
+
 
 ### Що дивитись у браузері
 

@@ -129,8 +129,10 @@ $ curl -s http://localhost:8000/notes/
 1. **View.** Параметр з URL приходить у функцію як іменований аргумент:
 
     ```python title="hello_app/views.py (фрагмент)"
+    from django.utils.html import escape
+
     def greet(request, name):
-        return HttpResponse(f"Привіт, {name}!")
+        return HttpResponse(f"Привіт, {escape(name)}!")
     ```
 
 2. **Маршрут.** Конвертер `str` бере все до наступного `/`:
@@ -143,12 +145,16 @@ $ curl -s http://localhost:8000/notes/
 
     ```text
     /greet/Olena/ 200 Привіт, Olena!
+    /greet/%3Cimg%20src=x%20onerror=alert(1)%3E/ 200 Привіт, &lt;img src=x onerror=alert(1)&gt;!
     /greet/ 404
     /greet/a/b/ 404
     reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
     ```
 
     `/greet/` — `404`, бо порожній рядок `str` не приймає; `/greet/a/b/` — `404`, бо `str` не містить `/` (для шляхів зі слешем є конвертер `path`).
+
+    !!! warning "Чому `escape(name)`"
+        `name` приходить з адреси, тобто його пише будь-хто. `HttpResponse` віддає рядок як HTML (`text/html`) і нічого не екранує. Без `escape()` та сама адреса повернула б `Привіт, <img src=x onerror=alert(1)>!` — браузер виконав би чужий JavaScript (reflected XSS). `escape()` перетворює `<` і `>` на `&lt;` і `&gt;`, і браузер показує їх як текст. Шаблони Django екранують змінні самі, тому в кроці 2, де відповідь будується через `render()`, `escape()` вже не потрібен.
 
 ### Зміни приклад { #modify }
 

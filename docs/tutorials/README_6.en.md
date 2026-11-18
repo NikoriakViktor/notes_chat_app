@@ -533,6 +533,15 @@ Rule: DEBUG = False ALWAYS in production.
 # 1. Go to the project folder
 cd notes_chat_app   # the repository root: manage.py and requirements.txt live here
 
+# PostgreSQL: settings.py does not start without DATABASE_URL
+# ("DATABASE_URL не встановлено. Запускай через docker compose.")
+docker run -d --name notes-pg -p 5432:5432 \
+  -e POSTGRES_USER=notes_user -e POSTGRES_PASSWORD=notes_pass -e POSTGRES_DB=notes_db \
+  postgres:16-alpine
+export DATABASE_URL=postgres://notes_user:notes_pass@localhost:5432/notes_db
+# Windows PowerShell: $env:DATABASE_URL="postgres://notes_user:notes_pass@localhost:5432/notes_db"
+# set DATABASE_URL in every terminal where you run manage.py
+
 # 2. Install dependencies
 pip install -r requirements.txt
 # Django>=5.2, django-crispy-forms>=2.3, crispy-bootstrap5, django-debug-toolbar
@@ -546,6 +555,10 @@ python manage.py createsuperuser
 # 5. Start the server
 python manage.py runserver
 ```
+
+!!! tip "Without local Python and PostgreSQL"
+    `docker compose up --build` from the repository root starts PostgreSQL, Redis and the app together; pages are at `http://localhost:8001/`.
+
 
 ### What to look at in the browser
 
