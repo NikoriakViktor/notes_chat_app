@@ -129,8 +129,10 @@ Task: the page `/greet/Olena/` must respond with `Привіт, Olena!`.
 1. **View.** The parameter from the URL arrives in the function as a keyword argument:
 
     ```python title="hello_app/views.py (excerpt)"
+    from django.utils.html import escape
+
     def greet(request, name):
-        return HttpResponse(f"Привіт, {name}!")
+        return HttpResponse(f"Привіт, {escape(name)}!")
     ```
 
 2. **Route.** The `str` converter takes everything up to the next `/`:
@@ -143,12 +145,16 @@ Task: the page `/greet/Olena/` must respond with `Привіт, Olena!`.
 
     ```text
     /greet/Olena/ 200 Привіт, Olena!
+    /greet/%3Cimg%20src=x%20onerror=alert(1)%3E/ 200 Привіт, &lt;img src=x onerror=alert(1)&gt;!
     /greet/ 404
     /greet/a/b/ 404
     reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
     ```
 
     `/greet/` gives `404` because `str` does not accept an empty string; `/greet/a/b/` gives `404` because `str` does not match `/` (for paths with slashes there is the `path` converter).
+
+    !!! warning "Why `escape(name)`"
+        `name` comes from the URL, so anyone can write it. `HttpResponse` returns the string as HTML (`text/html`) and escapes nothing. Without `escape()` the same URL would return `Привіт, <img src=x onerror=alert(1)>!` and the browser would run someone else's JavaScript (reflected XSS). `escape()` turns `<` and `>` into `&lt;` and `&gt;`, so the browser shows them as text. Django templates escape variables on their own, so in step 2, where the response is built with `render()`, `escape()` is no longer needed.
 
 ### Modify the example { #modify }
 
