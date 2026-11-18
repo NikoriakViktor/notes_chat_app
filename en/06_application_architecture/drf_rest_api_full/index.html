@@ -5312,7 +5312,7 @@
 <p>Зверни увагу: <strong>власника задає сервер</strong> (<code>user=request.user</code>), а не клієнт. Поле <code>user</code> у тілі запиту вхідний серіалізатор просто не приймає.</p>
 <hr />
 <h2 id="мінімальний-незалежний-приклад">Мінімальний незалежний приклад<a class="headerlink" href="#мінімальний-незалежний-приклад" title="Permanent link">&para;</a></h2>
-<p>Нижче — мінімальний незалежний приклад: модель <code>Note</code> без власника, API «як з коробки». У <a href="https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/">курсі</a> той самий API (урок 36) побудовано поверх проєкту нотаток із власниками: <a href="https://github.com/NikoriakViktor/PY-Course-Victor-Nikoriak-22-09-2026/tree/main/module_4/lessons/lesson_36_drf_fastapi/crispy_notes_project"><code>lesson_36_drf_fastapi/crispy_notes_project</code></a>.</p>
+<p>Нижче — мінімальний незалежний приклад: модель <code>Note</code> без власника, API «як з коробки». Той самий API з власниками нотаток і правами доступу — у розділі <a href="#приклад-із-notes-chat-app">Приклад із Notes Chat App</a> нижче.</p>
 <p><strong>1. Встановлення і налаштування.</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>djangorestframework<span class="w"> </span>drf-spectacular
 </code></pre></div>
@@ -5783,7 +5783,6 @@
 <li><a href="../../07_auth_and_security/permissions_full/">Права доступу</a> і <a href="../../07_auth_and_security/owasp_top_10_full/">OWASP Top 10</a> — IDOR і контроль доступу.</li>
 <li><a href="../../08_testing_and_quality/django_testing_full/">Django Testing</a> — <code>APITestCase</code> і тестова база.</li>
 <li><a href="../django_ninja_templates_full/">Django Ninja</a> — альтернативний підхід до API на Django.</li>
-<li>Курс: <a href="https://nikoriakviktor.github.io/PY-Course-Victor-Nikoriak-22-09-2026/modules/m4/lesson_36/">урок 36 «DRF overview + Django vs FastAPI»</a> — покроково, з <code>curl</code>, browsable API, OpenAPI і тим самим API на FastAPI.</li>
 <li>Документація: <a href="https://www.django-rest-framework.org/">Django REST framework</a>, <a href="https://drf-spectacular.readthedocs.io/">drf-spectacular</a>.</li>
 </ul>
 

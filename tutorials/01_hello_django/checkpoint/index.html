@@ -4425,8 +4425,10 @@
 <ol>
 <li>
 <p><strong>View.</strong> Параметр з URL приходить у функцію як іменований аргумент:</p>
-<div class="highlight"><span class="filename">hello_app/views.py (фрагмент)</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Привіт, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+<div class="highlight"><span class="filename">hello_app/views.py (фрагмент)</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.html</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Привіт, </span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
 </code></pre></div>
 </li>
 <li>
@@ -4437,11 +4439,16 @@
 <li>
 <p><strong>Результат</strong> (Django test client, той самий проєкт):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/greet/Olena/ 200 Привіт, Olena!
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>/greet/ 404
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>/greet/a/b/ 404
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>/greet/%3Cimg%20src=x%20onerror=alert(1)%3E/ 200 Привіт, &amp;lt;img src=x onerror=alert(1)&amp;gt;!
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>/greet/ 404
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>/greet/a/b/ 404
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
 </code></pre></div>
 <p><code>/greet/</code> — <code>404</code>, бо порожній рядок <code>str</code> не приймає; <code>/greet/a/b/</code> — <code>404</code>, бо <code>str</code> не містить <code>/</code> (для шляхів зі слешем є конвертер <code>path</code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Чому <code>escape(name)</code></p>
+<p><code>name</code> приходить з адреси, тобто його пише будь-хто. <code>HttpResponse</code> віддає рядок як HTML (<code>text/html</code>) і нічого не екранує. Без <code>escape()</code> та сама адреса повернула б <code>Привіт, &lt;img src=x onerror=alert(1)&gt;!</code> — браузер виконав би чужий JavaScript (reflected XSS). <code>escape()</code> перетворює <code>&lt;</code> і <code>&gt;</code> на <code>&amp;lt;</code> і <code>&amp;gt;</code>, і браузер показує їх як текст. Шаблони Django екранують змінні самі, тому в кроці 2, де відповідь будується через <code>render()</code>, <code>escape()</code> вже не потрібен.</p>
+</div>
 </li>
 </ol>
 <h3 id="modify">Зміни приклад<a class="headerlink" href="#modify" title="Permanent link">&para;</a></h3>

@@ -4425,8 +4425,10 @@
 <ol>
 <li>
 <p><strong>View.</strong> The parameter from the URL arrives in the function as a keyword argument:</p>
-<div class="highlight"><span class="filename">hello_app/views.py (excerpt)</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Привіт, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
+<div class="highlight"><span class="filename">hello_app/views.py (excerpt)</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">django.utils.html</span><span class="w"> </span><span class="kn">import</span> <span class="n">escape</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Привіт, </span><span class="si">{</span><span class="n">escape</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="si">}</span><span class="s2">!"</span><span class="p">)</span>
 </code></pre></div>
 </li>
 <li>
@@ -4437,11 +4439,16 @@
 <li>
 <p><strong>Result</strong> (Django test client, the same project):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>/greet/Olena/ 200 Привіт, Olena!
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>/greet/ 404
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>/greet/a/b/ 404
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>/greet/%3Cimg%20src=x%20onerror=alert(1)%3E/ 200 Привіт, &amp;lt;img src=x onerror=alert(1)&amp;gt;!
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>/greet/ 404
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>/greet/a/b/ 404
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>reverse('hello_app:greet', args=['Taras']) → /greet/Taras/
 </code></pre></div>
 <p><code>/greet/</code> gives <code>404</code> because <code>str</code> does not accept an empty string; <code>/greet/a/b/</code> gives <code>404</code> because <code>str</code> does not match <code>/</code> (for paths with slashes there is the <code>path</code> converter).</p>
+<div class="admonition warning">
+<p class="admonition-title">Why <code>escape(name)</code></p>
+<p><code>name</code> comes from the URL, so anyone can write it. <code>HttpResponse</code> returns the string as HTML (<code>text/html</code>) and escapes nothing. Without <code>escape()</code> the same URL would return <code>Привіт, &lt;img src=x onerror=alert(1)&gt;!</code> and the browser would run someone else's JavaScript (reflected XSS). <code>escape()</code> turns <code>&lt;</code> and <code>&gt;</code> into <code>&amp;lt;</code> and <code>&amp;gt;</code>, so the browser shows them as text. Django templates escape variables on their own, so in step 2, where the response is built with <code>render()</code>, <code>escape()</code> is no longer needed.</p>
+</div>
 </li>
 </ol>
 <h3 id="modify">Modify the example<a class="headerlink" href="#modify" title="Permanent link">&para;</a></h3>
