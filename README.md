@@ -6,6 +6,8 @@
 
 ### Структура документації
 
+**Онлайн:** https://nikoriakviktor.github.io/notes_chat_app/
+
 | Розділ | Опис |
 |--------|------|
 | [Книга](docs/00_getting_started/README.md) | 12 модулів: Web → Django → DB → Forms → Frontend → Architecture → Auth → Testing → Async → Linux → Deploy |
